@@ -18,7 +18,7 @@ export default function HomeScreen() {
       
       {/* Nav Buttons */}
       <NavButton label="Learn Pharmacology" page="Learn"/>
-      <NavButton label="Formulary" page="Home"/>
+      <NavButton label="Formulary" page="Formulary"/>
 
       {/* About Button */}
       <TouchableOpacity style={styles.button_about}>

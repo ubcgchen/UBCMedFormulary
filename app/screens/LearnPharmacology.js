@@ -14,7 +14,6 @@ export default function LearnPharmacologyScreen() {
         <View style={styles.horizontalview}>
           <Image style={styles.clipart} source={require('../assets/books.png')} />
           <Text style={styles.text_header}>Learn Pharmacology</Text>
-          <Image style={styles.clipart} source={require('../assets/pill.png')} />
       </View>
 
         <NavButton label="Pharmacology Quizzes" page="QuizSelect"/>

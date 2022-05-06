@@ -18,7 +18,7 @@ export default function ResultsScreen({route}) {
 
   return (
     <View style={styles.container}>
-        <ConfettiCannon count={confettiCount} origin={{x: -10, y: 0}} fadeOut={true} autoStartDelay={500} />
+        <ConfettiCannon count={confettiCount} origin={{x: -10, y: 0}} fadeOut={true} autoStartDelay={200} />
         <View style = {{ flex: 0.7, flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style = {{ flex: 1 }}>
                 <TouchableOpacity style={styles.button_quizexit} onPress={() => navigation.navigate("Learn")}>

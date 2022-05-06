@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { data } from '../data/Foundations';
+import { data } from '../data/Quiz/Foundations';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WINDOW } from '../constants/Dimensions';
 import { COLORS } from '../constants/Colours';
