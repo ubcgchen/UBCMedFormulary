@@ -1,10 +1,9 @@
 {/* Imports */}
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NavButton from '../components/NavButton';
-import BackButton from '../components/BackButton';
+import ConfettiCannon from 'react-native-confetti-cannon';
 import { WINDOW } from '../constants/Dimensions';
 import { COLORS } from '../constants/Colours';
 
@@ -14,8 +13,12 @@ export default function ResultsScreen({route}) {
   let incorrect = total-points
   let score = points/total * 100
 
+  let confettiCount = 0
+  if (incorrect == 0) confettiCount = 200
+
   return (
     <View style={styles.container}>
+        <ConfettiCannon count={confettiCount} origin={{x: -10, y: 0}} fadeOut={true} autoStartDelay={500} />
         <View style = {{ flex: 0.7, flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style = {{ flex: 1 }}>
                 <TouchableOpacity style={styles.button_quizexit} onPress={() => navigation.navigate("Learn")}>
@@ -41,7 +44,6 @@ export default function ResultsScreen({route}) {
         <View style = {{flex: 1, flexDirection: "row", justifyContent: "center"}}>
             <NavButton label="Take another quiz" page="QuizSelect"/>
         </View>
-      <BackButton page="QuizSelect"/>
     </View>
   );
 }
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
   },
   text_result:{
-      fontSize: WINDOW.scale * 20,
+      fontSize: WINDOW.scale * 25,
       fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
     },
 });
