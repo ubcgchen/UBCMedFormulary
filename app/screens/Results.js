@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import NavButton from '../components/NavButton';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { WINDOW } from '../constants/Dimensions';
-import { COLORS } from '../constants/Colours';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 export default function ResultsScreen({route}) {
   const navigation = useNavigation();
@@ -52,26 +54,26 @@ export default function ResultsScreen({route}) {
 const styles = StyleSheet.create({
   button_quizexit: {
     marginLeft: WINDOW.width * 0.02,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
   },
   container: {
     flex: 1,
     paddingVertical: 40,
-    backgroundColor: COLORS.background,
+    backgroundColor: thisStyle.background,
     position: "relative"
   },
   text_exitquiz: {
     fontSize: WINDOW.scale * 30, 
-    color: COLORS.text_primary, 
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    color: thisStyle.text_primary, 
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
   },
   text_title: {
     fontSize: WINDOW.scale * 40,
     color: "black",
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
   },
   text_result:{
       fontSize: WINDOW.scale * 25,
-      fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
     },
 });

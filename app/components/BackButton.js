@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 function BackButton({ page }) {
 
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
     },
     text_buttons: {
         fontSize: 18,
-        fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
     },
 });
 

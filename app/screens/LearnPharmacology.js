@@ -4,6 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import NavButton from '../components/NavButton';
 import BackButton from '../components/BackButton';
 import { WINDOW } from '../constants/Dimensions';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 export default function LearnPharmacologyScreen() {
     const navigation = useNavigation();
@@ -33,13 +36,13 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: thisStyle.background,
       alignItems: 'center',
       justifyContent: 'center',
     },
     text_header:{
       fontSize: 45 * WINDOW.scale,
-      fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
 
       padding: "2%",
       alignSelf: "center",

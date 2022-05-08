@@ -4,6 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NavButton from '../components/NavButton';
+import { STRINGS } from '../constants/Strings';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -12,13 +16,13 @@ export default function HomeScreen() {
     <View style={styles.container}>
       {/* Title */}
       <View style={styles.horizontalview}>
-        <Image style={styles.logo} source={require('../assets/ubc-logo.png')} />
+      <Image style={styles.logo} source={require('../assets/logos/ubc-logo.png')} />
         <Text style={styles.text_title}>UBC Med Formulary</Text>
       </View>
       
       {/* Nav Buttons */}
       <NavButton label="Learn Pharmacology" page="Learn"/>
-      <NavButton label="Formulary" page="Formulary"/>
+      <NavButton label="Formulary" page={STRINGS.formulary_page}/>
 
       {/* About Button */}
       <TouchableOpacity style={styles.button_about}>
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',   
+    backgroundColor: thisStyle.background,   
     alignItems: 'center',      
     justifyContent: 'center',
   },
@@ -53,13 +57,13 @@ const styles = StyleSheet.create({
   },
   text_buttons: {
     fontSize: 18,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
   },
   text_title: {
     marginLeft: 15,
     marginRight: 15,
     fontSize: 40,
-    color: "black",
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    color: thisStyle.text_primary,
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
   },
 });

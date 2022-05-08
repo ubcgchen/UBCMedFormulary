@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { data } from '../data/Quiz/Foundations';
+import { data } from '../data/quiz/Foundations';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WINDOW } from '../constants/Dimensions';
-import { COLORS } from '../constants/Colours';
+import { DEFAULT_STYLE } from '../constants/Styles';
 import Dialog from "react-native-dialog";
 import { useNavigation } from '@react-navigation/native';
+
+const thisStyle = DEFAULT_STYLE
 
 export default function QuizQuestionScreen() {
 
@@ -68,17 +70,18 @@ export default function QuizQuestionScreen() {
     return(
       <View>
         {
-          questions[currentQuestionIndex]?.choices.map(choice => (
-            <TouchableOpacity onPress={()=> highlightChoice(choice)} 
-                              style = {styles(choice, correctOption, currentOptionSelected, answerSubmitted).button_choice}
+          questions[currentQuestionIndex]?.choices.map((choice, key) => (
+            <TouchableOpacity key = {key}
+                              onPress={()=> highlightChoice(choice)} 
+                              style = {styles(choice, correctOption, currentOptionSelected, answerSubmitted, null).button_choice}
                               activeOpacity={1}
                               disabled={isOptionsDisabled}>
-              <Text style={styles.text_choice}>{choice}</Text>
+              <Text style={styles(null, null, null, null, null).text_choice}>{choice}</Text>
               {
                 choice==correctOption && answerSubmitted ? (
                     <View style={{
                         width: 30, height: 30, borderRadius: 30/2,
-                        backgroundColor: COLORS.correct_outline,
+                        backgroundColor: thisStyle.correct_outline,
                         justifyContent: 'center', alignItems: 'center'
                     }}>
                         <MaterialCommunityIcons name="check" style={{color: "#000", fontSize: 20}} />
@@ -86,7 +89,7 @@ export default function QuizQuestionScreen() {
                 ): choice == currentOptionSelected && answerSubmitted ? (
                     <View style={{
                         width: 30, height: 30, borderRadius: 30/2,
-                        backgroundColor: COLORS.incorrect_outline,
+                        backgroundColor: thisStyle.incorrect_outline,
                         justifyContent: 'center', alignItems: 'center'
                     }}>
                         <MaterialCommunityIcons name="close" style={{color: "#FFF", fontSize: 20}} />
@@ -160,7 +163,7 @@ export default function QuizQuestionScreen() {
 
 const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, isSubmitDisabled) => StyleSheet.create({
   button_submit: {
-      backgroundColor: isSubmitDisabled? "#fafafa" : COLORS.button,
+      backgroundColor: isSubmitDisabled? thisStyle.button_disabled : thisStyle.button,
       alignSelf: "center",
       justifyContent: "center",
       width: 250,
@@ -177,43 +180,44 @@ const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, i
   },
   text_submit: {
     textAlign: "center",
-    color: isSubmitDisabled? "#bbb" : COLORS.text_primary,
+    color: isSubmitDisabled? thisStyle.text_disabled : thisStyle.text_primary,
     fontSize: 25 * WINDOW.scale,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   },
   text_next: {
     textAlign: "center",
-    color: COLORS.text_primary,
+    color: thisStyle.text_primary,
     fontSize: 25 * WINDOW.scale,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   },
   button_quizexit: {
     marginLeft: WINDOW.width * 0.02,
     marginBottom: WINDOW.height * 0.01,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+    padding: 10
   },
   container: {
     flex: 1,
     paddingVertical: 40,
-    backgroundColor: COLORS.background,
+    backgroundColor: thisStyle.background,
     position: "relative"
   },
   button_choice: {
     borderWidth: 2, 
     borderColor: answerSubmitted?   choice == correctOption ? 
-                                    COLORS.correct_outline : choice == currentOptionSelected ? 
-                                    COLORS.incorrect_outline : 
-                                    COLORS.text_primary
+                                    thisStyle.correct_outline : choice == currentOptionSelected ? 
+                                    thisStyle.incorrect_outline : 
+                                    thisStyle.text_primary
                                 :   choice == currentOptionSelected ? 
-                                    "#5bbce4" : 
-                                    COLORS.text_primary,
+                                    thisStyle.selected_outline : 
+                                    thisStyle.text_primary,
     backgroundColor: answerSubmitted?    choice == correctOption ? 
-                                        COLORS.correct : choice == currentOptionSelected ? 
-                                        COLORS.incorrect : 
-                                        COLORS.button
+                                        thisStyle.correct : choice == currentOptionSelected ? 
+                                        thisStyle.incorrect : 
+                                        thisStyle.button
                                     :   choice == currentOptionSelected ? 
-                                        "#87CEEB" : 
-                                        COLORS.button,
+                                        thisStyle.selected : 
+                                        thisStyle.button,
     borderRadius: 50,
     height: WINDOW.height * 0.08,
 
@@ -228,28 +232,28 @@ const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, i
     marginRight: WINDOW.width * 0.02,
   },
   text_choice: {
-    color: COLORS.text_primary,
+    color: thisStyle.text_primary,
     fontSize: WINDOW.scale * 20,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   },
   text_numbering: {
-    color: COLORS.text_secondary, 
-    fontSize: WINDOW.scale * 25,
-    marginLeft: 25,
-    marginBottom: WINDOW.height * 0.005,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    color: thisStyle.text_secondary, 
+    fontSize: WINDOW.scale * 30,
+    marginLeft: 7,
+    marginBottom: 7,
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   },
   text_prompt: {
-    color: COLORS.text_primary, 
+    color: thisStyle.text_primary, 
     fontSize: WINDOW.scale * 30,
     marginLeft: WINDOW.width * 0.056,
     marginRight: WINDOW.width * 0.05,
     marginBottom: WINDOW.height * 0.03,
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   },
   text_exitquiz: {
-    fontSize: WINDOW.scale * 30, 
-    color: COLORS.text_primary, 
-    fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+    fontSize: WINDOW.scale * 35, 
+    color: thisStyle.text_primary, 
+    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
   }
 });

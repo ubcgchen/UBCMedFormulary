@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 function NavButton({ label, page }) {
 
@@ -16,9 +19,9 @@ function NavButton({ label, page }) {
 const styles = StyleSheet.create({
     button_nav: {
         alignItems: "center",
-        backgroundColor: "#ebebeb",
+        backgroundColor: thisStyle.button,
         padding: 12,
-        borderColor: "black",
+        borderColor: thisStyle.button_outline,
         borderWidth: 1.5,
         borderRadius: 50,
         marginBottom: 20,
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
     },
     text_buttons: {
         fontSize: 18,
-        fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
     },
 });
 

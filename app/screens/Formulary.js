@@ -1,37 +1,45 @@
 import * as React from 'react';
-import {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { List } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 
-import { COLORS } from '../constants/Colours';
+import { DEFAULT_STYLE } from '../constants/Styles';
 import { WINDOW } from '../constants/Dimensions';
+import { DRUG_CLASS } from '../data/formulary/maps/drug-class'
+
+const thisStyle = DEFAULT_STYLE
 
 export default function FormularyScreen() {
+
     const navigation = useNavigation();
-  
-    const [expanded, setExpanded] = React.useState(true);
-  
-    const handlePress = () => setExpanded(!expanded);
+    const drug_classes = Object.keys(DRUG_CLASS).map(function(drug_class) {
+        drug_class = drug_class.replace("_"," "); // Replace underlines with spaces to convert variable names to text
+        return drug_class
+    });
+
+    const handleDrugPress = (drug) => {
+        navigation.navigate("DrugInfo", {drug: drug})
+    }
   
     return (
       <View style={styles.container}>
         <List.Section title="Drug Class" titleStyle={styles.accordion}>
-            <List.Accordion
-                title="Analgesics"
-                left={props => <List.Icon {...props}/>}>
-                <List.Item title="Acetaminophen" />
-                <List.Item title="Ibuprofen" />
-            </List.Accordion>
-    
-            <List.Accordion
-                title="Antibacterials"
-                left={props => <List.Icon {...props}/>}>
-                <List.Item title="Penicillin" />
-                <List.Item title="Vancomycin" />
-            </List.Accordion>
+            {
+            drug_classes.map((drug_class, key) => (
+                <List.Accordion
+                    key={key}
+                    title={drug_class}
+                    left={props => <List.Icon {...props}/>}>
+                    {
+                        DRUG_CLASS[drug_class.replace(" ", "_")].map((drug, key) => (
+                            <List.Item key={key} title={drug} button onPress={() => {handleDrugPress(drug)}}/>
+                        ))
+                    }
+                </List.Accordion>
+            ))
+            }
         </List.Section>
     
         <BackButton page="Home"/>
@@ -42,14 +50,14 @@ export default function FormularyScreen() {
 
 const styles = StyleSheet.create({
     accordion: {
-        fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
         fontSize: 30 * WINDOW.scale,
         fontWeight: "normal",
-        color: COLORS.text_primary,
+        color: thisStyle.text_primary,
         marginTop: 20
     },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: thisStyle.background,
     },
   });

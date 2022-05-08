@@ -4,8 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import CheckBox from '../components/CheckBox';
 import BackButton from '../components/BackButton';
 
-let deviceWidth = Dimensions.get('window').width
-let deviceHeight = Dimensions.get('window').height
+import { WINDOW } from '../constants/Dimensions';
+import { DEFAULT_STYLE } from '../constants/Styles';
+
+const thisStyle = DEFAULT_STYLE
 
 export default function QuizSelectionScreen(){
 
@@ -70,31 +72,31 @@ const styles = StyleSheet.create({
     },
     container:{
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: thisStyle.background,
     },
     text_blurb:{
         alignSelf: "center",
         fontSize: 15,
-        marginBottom: deviceHeight*0.02,
+        marginBottom: WINDOW.height*0.02,
     },
     text_buttons: {
       fontSize: 18,
-      fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
     },
     text_header:{
       alignSelf: "center",
-      fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
       fontSize: 25,
-      marginBottom: deviceHeight*0.02,
-      marginTop: deviceHeight*0.07,
+      marginBottom: WINDOW.height*0.02,
+      marginTop: WINDOW.height*0.07,
       textDecorationLine: 'underline',
     },
     text_subheader: {
         fontSize: 18,
-        marginLeft: deviceWidth*0.02,
-        marginTop: deviceHeight*0.02,
+        marginLeft: WINDOW.width*0.02,
+        marginTop: WINDOW.height*0.02,
         marginBottom: 5,
         textDecorationLine: 'underline',
-        fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
+        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
       },
   });
