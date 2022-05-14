@@ -1,7 +1,7 @@
-giBleeds = ["Ibuprofen"]
-pregnancy = ["Valproic Acid"]
+const GI_Bleeds = ["Ibuprofen"]
+const Pregnancy = ["Valproic Acid"]
 
-export const contraindications = {
-    giBleeds,
-    pregnancy
+export const CONTRAINDICATIONS = {
+    GI_Bleeds,
+    Pregnancy
 }

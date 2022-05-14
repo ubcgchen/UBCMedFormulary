@@ -53,5 +53,5 @@ export const data = [
             "Drugs with a smaller ED50 are more efficacious"],
         "correct": "A drug with a lower potency may require higher doses, which could lead to unwanted side effects",
         "tags":["PD","medium","Foundations"]
-    } 
+    }, 
 ]

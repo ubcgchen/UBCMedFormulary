@@ -125,5 +125,5 @@ export const data = [
             "To maximize systemic absorption of drug through the oropharyngeal mucosa to increase effectiveness"],
         "correct": "Metered-dose inhalers contain smaller particle sizes that are easily exhaled before reaching the target",
         "tags":["PD","medium","MoA","Pulmonology"]
-    }     
+    }
 ]

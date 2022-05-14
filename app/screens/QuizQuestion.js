@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { data } from '../data/quiz/Foundations';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { data } from '../data/quiz/Upper Gastrointestinal Tract.js';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WINDOW } from '../constants/Dimensions';
 import { DEFAULT_STYLE } from '../constants/Styles';
@@ -23,8 +23,8 @@ export default function QuizQuestionScreen() {
   const [showSubmitButton, setShowSubmitButton] = useState(false);
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
   const navigation = useNavigation();
-  
-  const renderQuestion = () => {
+
+  const renderHeader = () => {
     return(
       <View>
         {/* Question Counter, Exit Button */}
@@ -44,6 +44,13 @@ export default function QuizQuestionScreen() {
         </View>
 
         {/* Question Prompt */}
+      </View>
+    );
+  }
+  
+  const renderQuestion = () => {
+    return(
+      <View>
         <Text style={styles(null, null, null, null, null).text_prompt}>
           {questions[currentQuestionIndex]?.prompt}
         </Text>
@@ -68,7 +75,7 @@ export default function QuizQuestionScreen() {
 
   const renderChoices = () => {
     return(
-      <View>
+      <ScrollView>
         {
           questions[currentQuestionIndex]?.choices.map((choice, key) => (
             <TouchableOpacity key = {key}
@@ -99,7 +106,7 @@ export default function QuizQuestionScreen() {
             </TouchableOpacity>
           ))
         }
-      </View>
+      </ScrollView>
     );
   }
 
@@ -151,7 +158,8 @@ export default function QuizQuestionScreen() {
 
   return (
     <View style={{flex:1}}>
-      <View style={styles(null, null, null, null, null).container}>        
+      <View style={styles(null, null, null, null, null).container}>
+        {renderHeader()}        
         {renderQuestion()}
         {renderChoices()}
         {renderSubmitButton()}
