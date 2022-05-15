@@ -1,4 +1,4 @@
-export const data = [
+export const pregnancy = [
     {
         "id" : 1,
         "prompt" : "What would you expect to occur if a patient undergoing labor takes a NSAID?",

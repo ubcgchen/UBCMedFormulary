@@ -3,7 +3,7 @@ const Benzodiazepines = ["Diazepam", "Lorazepam", "Midazolam"]
 const Beta_Blockers = ["Atenolol", "Bisoprolol", "Metoprolol"]
 const NSAIDs = ["Ibuprofen", "Indomethacin", "Ketorolac", "Naproxen"]
 
-export const DRUG_CLASS = {
+export const drugClass = {
     ACE_Inhbitors,
     Benzodiazepines,
     Beta_Blockers,

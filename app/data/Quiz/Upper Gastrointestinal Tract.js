@@ -1,4 +1,4 @@
-export const data = [
+export const upperGI = [
     {
         "id" : 1,
         "prompt" : "A 53 y/o patient with a history of GERD presents to his gastroenterologist for his annual checkup. The gastroenterologist performs an esophagogastroduodenoscopy. During the procedure the doctor notes numerous gastric polyps. The patient does not have a personal or family history of cancer, and has been on rabeprazole for the last 10 years with no complaints. Where is the most likely location of these polyps and the risk of malignancy?",

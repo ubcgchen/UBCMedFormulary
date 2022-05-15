@@ -1,4 +1,4 @@
-export const data = [
+export const electrolyteDisturbance = [
     {
         "id" : 1,
         "prompt" : "A 52 y/o patient presents to the ER with abdominal pain and swelling in his lower extremities. During the history, the patient recalls having diarrhea and abdominal pain for the last 5 days. He has been taking the maximum recommended dose of ibuprofen to manage the abdominal pain. Being the astute medical student you ask him about urination and recalls that he hasn’t urinated in the last 24 hours. You hypothesize that he has acute kidney injury due to:",

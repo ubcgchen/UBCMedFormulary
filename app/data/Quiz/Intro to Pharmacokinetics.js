@@ -1,4 +1,4 @@
-export const data = [
+export const pharmacokinetics = [
     {
         "id" : 1,
         "prompt" : "Which of the following drugs would you predict to be more readily absorbed orally",

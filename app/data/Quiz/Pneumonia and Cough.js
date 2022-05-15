@@ -1,4 +1,4 @@
-export const data = [
+export const pneumoniaAndCough = [
     {
         "id" : 1,
         "prompt" : "A 6 y/o boy presents to the clinic with a fever and sore throat. Based on clinical findings during the exam, he is diagnosed with strep throat and prescribed 250 mg penicillin V PO BID for 10 days. His parents ask if it’s possible to just double the dose to kill the bacteria faster. In this case, would Pen V be more effective at a higher dose?",

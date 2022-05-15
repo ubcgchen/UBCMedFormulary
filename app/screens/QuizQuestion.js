@@ -1,17 +1,45 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { data } from '../data/quiz/Upper Gastrointestinal Tract.js';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WINDOW } from '../constants/Dimensions';
 import { DEFAULT_STYLE } from '../constants/Styles';
 import Dialog from "react-native-dialog";
 import { useNavigation } from '@react-navigation/native';
 
+import * as quizzes from '../data/quiz'
+
 const thisStyle = DEFAULT_STYLE
 
-export default function QuizQuestionScreen() {
+export default function QuizQuestionScreen({route}) {
+  const { selectedWeeks } = route.params;
+  
+  let week_mappings = {
+    "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
+    "Intro to Pharmacokinetics": quizzes.pharmacokinetics,
+    "Fetal Development": quizzes.fetalDevelopment,
+    "Breast Mass": quizzes.breastMass,
+    "Immunology & Allergy": quizzes.immunologyAndAllergy,
+    "Pneumonia and Cough": quizzes.pneumoniaAndCough,
+    "Chronic Obstructive Pulmonary Disease (COPD)": quizzes.COPD,
+    "Electrolyte Disturbance": quizzes.electrolyteDisturbance,
+    "Hypertension": quizzes.hypertension,
+    "Heart Murmurs": quizzes.heartMurmur,
+    "Upper Gastrointestinal Tract": quizzes.upperGI,
+    "Nutrient Malabsorption": quizzes.nutrientMalabsorption,
+    "Diabetes Mellitus": quizzes.diabetesMellitus,
+    "Lower Gastrointestinal Tract": quizzes.lowerGI,
+    "Infertility": quizzes.infertility,
+    "Pregnancy": quizzes.pregnancy
+  }
 
-  const questions = data;
+  const questions = [];
+
+  for (const key in selectedWeeks) {
+    if (selectedWeeks[key]) {
+      questions.push.apply(questions, week_mappings[key])
+    }
+  }
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
   const [correctOption, setCorrectOption] = useState(null);

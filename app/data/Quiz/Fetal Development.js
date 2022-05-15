@@ -1,4 +1,4 @@
-export const data = [
+export const fetalDevelopment = [
     {
         "id" : 1,
         "prompt" : "A 32 y/o pregnant patient G3T1P1 with a history of seizure presents to the ER with worsening seizures. She currently takes 250 mg orally once daily. After a review of the patient's case, the care team decides that her valproic acid dose needs to be increased to 500 mg daily to manage her seizures. Which of the following is the best method of increasing the dose?",

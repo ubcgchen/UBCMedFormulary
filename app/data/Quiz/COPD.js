@@ -1,4 +1,4 @@
-export const data = [
+export const COPD = [
     {
         "id" : 1,
         "prompt" : "What is the mechanism of action of varenicline with respect to smoking cessation therapy?",

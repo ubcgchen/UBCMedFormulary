@@ -1,9 +1,9 @@
-export const data = [
+export const diabetesMellitus = [
     {
         "id" : 1,
         "prompt" : "A 56 y/o patient with epilepsy, hypertension and GERD presents to the clinic for an annual checkup. During the history he reports feeling thirsty more often and fatigued. His medications include furosemide, ramipril, omeprazole, phenytoin, and acetaminophen PRN. His older brother was diagnosed with type 2 diabetes mellitus (T2DM) last year. On inspection his BMI is 27. You highly suspect that he may have T2DM given his risk factor. Which one of his medications would most likely also play a role in development of T2DM?",
         "choices": [
-           // "Acetaminophen", 
+           "Acetaminophen", 
             "Furosemide",
             "Omeprazole",
             "Phenytoin",
@@ -17,7 +17,7 @@ export const data = [
         "choices": [
             "No, insulin does not affect serum K+ levels",
             "No, Andy is in a high total body K+ state, insulin causes K+ to shift into cells and this will normalize his serum K+",
-            // "No, Andy is in a low total body K+ state, insulin causes K+ to shift out of cells and this will normalize his serum K+", 
+            "No, Andy is in a low total body K+ state, insulin causes K+ to shift out of cells and this will normalize his serum K+", 
             "Yes, Andy is in a high total body K+ state, insulin causes K+ to shift out of cells, and this will increase his serum K+ to dangerous levels",
             "Yes, Andy is in a low total body K+ state, insulin causes K+ to shift into cells and this will reduce his serum K+ to dangerous levels"],
         "correct": "Yes, Andy is in a low total body K+ state, insulin causes K+ to shift into cells and this will reduce his serum K+ to dangerous levels",
@@ -28,8 +28,8 @@ export const data = [
         "prompt" : "An 80 y/o patient with T2DM, hypertension, and dyslipidemia presents to the ER after being found unresponsive in her kitchen She is hypotensive, tachycardic, and has no urine output. Initial labs  show elevated levels of glucose (72 mM), Na+ (155 mM), K+ (5.6 mM), Cl- (120 mM), creatinine (140 µM), and urea (20 mM), but normal HCO3- (24 mM). Her blood pH is normal, blood β-OHbutyrate is slightly elevated and positive urine ketones. You have high suspicion of an endocrine emergency, but you are unable to locate a precipitant. You check her medications: metformin, rosuvastatin, amlodipine, and hydrochlorothiazide. Given this new information, which of her following medications may have precipitated the condition?",
         "choices": [
             "Amlodipine", 
-            // "Hydrochlorothiazide",
-            // "Metformin",
+            "Hydrochlorothiazide",
+            "Metformin",
             "Rosuvastatin (Lipid lowering medication)",
             "A and B"],
         "correct": "A and B",
@@ -41,7 +41,7 @@ export const data = [
         "choices": [
             "Insulin only",
             "Insulin + Metformin",
-            // "Insulin + Metformin + a 2nd agent", 
+            "Insulin + Metformin + a 2nd agent", 
             "Metformin only",
             "Metformin + a 2nd agent"],
         "correct": "Insulin + Metformin",
@@ -99,7 +99,7 @@ export const data = [
         "prompt" : "A 62 y/o patient with T2DM  presents to the ER with a 1 week history of diarrhea and abdominal pain. She is tachycardic, tachypneic, and hypotensive. A quick abdominal exam reveals ascites, caput medusae, negative Murphy’s sign and no jaundice. An eGFR comes back with <30 mL/min. An arterial blood gas reveals acidemia and high lactate levels. Which of the following medications is associated with this presentation?",
         "choices": [
             "Canagliflozin",
-            // "Dulaglutide",
+            "Dulaglutide",
             "Glyburide",
             "Insulin",
             "Metformin"],

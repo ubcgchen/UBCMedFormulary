@@ -8,8 +8,16 @@ import 'react-native-vector-icons'
 
 import { DEFAULT_STYLE } from '../constants/Styles';
 import { WINDOW } from '../constants/Dimensions';
-import { DRUG_CLASS } from '../data/formulary/maps/drug-class'
-import { CONTRAINDICATIONS } from "../data/formulary/maps/contraindication";
+
+import { drugClass } from '../data/formulary/maps/drug-class'
+import { contraindication } from "../data/formulary/maps/contraindication"
+
+// NOT IMPLEMENTED YET
+import { indication } from "../data/formulary/maps/indication"
+import { sideEffect } from "../data/formulary/maps/side-effect"
+import { bodySystem } from "../data/formulary/maps/body-system"
+import { cblCase } from "../data/formulary/maps/cbl-case"
+
 
 const thisStyle = DEFAULT_STYLE
 
@@ -17,56 +25,66 @@ export default function FormularyScreen() {
 
     const navigation = useNavigation();
 
-    // TODO: REFACTOR INTO HELPER
-    const drug_classes = Object.keys(DRUG_CLASS).map(function(drug_class) {
-        drug_class = drug_class.replace("_"," "); // Replace underlines with spaces to convert variable names to text
-        return drug_class
-    });
-    const contraindications = Object.keys(CONTRAINDICATIONS).map(function(contraindication) {
-      contraindication = contraindication.replace("_"," "); // Replace underlines with spaces to convert variable names to text
-      return contraindication
-    });
-    //
+    // #region Dropdown Menu
 
-    const handleChangeValuePress = (value, dict, dict1, sorts) => {
-      console.log(sorts["sort_order"])
-      sorts["sort_order"] = dict[value]
-      sorts["sort_labels"] = dict1[value]
-      console.log(sorts["sort_order"])
+    // Convert the backend variable names to text format to be displayed
+    const textify = (label) => {
+      const res = Object.keys(label).map(function(x) {
+        x = x.replace("_"," "); // Replace underlines with spaces to convert variable names to text
+        return x
+      })
+      return res
+    }
+    const drugClassText = textify(drugClass)
+    const contraindicationsText = textify(contraindication)
+    const indicationText = textify(indication)
+    const sideEffectText = textify(sideEffect)
+    const bodySystemText = textify(bodySystem)
+    const cblCaseText = textify(cblCase)
+
+    // Drug Class is the entry sort order
+    const defaultText = drugClassText
+    const defaultLabel = drugClass
+    const defaultTitle = "Drug Class"
+    const [sortOrder, setSortOrder] = useState(defaultText)
+    const [sortLabel, setSortLabel] = useState(defaultLabel)
+    const [title, setTitle] = useState(defaultTitle)
+
+    // Update sort order
+    const handleChangeValuePress = (value, dict_text, dict_values) => {
+      setSortOrder(dict_text[value])
+      setSortLabel(dict_values[value])
+      setTitle(dict_titles[value])
     }
 
-    // TODO: REFACTOR TO BACKEND
-    var dict = {
-      drugClass: drug_classes,
-      contraindication: contraindications,
-      indication: drug_classes,
-      sideEffect: contraindications,
-      cblCase: drug_classes,
-      bodySystem : contraindications
+    // Mappings. 
+    // TODO: Try refactoring to backend
+    var dict_text = {
+      drugClass: drugClassText,
+      contraindication: contraindicationsText,
+      indication: indicationText,
+      sideEffect: sideEffectText,
+      cblCase: cblCaseText,
+      bodySystem : bodySystemText
     };
-    var dict1 = {
-      drugClass: DRUG_CLASS,
-      contraindication: CONTRAINDICATIONS,
-      indication: DRUG_CLASS,
-      sideEffect: CONTRAINDICATIONS,
-      cblCase: DRUG_CLASS,
-      bodySystem : CONTRAINDICATIONS
+    var dict_values = {
+      drugClass: drugClass,
+      contraindication: contraindication,
+      indication: indication,
+      sideEffect: sideEffect,
+      cblCase: cblCase,
+      bodySystem : bodySystem
     };
-    //
-
-    const current_sort_order = "Drug Class"
-    let sorts = {
-      sort_order: drug_classes,
-      sort_labels: DRUG_CLASS
+    var dict_titles = {
+      drugClass: "Drug Class",
+      contraindication: "Contraindications",
+      indication: "Indications",
+      sideEffect: "Side Effects",
+      cblCase: "CBL Case",
+      bodySystem : "Body System"
     }
 
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const onChangeSearch = query => setSearchQuery(query);
-
-    const handleDrugPress = (drug) => {
-        navigation.navigate("DrugInfo", {drug: drug})
-    }
-
+    // Dropdown hooks
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -78,9 +96,18 @@ export default function FormularyScreen() {
       {label: "Body System", value: 'bodySystem'}
     ]);
 
+    // #endregion
+
+    const [searchQuery, setSearchQuery] = React.useState('');
+    const onChangeSearch = query => setSearchQuery(query);
+
+    const handleDrugPress = (drug) => {
+        navigation.navigate("DrugInfo", {drug: drug})
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{current_sort_order}</Text>
+            <Text style={styles.title}>{title}</Text>
             <View style={{flexDirection:"row", zIndex: 999}}>
             <Searchbar
                 placeholder="Search"
@@ -105,18 +132,18 @@ export default function FormularyScreen() {
                 fontSize: 15,
                 fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
               }}
-              onChangeValue={(value) => {handleChangeValuePress(value, dict, dict1, sorts)}}
+              onChangeValue={(value) => {handleChangeValuePress(value, dict_text, dict_values)}}
             />
           </View>
           <List.Section titleStyle={styles.accordion}>
               {
-              sorts.sort_order.map((drug_class, key) => (
+              sortOrder.map((drug_class, key) => (
                   <List.Accordion
                       key={key}
                       title={drug_class}
                       left={props => <List.Icon {...props}/>}>
                       {
-                          sorts.sort_labels[drug_class.replace(" ", "_")].map((drug, key) => (
+                          sortLabel[drug_class.replace(" ", "_")].map((drug, key) => (
                               <List.Item key={key} title={drug} button onPress={() => {handleDrugPress(drug)}}/>
                           ))
                       }

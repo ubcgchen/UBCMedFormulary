@@ -1,4 +1,4 @@
-export const data = [
+export const heartMurmur = [
     {
         "id" : 1,
         "prompt" : "A 63 y/o patient with a long history of cardiovascular issues and risk factors presents to the CTU with right sided heart failure. Some of his vitals are BP 180/100, and HR 120. Bilateral crackles are auscultated at the base of the lungs and the internist notes severe pitting edema at the lower extremities. An echocardiogram notes an ejection fraction of <30%. The internist orders IV furosemide. How will furosemide be helpful in this case?",

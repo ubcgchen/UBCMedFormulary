@@ -1,4 +1,4 @@
-export const data = [
+export const infertility = [
     {
         "id" : 1,
         "prompt" : "A 23 y/o female patient presents to the clinic with profuse frothy yellowish to greenish coloured vaginal discharge. The patient reports being sexually active with multiple partners and does not always use protection. Her family doctor performs a pelvic exam and notes the presence of a strawberry cervix. A vaginal wet mount is done and a sample is sent for PCR. The lab reports the presence of an anaerobic parasitic flagellated protozoa. The most likely pathogen in this case presentation is best treated with which of the following antimicrobials?",

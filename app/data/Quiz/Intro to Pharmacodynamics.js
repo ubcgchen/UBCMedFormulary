@@ -1,4 +1,4 @@
-export const data = [
+export const pharmacodynamics = [
     {
         "id" : 1,
         "prompt" : "Molecule X is found to have 10-fold higher affinity for the µ opioid receptor than morphine (µ opioid receptor agonist) and no intrinsic activity. Which statement is most likely true?",

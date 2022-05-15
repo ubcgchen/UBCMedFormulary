@@ -1,4 +1,4 @@
-export const data = [
+export const lowerGI = [
     {
         "id" : 1,
         "prompt" : "Doris, a 23 y/o patient with a history of GERD presents to the ER with severe abdominal pain, distention, and constipation. She reports being constipated for over a week and has taken the following medications to resolve her constipation: metoclopramide, sennosides, and lots of fiber to no avail. Her vitals are: BP 88/62, HR 112, T 37.4 \u00b0C. On examination, bowel sounds are absent, abdomen is tympanic on percussion, and tenderness on palpation. An abdominal X-ray shows air-fluid levels and the small bowel diameter measures 5 cm. Which one of the following drugs is NOT contraindicated in this case:",

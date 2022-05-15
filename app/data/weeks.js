@@ -1,0 +1,17 @@
+export const weeks =    ["Intro to Pharmacodynamics",
+                        "Intro to Pharmacokinetics",
+                        "Fetal Development", 
+                        "Breast Mass", 
+                        "Immunology & Allergy",
+                        "Pneumonia and Cough",
+                        "Chronic Obstructive Pulmonary Disease (COPD)",
+                        "Electrolyte Disturbance",
+                        "Hypertension",
+                        "Heart Murmurs",
+                        "Upper Gastrointestinal Tract",
+                        "Nutrient Malabsorption",
+                        "Diabetes Mellitus",
+                        "Lower Gastrointestinal Tract",
+                        "Infertility",
+                        "Pregnancy"
+                        ]

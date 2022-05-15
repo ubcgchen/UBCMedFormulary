@@ -1,4 +1,4 @@
-export const data = [
+export const immunologyAndAllergy = [
     {
         "id" : 1,
         "prompt" : "Given that epinephrine and norepinephrine are both released during SNS activation and structurally very similar, why is norepinephrine not used in the initial treatment of anaphylaxis shock?",

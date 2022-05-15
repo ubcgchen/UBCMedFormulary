@@ -1,4 +1,4 @@
-export const data = [
+export const hypertension = [
     {
         "id" : 1,
         "prompt" : "Which of the following anti-hypertensive is correctly matched to its class?",

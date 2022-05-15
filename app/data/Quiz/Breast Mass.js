@@ -1,4 +1,9 @@
-export const data = [
+/**
+ * Questions for Breast Mass week
+ * @author Michael Gong, UBC VFMP 2025
+ */
+
+export const breastMass = [
     {
         "id" : 1,
         "prompt" : "A 63 y/o patient is undergoing adjuvant chemotherapy for her breast cancer and has a positive family history for osteoporosis. She is wondering if letrozole or tamoxifen would be safer given her family history. Which drug would be safer in terms of bone density and why?",
