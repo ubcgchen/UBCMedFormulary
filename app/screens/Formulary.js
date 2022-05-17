@@ -18,7 +18,6 @@ import { sideEffect } from "../data/formulary/maps/side-effect"
 import { bodySystem } from "../data/formulary/maps/body-system"
 import { cblCase } from "../data/formulary/maps/cbl-case"
 
-
 const thisStyle = DEFAULT_STYLE
 
 export default function FormularyScreen() {
@@ -26,6 +25,14 @@ export default function FormularyScreen() {
     const navigation = useNavigation();
 
     // #region Dropdown Menu
+
+    const handleSetAllDrugs = (label) => {
+      let temp_allDrugs = []
+      for (const key in label) {
+        temp_allDrugs.push.apply(temp_allDrugs, label[key])
+      }
+      return(temp_allDrugs)
+    }
 
     // Convert the backend variable names to text format to be displayed
     const textify = (label) => {
@@ -49,12 +56,15 @@ export default function FormularyScreen() {
     const [sortOrder, setSortOrder] = useState(defaultText)
     const [sortLabel, setSortLabel] = useState(defaultLabel)
     const [title, setTitle] = useState(defaultTitle)
+    const [allDrugs, setAllDrugs] = useState([])
+    const [filteredDrugs, setFilteredDrugs] = useState(handleSetAllDrugs(defaultLabel))
 
     // Update sort order
     const handleChangeValuePress = (value, dict_text, dict_values) => {
       setSortOrder(dict_text[value])
       setSortLabel(dict_values[value])
       setTitle(dict_titles[value])
+      setAllDrugs(handleSetAllDrugs(dict_values[value]))
     }
 
     // Mappings. 
@@ -99,8 +109,18 @@ export default function FormularyScreen() {
     // #endregion
 
     const [searchQuery, setSearchQuery] = React.useState('');
-    const onChangeSearch = query => setSearchQuery(query);
 
+    const onChangeSearch = (query) => {
+      setSearchQuery(query);
+
+      let temp_filteredDrugs = allDrugs.filter(drug => drug.startsWith(query))
+      setFilteredDrugs(temp_filteredDrugs)
+    }
+
+    /**
+     * Navigates to appropriate drugInfo screen
+     * @param {string} drug name of drug to navigate to
+     */
     const handleDrugPress = (drug) => {
         navigation.navigate("DrugInfo", {drug: drug})
     }
@@ -143,7 +163,7 @@ export default function FormularyScreen() {
                       title={drug_class}
                       left={props => <List.Icon {...props}/>}>
                       {
-                          sortLabel[drug_class.replace(" ", "_")].map((drug, key) => (
+                          sortLabel[drug_class.replace(" ", "_")].filter(drug => filteredDrugs.includes(drug)).map((drug, key) => (
                               <List.Item key={key} title={drug} button onPress={() => {handleDrugPress(drug)}}/>
                           ))
                       }
