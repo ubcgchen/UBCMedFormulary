@@ -16,8 +16,8 @@ const file_mappings = {
 }
 
 export default function QuizSelectionScreen({route}){
-  const { param } = route.params;
-  const weeks = file_mappings[param]
+  const { exam, randomize, numQuestions } = route.params;
+  const weeks = file_mappings[exam]
   
   const navigation = useNavigation();
 
@@ -28,7 +28,6 @@ export default function QuizSelectionScreen({route}){
     week_mappings[item] = false
     week_mappings_all_selected[item] = true
   });
-  console.log(week_mappings)
 
   const [selectedWeeks, setSelectedWeeks] = useState(week_mappings)
   const [disableStart, setDisableStart] = useState(true)
@@ -66,7 +65,7 @@ export default function QuizSelectionScreen({route}){
       {/* Title */}
       <View>
         <Text style={styles(null).text_header}>
-          {param} Quizzes
+          {exam} Quizzes
         </Text>
         <Text style={styles(null).text_blurb}>
           Improve your pharmacology knowledge! Select the CBL cases you want to be quizzed on
@@ -102,7 +101,7 @@ export default function QuizSelectionScreen({route}){
       {/* Bottom Buttons */}
       <View style = {{flex: 0.11}}>
         <BackButton page="Learn"/>
-        <TouchableOpacity style={styles(null).button_start} onPress={() => navigation.navigate('QuizQuestion', {selectedWeeks: selectedWeeks})} disabled={disableStart}>
+        <TouchableOpacity style={styles(null).button_start} onPress={() => navigation.navigate('QuizQuestion', {selectedWeeks: selectedWeeks, exam: exam, randomize:randomize, numQuestions: numQuestions})} disabled={disableStart}>
           <Text style={styles(disableStart).text_buttons}>Start Quiz</Text>
         </TouchableOpacity>
       </View>

@@ -10,7 +10,7 @@ function NavButton({ label, page, param }) {
     const navigation = useNavigation();
 
     return(
-        <TouchableOpacity style={styles.button_nav} onPress={() => {navigation.navigate(page, {param: param})}}>
+        <TouchableOpacity style={styles.button_nav} onPress={() => {navigation.navigate(page, param)}}>
           <Text style={styles.text_buttons}>{label}</Text>
         </TouchableOpacity>
     );

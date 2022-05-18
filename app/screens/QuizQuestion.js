@@ -6,12 +6,14 @@ import { DEFAULT_STYLE } from '../constants/Styles';
 import Dialog from "react-native-dialog";
 import { useNavigation } from '@react-navigation/native';
 
+import { shuffle } from '../utils/Shuffle';
+
 import * as quizzes from '../data/quiz'
 
 const thisStyle = DEFAULT_STYLE
 
 export default function QuizQuestionScreen({route}) {
-  const { selectedWeeks } = route.params;
+  const { selectedWeeks, exam, randomize, numQuestions } = route.params;
   
   let week_mappings = {
     "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
@@ -39,6 +41,10 @@ export default function QuizQuestionScreen({route}) {
       questions.push.apply(questions, week_mappings[key])
     }
   }
+
+  const questionsLength = questions.length;
+  const defaultOrder = [...Array(questionsLength).keys()]
+  const [questionOrder, setQuestionOrder] = randomize ? useState(shuffle(defaultOrder)) : useState(defaultOrder)
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -68,7 +74,7 @@ export default function QuizQuestionScreen({route}) {
                 <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
                 <Dialog.Button label="Leave" onPress={() => navigation.navigate("Learn")} />
           </Dialog.Container>
-          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {questions.length}</Text>
+          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {questionsLength}</Text>
         </View>
 
         {/* Question Prompt */}
@@ -80,7 +86,7 @@ export default function QuizQuestionScreen({route}) {
     return(
       <View>
         <Text style={styles(null, null, null, null, null).text_prompt}>
-          {questions[currentQuestionIndex]?.prompt}
+          {questions[questionOrder[currentQuestionIndex]]?.prompt}
         </Text>
       </View>
     );
@@ -145,8 +151,8 @@ export default function QuizQuestionScreen({route}) {
   }
 
   const handleNext = () => {
-      if (currentQuestionIndex +1 == questions.length) {
-          navigation.navigate("Results", {points: score, total: questions.length})
+      if (currentQuestionIndex + 1 == questionsLength) {
+          navigation.navigate("Results", {points: score, total: questionsLength, exam: exam, randomize:randomize, numQuestions: numQuestions})
       } else {
           setCurrentQuestionIndex(currentQuestionIndex + 1)
           setCurrentOptionSelected(null)

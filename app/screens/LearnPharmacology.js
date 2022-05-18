@@ -69,12 +69,12 @@ export default function LearnPharmacologyScreen() {
         </View>
 
         <View>
-          <NavButton label="MEDD 411 Midterm" page="QuizSelect" param="MEDD 411 Midterm"/>
-          <NavButton label="MEDD 411 Final" page="QuizSelect" param="MEDD 411 Final"/>
+          <NavButton label="MEDD 411 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomEnabled, numQuestions: text}}/>
+          <NavButton label="MEDD 411 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomEnabled, numQuestions: text}}/>
 
           {/*NOT IMPLEMENTED*/}
-          <NavButton label="MEDD 412 Midterm" page="QuizSelect" param="MEDD 411 Midterm"/>
-          <NavButton label="MEDD 412 Final" page="QuizSelect" param="MEDD 411 Final"/>
+          <NavButton label="MEDD 412 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomEnabled, numQuestions: text}}/>
+          <NavButton label="MEDD 412 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomEnabled, numQuestions: text}}/>
         </View>
 
         <BackButton page="Home"/>

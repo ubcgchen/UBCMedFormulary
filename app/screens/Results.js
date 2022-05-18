@@ -11,7 +11,7 @@ const thisStyle = DEFAULT_STYLE
 
 export default function ResultsScreen({route}) {
   const navigation = useNavigation();
-  const { points, total } = route.params;
+  const { points, total, exam, randomize, numQuestions } = route.params;
   let incorrect = total-points
   let score = points/total * 100
 
@@ -44,7 +44,7 @@ export default function ResultsScreen({route}) {
             </View>
         </View>
         <View style = {{flex: 1, flexDirection: "row", justifyContent: "center"}}>
-            <NavButton label="Take another quiz" page="QuizSelect"/>
+            <NavButton label="Take another quiz" page="QuizSelect" param={{exam: exam, randomize:randomize, numQuestions: numQuestions}}/>
         </View>
     </View>
   );
