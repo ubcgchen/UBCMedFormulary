@@ -42,7 +42,8 @@ export default function QuizQuestionScreen({route}) {
     }
   }
 
-  const questionsLength = questions.length;
+  const questionsLength = questions.length
+  if (numQuestions == 0) numQuestions = questionsLength
   const defaultOrder = [...Array(questionsLength).keys()]
   const [questionOrder, setQuestionOrder] = randomize ? useState(shuffle(defaultOrder)) : useState(defaultOrder)
 
@@ -74,7 +75,7 @@ export default function QuizQuestionScreen({route}) {
                 <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
                 <Dialog.Button label="Leave" onPress={() => navigation.navigate("Learn")} />
           </Dialog.Container>
-          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {questionsLength}</Text>
+          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {numQuestions}</Text>
         </View>
 
         {/* Question Prompt */}
@@ -151,8 +152,8 @@ export default function QuizQuestionScreen({route}) {
   }
 
   const handleNext = () => {
-      if (currentQuestionIndex + 1 == questionsLength) {
-          navigation.navigate("Results", {points: score, total: questionsLength, exam: exam, randomize:randomize, numQuestions: numQuestions})
+      if (currentQuestionIndex + 1 == numQuestions) {
+          navigation.navigate("Results", {points: score, total: numQuestions, exam: exam, randomize:randomize, numQuestions: numQuestions})
       } else {
           setCurrentQuestionIndex(currentQuestionIndex + 1)
           setCurrentOptionSelected(null)

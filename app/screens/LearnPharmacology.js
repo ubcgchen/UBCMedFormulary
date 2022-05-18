@@ -17,8 +17,9 @@ export default function LearnPharmacologyScreen() {
     const [modalVisible, setModalVisible] = useState(false);
     const [text, setText] = React.useState("");
 
-    const [isRandomEnabled, setIsRandomEnabled] = useState(false);
-    const toggleSwitch = () => setIsRandomEnabled(previousState => !previousState);
+    const [isRandomOn, setisRandomOn] = useState(false);
+    const [isRandomDisabled, setIsRandomDisabled] = useState(false);
+    const toggleSwitch = () => setisRandomOn(previousState => !previousState);
 
     const handleQuizSettings = () => {
       setModalVisible(true)
@@ -26,6 +27,12 @@ export default function LearnPharmacologyScreen() {
 
     const filterInput = (temp_text) => {
         setText(temp_text.replace(/[^0-9]/g, ''))
+        if (temp_text.length != 0 && Number(temp_text) > 0) {
+          setisRandomOn(true);
+          setIsRandomDisabled(true);
+        } else {
+          setIsRandomDisabled(false);
+        }
     }
   
     return (
@@ -38,8 +45,9 @@ export default function LearnPharmacologyScreen() {
                 <Switch
                   color = "blue"
                   onValueChange={toggleSwitch}
-                  value={isRandomEnabled}
+                  value={isRandomOn}
                   style={{marginLeft:"70%"}}
+                  disabled={isRandomDisabled}
                 />
                 </View>
               <View style = {{width: "50%"}}>
@@ -57,7 +65,7 @@ export default function LearnPharmacologyScreen() {
                 />
               </View>
               <View style = {{width: "50%"}}>
-                <Text style = {{padding: 12, fontSize: 17}}>Max Quiz Questions</Text>
+                <Text style = {{padding: 12, fontSize: 17}}>Max Questions (turns randomize on)</Text>
               </View>
             </View>
         </Modal>
@@ -69,12 +77,12 @@ export default function LearnPharmacologyScreen() {
         </View>
 
         <View>
-          <NavButton label="MEDD 411 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomEnabled, numQuestions: text}}/>
-          <NavButton label="MEDD 411 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomEnabled, numQuestions: text}}/>
+          <NavButton label="MEDD 411 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomOn, numQuestions: text}}/>
+          <NavButton label="MEDD 411 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomOn, numQuestions: text}}/>
 
           {/*NOT IMPLEMENTED*/}
-          <NavButton label="MEDD 412 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomEnabled, numQuestions: text}}/>
-          <NavButton label="MEDD 412 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomEnabled, numQuestions: text}}/>
+          <NavButton label="MEDD 412 Midterm" page="QuizSelect" param={{exam: "MEDD 411 Midterm", randomize:isRandomOn, numQuestions: text}}/>
+          <NavButton label="MEDD 412 Final" page="QuizSelect" param={{exam: "MEDD 411 Final", randomize:isRandomOn, numQuestions: text}}/>
         </View>
 
         <BackButton page="Home"/>
