@@ -5,6 +5,7 @@ import { DarkTheme, List, Provider, Searchbar, Menu, Button, Divider } from 'rea
 import BackButton from '../components/BackButton';
 import DropDownPicker from 'react-native-dropdown-picker';
 import 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { DEFAULT_STYLE } from '../constants/Styles';
 import { WINDOW } from '../constants/Dimensions';
@@ -151,6 +152,7 @@ export default function FormularyScreen() {
               placeholderStyle={{
                 fontSize: 15,
                 fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+                icon: () => <MaterialCommunityIcons name="cog" style={{color: "#000", fontSize: 20}} />
               }}
               onChangeValue={(value) => {handleChangeValuePress(value, dict_text, dict_values)}}
             />

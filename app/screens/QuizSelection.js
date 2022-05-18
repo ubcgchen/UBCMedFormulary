@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../components/BackButton';
 import { Checkbox } from 'react-native-paper';
@@ -7,32 +7,28 @@ import { Checkbox } from 'react-native-paper';
 import { WINDOW } from '../constants/Dimensions';
 import { DEFAULT_STYLE } from '../constants/Styles';
 
-import { weeks } from '../data/weeks';
+import { m411Midterm, m411Final } from '../data/weeks';
 
 const thisStyle = DEFAULT_STYLE
+const file_mappings = {
+  "MEDD 411 Midterm": m411Midterm,
+  "MEDD 411 Final": m411Final
+}
 
-export default function QuizSelectionScreen(){
+export default function QuizSelectionScreen({route}){
+  const { param } = route.params;
+  const weeks = file_mappings[param]
   
   const navigation = useNavigation();
 
-  let week_mappings = {
-    "Intro to Pharmacodynamics": false,
-    "Intro to Pharmacokinetics": false,
-    "Fetal Development": false,
-    "Breast Mass": false,
-    "Immunology & Allergy": false,
-    "Pneumonia and Cough": false,
-    "Chronic Obstructive Pulmonary Disease (COPD)": false,
-    "Electrolyte Disturbance": false,
-    "Hypertension": false,
-    "Heart Murmurs": false,
-    "Upper Gastrointestinal Tract": false,
-    "Nutrient Malabsorption": false,
-    "Diabetes Mellitus": false,
-    "Lower Gastrointestinal Tract": false,
-    "Infertility": false,
-    "Pregnancy": false
-  }
+  let week_mappings = {}
+  let week_mappings_all_selected = {}
+
+  weeks.forEach((item) => {
+    week_mappings[item] = false
+    week_mappings_all_selected[item] = true
+  });
+  console.log(week_mappings)
 
   const [selectedWeeks, setSelectedWeeks] = useState(week_mappings)
   const [disableStart, setDisableStart] = useState(true)
@@ -54,17 +50,37 @@ export default function QuizSelectionScreen(){
       setDisableStart(false)
     }
   }
+
+  const handleSelectAll = () => {
+    setSelectedWeeks(week_mappings_all_selected)
+    setDisableStart(false)
+  }
+
+  const handleDeselectAll = () => {
+    setSelectedWeeks(week_mappings)
+    setDisableStart(true)
+  }
   
   return (
     <View style={styles(null).container}>
       {/* Title */}
       <View>
         <Text style={styles(null).text_header}>
-          Quizzes
+          {param} Quizzes
         </Text>
         <Text style={styles(null).text_blurb}>
           Improve your pharmacology knowledge! Select the CBL cases you want to be quizzed on
         </Text>
+      </View>
+
+      <View style={{flexDirection: "row"}}>
+        <TouchableOpacity onPress={() => {handleSelectAll()}} style = {styles(null).button}>
+          <Text>Select All</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {handleDeselectAll()}} style = {styles(null).button}>
+          <Text>De-select All</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Quiz Selection */}
@@ -97,6 +113,14 @@ export default function QuizSelectionScreen(){
 
 
 const styles = (disableStart) => StyleSheet.create({
+    button:{
+      backgroundColor: thisStyle.button,
+      padding: 10,
+      marginLeft:20,
+      marginTop: 10,
+      marginBottom: 10,
+      borderRadius:10
+    },
     button_start: {
       position: 'absolute',
       right: 20,
@@ -122,7 +146,6 @@ const styles = (disableStart) => StyleSheet.create({
       fontSize: 25,
       marginBottom: WINDOW.height*0.02,
       marginTop: WINDOW.height*0.07,
-      textDecorationLine: 'underline',
     },
     text_subheader: {
         fontSize: 18,

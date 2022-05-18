@@ -1,0 +1,7 @@
+"Intro to Pharmacodynamics"
+"Intro to Pharmacokinetics"
+"Fetal Development"
+"Breast Mass"
+"Immunology & Allergy"
+"Chronic Obstructive Pulmonary Disease (COPD)"
+"Nutrient Malabsorption"

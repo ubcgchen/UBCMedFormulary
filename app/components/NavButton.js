@@ -5,12 +5,12 @@ import { DEFAULT_STYLE } from '../constants/Styles';
 
 const thisStyle = DEFAULT_STYLE
 
-function NavButton({ label, page }) {
+function NavButton({ label, page, param }) {
 
     const navigation = useNavigation();
 
     return(
-        <TouchableOpacity style={styles.button_nav} onPress={() => {navigation.navigate(page)}}>
+        <TouchableOpacity style={styles.button_nav} onPress={() => {navigation.navigate(page, {param: param})}}>
           <Text style={styles.text_buttons}>{label}</Text>
         </TouchableOpacity>
     );
