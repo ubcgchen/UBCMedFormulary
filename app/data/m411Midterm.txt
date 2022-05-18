@@ -3,5 +3,5 @@
 "Fetal Development"
 "Breast Mass"
 "Immunology & Allergy"
-"Chronic Obstructive Pulmonary Disease (COPD)"
-"Nutrient Malabsorption"
+"Pneumonia and Cough"
+"Pregnancy"

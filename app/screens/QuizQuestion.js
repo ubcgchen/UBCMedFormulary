@@ -43,7 +43,8 @@ export default function QuizQuestionScreen({route}) {
   }
 
   const questionsLength = questions.length
-  if (numQuestions == 0) numQuestions = questionsLength
+  let numQuestions_filtered = numQuestions
+  if (numQuestions == 0 || numQuestions > questionsLength) numQuestions_filtered = questionsLength
   const defaultOrder = [...Array(questionsLength).keys()]
   const [questionOrder, setQuestionOrder] = randomize ? useState(shuffle(defaultOrder)) : useState(defaultOrder)
 
@@ -75,7 +76,7 @@ export default function QuizQuestionScreen({route}) {
                 <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
                 <Dialog.Button label="Leave" onPress={() => navigation.navigate("Learn")} />
           </Dialog.Container>
-          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {numQuestions}</Text>
+          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {numQuestions_filtered}</Text>
         </View>
 
         {/* Question Prompt */}
@@ -152,8 +153,8 @@ export default function QuizQuestionScreen({route}) {
   }
 
   const handleNext = () => {
-      if (currentQuestionIndex + 1 == numQuestions) {
-          navigation.navigate("Results", {points: score, total: numQuestions, exam: exam, randomize:randomize, numQuestions: numQuestions})
+      if (currentQuestionIndex + 1 == numQuestions_filtered) {
+          navigation.navigate("Results", {points: score, total: numQuestions_filtered, exam: exam, randomize:randomize, numQuestions: numQuestions_filtered})
       } else {
           setCurrentQuestionIndex(currentQuestionIndex + 1)
           setCurrentOptionSelected(null)

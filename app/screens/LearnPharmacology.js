@@ -26,7 +26,8 @@ export default function LearnPharmacologyScreen() {
     }
 
     const filterInput = (temp_text) => {
-        setText(temp_text.replace(/[^0-9]/g, ''))
+        temp_text = temp_text.replace(/[^0-9]/g, '')
+        setText(temp_text)
         if (temp_text.length != 0 && Number(temp_text) > 0) {
           setisRandomOn(true);
           setIsRandomDisabled(true);

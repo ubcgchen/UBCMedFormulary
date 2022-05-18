@@ -3,18 +3,18 @@ export const m411Midterm = ["Intro to Pharmacodynamics",
 "Fetal Development",
 "Breast Mass",
 "Immunology & Allergy",
-"Chronic Obstructive Pulmonary Disease (COPD)",
-"Nutrient Malabsorption",
+"Pneumonia and Cough",
+"Pregnancy",
 ]
 
 export const m411Final = ["Electrolyte Disturbance",
-"Hypertension",
 "Heart Murmurs",
+"Hypertension",
 "Upper Gastrointestinal Tract",
+"Nutrient Malabsorption",
 "Diabetes Mellitus",
 "Lower Gastrointestinal Tract",
 "Infertility",
-"Pregnancy",
-"Pneumonia and Cough",
+"Chronic Obstructive Pulmonary Disease (COPD)",
 ]
 
