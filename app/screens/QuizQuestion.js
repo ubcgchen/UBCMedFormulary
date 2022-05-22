@@ -1,19 +1,18 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WINDOW } from '../constants/Dimensions';
-import { DEFAULT_STYLE } from '../constants/Styles';
 import Dialog from "react-native-dialog";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 import { shuffle } from '../utils/Shuffle';
 
 import * as quizzes from '../data/quiz'
 
-const thisStyle = DEFAULT_STYLE
-
 export default function QuizQuestionScreen({route}) {
   const { selectedWeeks, exam, randomize, numQuestions } = route.params;
+  const {colors, font} = useTheme()
   
   let week_mappings = {
     "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
@@ -60,34 +59,50 @@ export default function QuizQuestionScreen({route}) {
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
   const navigation = useNavigation();
 
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [incorrect, setIncorrect] = useState(0)
+  const [percent, setPercent] = useState(0)
+  const [confettiCount, setConfettiCount] = useState(0)
+
+  const [quizOver, setQuizOver] = useState(false)
+  const [backButtonDisabled, setBackButtonDisabled] = useState(false)
+
+
   const renderHeader = () => {
     return(
       <View>
         {/* Question Counter, Exit Button */}
         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity style={styles(null, null, null, null, null).button_quizexit} onPress={() => {setVisible(true)}}>
-            <Text style={styles(null, null, null, null, null).text_exitquiz}>{'<'}</Text>
+          <TouchableOpacity style={styles(colors, font, null, null, null, null, null).button_quizexit} onPress={() => {setVisible(true)}} hitSlop={{top: 200, bottom: 50, left: 200, right: 50}}>
+            <Text style={styles(colors, font, null, null, null, null, null).text_exitquiz}>{'<'}</Text>
           </TouchableOpacity>
           <Dialog.Container visible={visible} onBackdropPress={() => setVisible(false)}>
                 <Dialog.Title>Exit Quiz</Dialog.Title>
                 <Dialog.Description>
-                    Would you like to leave your current quiz? All progress will be lost.
+                    Would you like to leave the quiz? All data will be lost.
                 </Dialog.Description>
                 <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
-                <Dialog.Button label="Leave" onPress={() => navigation.navigate("Learn")} />
+                <Dialog.Button label="Leave" onPress={() => {handleExitQuiz()}} />
           </Dialog.Container>
-          <Text style={styles(null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {numQuestions_filtered}</Text>
+          <Text style={styles(colors, font, null, null, null, null, null).text_numbering}>{currentQuestionIndex+1} / {numQuestions_filtered}</Text>
         </View>
 
         {/* Question Prompt */}
       </View>
     );
   }
+
+  const handleExitQuiz = () => {
+    navigation.navigate("Learn")
+    setQuizOver(false)
+  }
   
   const renderQuestion = () => {
     return(
       <View>
-        <Text style={styles(null, null, null, null, null).text_prompt}>
+        <Text style={styles(colors, font, null, null, null, null, null).text_prompt}>
           {questions[questionOrder[currentQuestionIndex]]?.prompt}
         </Text>
       </View>
@@ -95,7 +110,7 @@ export default function QuizQuestionScreen({route}) {
   }
 
   const highlightChoice = (selectedOption) => {
-    let correct_option = questions[currentQuestionIndex]["correct"];
+    let correct_option = questions[questionOrder[currentQuestionIndex]]["correct"];
     setCurrentOptionSelected(selectedOption);
     setCorrectOption(correct_option);
     setShowSubmitButton(true);
@@ -111,38 +126,38 @@ export default function QuizQuestionScreen({route}) {
 
   const renderChoices = () => {
     return(
-      <ScrollView>
-        {
-          questions[currentQuestionIndex]?.choices.map((choice, key) => (
-            <TouchableOpacity key = {key}
-                              onPress={()=> highlightChoice(choice)} 
-                              style = {styles(choice, correctOption, currentOptionSelected, answerSubmitted, null).button_choice}
-                              activeOpacity={1}
-                              disabled={isOptionsDisabled}>
-              <Text style={styles(null, null, null, null, null).text_choice}>{choice}</Text>
-              {
-                choice==correctOption && answerSubmitted ? (
-                    <View style={{
-                        width: 30, height: 30, borderRadius: 30/2,
-                        backgroundColor: thisStyle.correct_outline,
-                        justifyContent: 'center', alignItems: 'center'
-                    }}>
-                        <MaterialCommunityIcons name="check" style={{color: "#000", fontSize: 20}} />
-                    </View>
-                ): choice == currentOptionSelected && answerSubmitted ? (
-                    <View style={{
-                        width: 30, height: 30, borderRadius: 30/2,
-                        backgroundColor: thisStyle.incorrect_outline,
-                        justifyContent: 'center', alignItems: 'center'
-                    }}>
-                        <MaterialCommunityIcons name="close" style={{color: "#FFF", fontSize: 20}} />
-                    </View>
-                ) : null
-              }
-            </TouchableOpacity>
-          ))
-        }
-      </ScrollView>
+        <ScrollView>
+          {
+            questions[questionOrder[currentQuestionIndex]]?.choices.map((choice, key) => (
+              <TouchableOpacity key = {key}
+                                onPress={()=> highlightChoice(choice)} 
+                                style = {styles(colors, font, choice, correctOption, currentOptionSelected, answerSubmitted, null).button_choice}
+                                activeOpacity={1}
+                                disabled={isOptionsDisabled}>
+                <Text style={styles(colors, font, null, null, null, null, null).text_choice}>{choice}</Text>
+                {
+                  choice==correctOption && answerSubmitted ? (
+                      <View style={{
+                          width: 30, height: 30, borderRadius: 30/2,
+                          backgroundColor: colors.correct_outline,
+                          justifyContent: 'center', alignItems: 'center'
+                      }}>
+                          <MaterialCommunityIcons name="check" style={{color: "#000", fontSize: 20}} />
+                      </View>
+                  ): choice == currentOptionSelected && answerSubmitted ? (
+                      <View style={{
+                          width: 30, height: 30, borderRadius: 30/2,
+                          backgroundColor: colors.incorrect_outline,
+                          justifyContent: 'center', alignItems: 'center'
+                      }}>
+                          <MaterialCommunityIcons name="close" style={{color: "#FFF", fontSize: 20}} />
+                      </View>
+                  ) : null
+                }
+              </TouchableOpacity>
+            ))
+          }
+        </ScrollView>
     );
   }
 
@@ -150,12 +165,23 @@ export default function QuizQuestionScreen({route}) {
       setAnswerSubmitted(true);
       validateAnswer();
       setSubmitDisabled(true);
+      let temp_userAnswers = userAnswers
+      temp_userAnswers.push(currentOptionSelected)
+
+      setUserAnswers(temp_userAnswers)
+      console.log(temp_userAnswers)
   }
 
   const handleNext = () => {
       if (currentQuestionIndex + 1 == numQuestions_filtered) {
-          navigation.navigate("Results", {points: score, total: numQuestions_filtered, exam: exam, randomize:randomize, numQuestions: numQuestions_filtered})
-      } else {
+          setModalVisible(true)
+          let temp_incorrect = numQuestions_filtered-score
+          setIncorrect(temp_incorrect)
+          setPercent(score/numQuestions_filtered * 100)
+          if (temp_incorrect == 0) setConfettiCount(200)
+          setQuizOver(true)
+          setShowSubmitButton(false)
+      } else if (!quizOver) {
           setCurrentQuestionIndex(currentQuestionIndex + 1)
           setCurrentOptionSelected(null)
           setIsOptionsDisabled(false)
@@ -163,28 +189,53 @@ export default function QuizQuestionScreen({route}) {
           setShowSubmitButton(false)
           setAnswerSubmitted(false)
           setSubmitDisabled(false)
+      } else {
+        // Quiz is over
+        setBackButtonDisabled(false)
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
+        setCurrentOptionSelected(userAnswers[currentQuestionIndex + 1])
+        setAnswerSubmitted(true)
+        setCorrectOption(questions[currentQuestionIndex + 1]["correct"])
       }
   }
 
-  const renderNextButton = () => {
-      if (showNextButton) {
+  const handleBack = () => {
+    if (currentQuestionIndex == 0) {
+      setBackButtonDisabled(true)
+    } else {
+      setCurrentQuestionIndex(currentQuestionIndex - 1)
+      setCurrentOptionSelected(userAnswers[currentQuestionIndex - 1])
+      setCorrectOption(questions[currentQuestionIndex - 1]["correct"])
+      setAnswerSubmitted(true)
+    }
+  }
+
+  const renderFooter = () => {
           return (
-              <TouchableOpacity style={styles(null, null, null, null, null).button_next} onPress={() => {handleNext()}}>
-                  <Text style={styles(null, null, null, null, null).text_next}>Next {'>>'}</Text>
-              </TouchableOpacity>
+            <View style={{flexDirection: "row"}}>
+              {quizOver && ( 
+                  <TouchableOpacity style={styles(colors, font, null, null, null, null, null).button_back} disabled={backButtonDisabled} onPress={() => {handleBack()}}>
+                   <Text style={styles(colors, font, null, null, null, null, null).text_next}>{'<<'} Back</Text>
+                  </TouchableOpacity>
+              )}
+              <View style={{flex:5}}></View>
+              {showNextButton && ( 
+                  <TouchableOpacity style={styles(colors, font, null, null, null, null, null).button_next} onPress={() => {handleNext()}}>
+                   <Text style={styles(colors, font, null, null, null, null, null).text_next}>Next {'>>'}</Text>
+                  </TouchableOpacity>
+              )}
+            </View>
           )
-      } else {
-          return null
-      }
+
   }
 
   const renderSubmitButton = () => {
       if (showSubmitButton) {
           return (
-            <TouchableOpacity style={styles(null, null, null, null, isSubmitDisabled).button_submit} 
+            <TouchableOpacity style={styles(colors, font, null, null, null, null, isSubmitDisabled).button_submit} 
                               onPress={() => {handleSubmit()}} disabled={isSubmitDisabled}
                               activeOpacity = {1}>
-                <Text style={styles(null, null, null, null, isSubmitDisabled).text_submit}>Submit</Text>
+                <Text style={styles(colors, font, null, null, null, null, isSubmitDisabled).text_submit}>Submit</Text>
             </TouchableOpacity>
           )
       } else {
@@ -192,22 +243,53 @@ export default function QuizQuestionScreen({route}) {
       }
   }
 
+
+  const renderResults = () => {
+    return(
+      <Modal animationType="slide" visible={modalVisible}>
+        <View style={styles(colors, font).modal}>
+          <ConfettiCannon count={confettiCount} origin={{x: -10, y: 0}} fadeOut={true} autoStartDelay={200} />
+          <View style = {{ flex: 1, justifyContent: "center", flexDirection: "row" }}>
+              <Text style={styles(colors, font, null, null, null, null, null).text_title}>Quiz Summary</Text>
+          </View>
+          <View style = {{flex: 1, flexDirection: "row"}}>
+              <View style = {{ flex: 1, justifyContent: "center", flexDirection: "row" }}>
+                  <Text style = {styles(colors, font, null, null, null, null, null).text_result}>{score}/{numQuestions_filtered}{"\n"}Correct</Text>
+              </View>
+              <View style = {{ flex: 1, justifyContent: "center", flexDirection: "row" }}>
+                  <Text style = {styles(colors, font, null, null, null, null, null).text_result}>{incorrect}/{numQuestions_filtered}{"\n"}Incorrect</Text>
+              </View>
+              <View style = {{ flex: 1, justifyContent: "center", flexDirection: "row" }}>
+                  <Text style = {styles(colors, font, null, null, null, null, null).text_result}>{percent}%{"\n"}Score</Text>
+              </View>
+          </View>
+          <View style = {{flex: 1, flexDirection: "row", justifyContent: "center"}}>
+            <TouchableOpacity style={styles(colors, font, null, null, null, null, null).button_nav} onPress={() => {setModalVisible(false)}}>
+              <Text style={styles(colors, font, null, null, null, null, null).text_buttons}>{"Review Quiz"}</Text>
+            </TouchableOpacity>            
+          </View>
+        </View>
+      </Modal>
+    );
+  }
+
   return (
     <View style={{flex:1}}>
-      <View style={styles(null, null, null, null, null).container}>
+      <View style={styles(colors, font, null, null, null, null, null).container}>
         {renderHeader()}        
         {renderQuestion()}
         {renderChoices()}
         {renderSubmitButton()}
-        {renderNextButton()}
+        {renderFooter()}
+        {renderResults()}
       </View>
     </View>
   );
 }
 
-const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, isSubmitDisabled) => StyleSheet.create({
+const styles = (colors, font, choice, correctOption, currentOptionSelected, answerSubmitted, isSubmitDisabled) => StyleSheet.create({
   button_submit: {
-      backgroundColor: isSubmitDisabled? thisStyle.button_disabled : thisStyle.button,
+      backgroundColor: isSubmitDisabled ? colors.button_disabled : colors.button,
       alignSelf: "center",
       justifyContent: "center",
       width: 250,
@@ -215,7 +297,17 @@ const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, i
       borderRadius: 20,
       marginTop: 20
   },
+  button_back: {
+    flex: 1,
+    justifyContent: "center",
+    width: 100,
+    height: 50,
+    alignSelf: "flex-start",
+    marginLeft: 30,
+
+  },
   button_next: {
+      flex: 1,
       justifyContent: "center",
       width: 100,
       height: 50,
@@ -224,44 +316,45 @@ const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, i
   },
   text_submit: {
     textAlign: "center",
-    color: isSubmitDisabled? thisStyle.text_disabled : thisStyle.text_primary,
-    fontSize: 25 * WINDOW.scale,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+    color: isSubmitDisabled? colors.text_disabled : colors.text,
+    fontSize: 25 * WINDOW.scale * font.scale,
+    fontFamily: font.style
   },
   text_next: {
     textAlign: "center",
-    color: thisStyle.text_primary,
-    fontSize: 25 * WINDOW.scale,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+    color: colors.text,
+    fontSize: 25 * WINDOW.scale * font.scale,
+    fontFamily: font.style
   },
   button_quizexit: {
+    zIndex: 500,
     marginLeft: WINDOW.width * 0.02,
     marginBottom: WINDOW.height * 0.01,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+    fontFamily: font.style,
     padding: 10
   },
   container: {
     flex: 1,
     paddingVertical: 40,
-    backgroundColor: thisStyle.background,
+    backgroundColor: colors.background,
     position: "relative"
   },
   button_choice: {
     borderWidth: 2, 
-    borderColor: answerSubmitted?   choice == correctOption ? 
-                                    thisStyle.correct_outline : choice == currentOptionSelected ? 
-                                    thisStyle.incorrect_outline : 
-                                    thisStyle.text_primary
+    borderColor: answerSubmitted ?   choice == correctOption ? 
+                                    colors.correct_outline : choice == currentOptionSelected ? 
+                                    colors.incorrect_outline : 
+                                    colors.button_outline
                                 :   choice == currentOptionSelected ? 
-                                    thisStyle.selected_outline : 
-                                    thisStyle.text_primary,
-    backgroundColor: answerSubmitted?    choice == correctOption ? 
-                                        thisStyle.correct : choice == currentOptionSelected ? 
-                                        thisStyle.incorrect : 
-                                        thisStyle.button
+                                    colors.selected_outline : 
+                                    colors.button_outline,
+    backgroundColor: answerSubmitted ?    choice == correctOption ? 
+                                        colors.correct : choice == currentOptionSelected ? 
+                                        colors.incorrect : 
+                                        colors.button
                                     :   choice == currentOptionSelected ? 
-                                        thisStyle.selected : 
-                                        thisStyle.button,
+                                        colors.selected : 
+                                        colors.button,
     borderRadius: 50,
     height: WINDOW.height * 0.08,
 
@@ -275,29 +368,61 @@ const styles = (choice, correctOption, currentOptionSelected, answerSubmitted, i
     marginLeft: WINDOW.width * 0.02,
     marginRight: WINDOW.width * 0.02,
   },
+  modal: {
+    backgroundColor: colors.background,
+    minHeight: "100%" 
+ },
   text_choice: {
-    color: thisStyle.text_primary,
-    fontSize: WINDOW.scale * 20,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+    color: answerSubmitted ? colors.text_submitted : colors.text,
+    fontSize: WINDOW.scale * 20 * font.scale,
+    fontFamily: font.style // Determine font based on platform
   },
   text_numbering: {
-    color: thisStyle.text_secondary, 
-    fontSize: WINDOW.scale * 30,
+    color: colors.text_disabled, 
+    fontSize: WINDOW.scale * 30 * font.scale,
     marginLeft: 7,
     marginBottom: 7,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+    fontFamily: font.style
   },
   text_prompt: {
-    color: thisStyle.text_primary, 
-    fontSize: WINDOW.scale * 30,
+    color: colors.text, 
+    fontSize: WINDOW.scale * 30 * font.scale,
     marginLeft: WINDOW.width * 0.056,
     marginRight: WINDOW.width * 0.05,
     marginBottom: WINDOW.height * 0.03,
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+    fontFamily: font.style
   },
   text_exitquiz: {
-    fontSize: WINDOW.scale * 35, 
-    color: thisStyle.text_primary, 
-    fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
-  }
+    fontSize: WINDOW.scale * 35* font.scale,  
+    color: colors.text, 
+    fontFamily: font.style
+  },
+  text_title: {
+    marginTop: "10%",
+    fontSize: WINDOW.scale * 40* font.scale,
+    color: colors.text,
+    fontFamily: font.style
+  },
+  text_result:{
+    fontSize: WINDOW.scale * 25* font.scale,
+    fontFamily: font.style,
+    color: colors.text
+  },
+  button_nav: {
+    alignItems: "center",
+    backgroundColor: colors.button,
+    padding: 12,
+    borderColor: colors.button_outline,
+    borderWidth: 1.5,
+    borderRadius: 50,
+    marginBottom: 20,
+    marginTop: 20,
+    width: 275,
+    height: 50
+},
+text_buttons: {
+    fontSize: 18 * font.scale,
+    fontFamily: font.style,
+    color: colors.text
+},
 });

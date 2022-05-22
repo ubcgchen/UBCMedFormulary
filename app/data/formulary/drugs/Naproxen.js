@@ -2,7 +2,6 @@ export const naproxen =
 
 {
     "drug-classes": ["NSAID"],
-    "body-systems": ["MSK"],
     "CBL-cases": [],
     "side-effects": [{
         "GI": ["Nausea", "Dizziness", "Decreased renal function"],

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import { DarkTheme, List, Provider, Searchbar, Menu, Button, Divider } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 import DropDownPicker from 'react-native-dropdown-picker';
 import 'react-native-vector-icons'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { DEFAULT_STYLE } from '../constants/Styles';
 import { WINDOW } from '../constants/Dimensions';
@@ -16,7 +15,6 @@ import { contraindication } from "../data/formulary/maps/contraindication"
 // NOT IMPLEMENTED YET
 import { indication } from "../data/formulary/maps/indication"
 import { sideEffect } from "../data/formulary/maps/side-effect"
-import { bodySystem } from "../data/formulary/maps/body-system"
 import { cblCase } from "../data/formulary/maps/cbl-case"
 
 const thisStyle = DEFAULT_STYLE
@@ -24,6 +22,7 @@ const thisStyle = DEFAULT_STYLE
 export default function FormularyScreen() {
 
     const navigation = useNavigation();
+    const {colors, font} = useTheme()
 
     // #region Dropdown Menu
 
@@ -47,7 +46,6 @@ export default function FormularyScreen() {
     const contraindicationsText = textify(contraindication)
     const indicationText = textify(indication)
     const sideEffectText = textify(sideEffect)
-    const bodySystemText = textify(bodySystem)
     const cblCaseText = textify(cblCase)
 
     // Drug Class is the entry sort order
@@ -76,7 +74,6 @@ export default function FormularyScreen() {
       indication: indicationText,
       sideEffect: sideEffectText,
       cblCase: cblCaseText,
-      bodySystem : bodySystemText
     };
     var dict_values = {
       drugClass: drugClass,
@@ -84,7 +81,6 @@ export default function FormularyScreen() {
       indication: indication,
       sideEffect: sideEffect,
       cblCase: cblCase,
-      bodySystem : bodySystem
     };
     var dict_titles = {
       drugClass: "Drug Class",
@@ -92,7 +88,6 @@ export default function FormularyScreen() {
       indication: "Indications",
       sideEffect: "Side Effects",
       cblCase: "CBL Case",
-      bodySystem : "Body System"
     }
 
     // Dropdown hooks
@@ -104,7 +99,6 @@ export default function FormularyScreen() {
       {label: "Indication", value: 'indication'},
       {label: "Side Effect", value: 'sideEffect'},
       {label: "CBL Case", value: 'cblCase'},
-      {label: "Body System", value: 'bodySystem'}
     ]);
 
     // #endregion
@@ -127,16 +121,19 @@ export default function FormularyScreen() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
-            <View style={{flexDirection:"row", zIndex: 999}}>
+        <View style={styles(colors, font, null).container}>
+            <Text style={styles(colors, font, null).title}>{title}</Text>
+            <View style={{flexDirection:"row", zIndex: 500}}>
             <Searchbar
                 placeholder="Search"
                 onChangeText={onChangeSearch}
                 value={searchQuery}
                 icon="pill"
-                style = {styles.searchbar}
-                inputStyle= {{color: "#000"}}
+                style = {styles(colors, font, open).searchbar}
+                inputStyle= {{color: colors.text}}
+                placeholderTextColor={colors.text}
+                placeholderStyle={{font: font}}
+                iconColor = {colors.text}
               />
             <DropDownPicker
               open={open}
@@ -145,84 +142,99 @@ export default function FormularyScreen() {
               setOpen={setOpen}
               setValue={setValue}
               setItems={setItems}
-              listItemLabelStyle={{fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android}}
-              dropDownContainerStyle={{borderColor: "#fff", width:"36%"}}
+              listItemLabelStyle={{fontFamily: font.style, color: colors.text, fontSize: 15 * font.scale}}
+              selectedItemLabelStyle={{fontWeight: "bold"}}
+              dropDownContainerStyle={{borderColor: colors.formulary_header, backgroundColor: colors.formulary_header, width:"36%", zIndex: 500}}
               placeholder="Browse By"
-              style={styles.dropdown_menu}
+              textDecorationColor={colors.text}
+              style={styles(colors, font, null).dropdown_menu}
               placeholderStyle={{
-                fontSize: 15,
-                fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
-                icon: () => <MaterialCommunityIcons name="cog" style={{color: "#000", fontSize: 20}} />
+                fontSize: 15 * font.scale,
+                fontFamily: font.style,
+                color: colors.text
               }}
               onChangeValue={(value) => {handleChangeValuePress(value, dict_text, dict_values)}}
+              dropdownIconColor= {colors.text}
             />
           </View>
-          <List.Section titleStyle={styles.accordion}>
-              {
-              sortOrder.map((drug_class, key) => (
-                  <List.Accordion
-                      key={key}
-                      title={drug_class}
-                      left={props => <List.Icon {...props}/>}>
-                      {
-                          sortLabel[drug_class.replace(" ", "_")].filter(drug => filteredDrugs.includes(drug)).map((drug, key) => (
-                              <List.Item key={key} title={drug} button onPress={() => {handleDrugPress(drug)}}/>
-                          ))
-                      }
-                  </List.Accordion>
-              ))
-              }
-          </List.Section>
+          <ScrollView>
+            <List.Section titleStyle={styles(colors, font, null).accordion}>
+                {
+                sortOrder.map((label, key) => (
+                    <List.Accordion
+                        key={key}
+                        title={label}
+                        left={props => <List.Icon {...props}/>}
+                        style={{backgroundColor: colors.background}}
+                        titleStyle = {{color:colors.text, fontFamily: font.style, fontSize: 15* font.scale}}
+                        theme={{colors: {text: colors.text}}}>
+                        {
+                            sortLabel[label.replace(" ", "_")].filter(drug => filteredDrugs.includes(drug)).map((drug, key) => (
+                                <List.Item key={key} title={drug} titleStyle = {{color:colors.text, fontSize: 14* font.scale, fontFamily:font.style}} style={{backgroundColor: colors.button}} button onPress={() => {handleDrugPress(drug)}}/>
+                            ))
+                        }
+                    </List.Accordion>
+                ))
+                }
+            </List.Section>
+          </ScrollView>
+
       
           <BackButton page="Home"/>
         </View>
     );
   }
 
-
-const styles = StyleSheet.create({
+const styles = (colors, font, open) => StyleSheet.create({
     accordion: {
-        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+        fontFamily: font.style,
         fontSize: 30 * WINDOW.scale,
         fontWeight: "normal",
-        color: thisStyle.text_primary
+        color: colors.text,
+        zIndex: -1,
     },
     container: {
       flex: 1,
-      backgroundColor: thisStyle.background,
+      backgroundColor: colors.background,
       paddingTop: 40
     },
     dropdown_menu: {
       width: "36%",
       borderRadius: 25,
+      backgroundColor: colors.formulary_header,
       borderWidth: 0,
-      shadowColor: "#a9a9a9",
+      shadowColor: colors.shadow,
         shadowOpacity: 0.8,
         shadowRadius: 4,
         shadowOffset: {
           height: 3,
           width: 1
-      }
+      },
+      zIndex: 500
     },
     searchbar: {
       width: '50%',
       alignSelf: 'center',
       borderRadius: 30,
-      marginBottom: 10,
+      marginBottom: Platform.OS === 'ios' ? 25 :
+                    open ? 200 : 25,
       marginRight: "4.5%",
       marginLeft: "5%",
-
+      zIndex: 500,
+      backgroundColor: colors.formulary_header,
+      textDecorationColor: colors.text
     },
     text: {
       alignSelf: "center",
       fontSize: 25* WINDOW.scale,
-      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+      fontFamily: font.style
     },
     title: {
       fontSize: 35 * WINDOW.scale,
       alignSelf: 'flex-start',
       marginLeft: "3%",
       marginBottom: 20,
-      fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android, // Determine font based on platform
+      fontFamily: font.style,
+      color: colors.text
     }
   });

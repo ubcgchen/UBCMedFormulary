@@ -1,23 +1,27 @@
 {/* Imports */}
-import * as React from 'react';
+import React, { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import NavButton from '../components/NavButton';
 import { STRINGS } from '../constants/Strings';
 import { DEFAULT_STYLE } from '../constants/Styles';
+import { ThemeContext } from "../../App";
 
 const thisStyle = DEFAULT_STYLE
 
 export default function HomeScreen() {
+  const { setTheme, theme } = React.useContext(ThemeContext);
+
   const navigation = useNavigation();
+  const { colors, font } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={styles(colors, font).container}>
       {/* Title */}
-      <View style={styles.horizontalview}>
-      <Image style={styles.logo} source={require('../assets/logos/ubc-logo.png')} />
-        <Text style={styles.text_title}>UBC Med Formulary</Text>
+      <View style={styles(colors, font).horizontalview}>
+      <Image style={styles(colors, font).logo} source={require('../assets/logos/ubc-logo.png')} />
+        <Text style={styles(colors, font).text_title}>UBC Med Formulary</Text>
       </View>
       
       {/* Nav Buttons */}
@@ -25,8 +29,8 @@ export default function HomeScreen() {
       <NavButton label="Formulary" page={STRINGS.formulary_page}/>
 
       {/* About Button */}
-      <TouchableOpacity style={styles.button_about}>
-        <Text style={styles.text_buttons}>About</Text>
+      <TouchableOpacity style={styles(colors, font).button_about}>
+        <Text style={styles(colors, font).text_buttons}>About</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -34,7 +38,7 @@ export default function HomeScreen() {
 }
 
 
-const styles = StyleSheet.create({
+const styles = (colors, font) => StyleSheet.create({
   button_about: {
     position: 'absolute',
     right: 20,
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: thisStyle.background,   
+    backgroundColor: colors.background,   
     alignItems: 'center',      
     justifyContent: 'center',
   },

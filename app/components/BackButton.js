@@ -1,30 +1,32 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { DEFAULT_STYLE } from '../constants/Styles';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
-const thisStyle = DEFAULT_STYLE
+import { DEFAULT_STYLE } from '../constants/Styles';
 
 function BackButton({ page }) {
 
     const navigation = useNavigation();
+    const { colors, font } = useTheme()
 
     return(
-        <TouchableOpacity style={styles.button_back} onPress={() => {navigation.navigate(page)}}>
-          <Text style={styles.text_buttons}>Back</Text>
+        <TouchableOpacity style={styles(colors,font).button_back} onPress={() => {navigation.navigate(page)}} hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}>
+          <Text style={styles(colors,font).text_buttons}>Back</Text>
         </TouchableOpacity>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = (colors, font) => StyleSheet.create({
     button_back: {
         position: 'absolute',
         left: 20,
         bottom: 20,
+        padding: 10
     },
     text_buttons: {
-        fontSize: 18,
-        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+        color: colors.button_text,
+        fontSize: 18 * font.scale,
+        fontFamily: font.style
     },
 });
 

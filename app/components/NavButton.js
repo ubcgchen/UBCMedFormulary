@@ -1,27 +1,26 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import { DEFAULT_STYLE } from '../constants/Styles';
-
-const thisStyle = DEFAULT_STYLE
 
 function NavButton({ label, page, param }) {
 
     const navigation = useNavigation();
+    const { colors, font } = useTheme()
 
     return(
-        <TouchableOpacity style={styles.button_nav} onPress={() => {navigation.navigate(page, param)}}>
-          <Text style={styles.text_buttons}>{label}</Text>
+        <TouchableOpacity style={styles(colors, font).button_nav} onPress={() => {navigation.navigate(page, param)}}>
+          <Text style={styles(colors, font).text_buttons}>{label}</Text>
         </TouchableOpacity>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = (colors, font) => StyleSheet.create({
     button_nav: {
         alignItems: "center",
-        backgroundColor: thisStyle.button,
+        backgroundColor: colors.button,
         padding: 12,
-        borderColor: thisStyle.button_outline,
+        borderColor: colors.border,
         borderWidth: 1.5,
         borderRadius: 50,
         marginBottom: 20,
@@ -30,8 +29,9 @@ const styles = StyleSheet.create({
         height: 50
     },
     text_buttons: {
-        fontSize: 18,
-        fontFamily: Platform.OS === 'ios' ? thisStyle.font_ios : thisStyle.font_android // Determine font based on platform
+        fontSize: 18 * font.scale,
+        color: colors.button_text,
+        fontFamily: font.style
     },
 });
 

@@ -31,7 +31,7 @@ export const immunologyAndAllergy = [
             "Dimenhydrinate",
             "Loratadine", 
             "Ranitidine"],
-        "correct": "Loratidine",
+        "correct": "Loratadine",
         "tags":["PD","easy","Immunology","Side effects"]
     },  
     {
