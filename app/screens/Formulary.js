@@ -6,7 +6,6 @@ import BackButton from '../components/BackButton';
 import DropDownPicker from 'react-native-dropdown-picker';
 import 'react-native-vector-icons'
 
-import { DEFAULT_STYLE } from '../constants/Styles';
 import { WINDOW } from '../constants/Dimensions';
 
 import { drugClass } from '../data/formulary/maps/drug-class'
@@ -16,8 +15,6 @@ import { contraindication } from "../data/formulary/maps/contraindication"
 import { indication } from "../data/formulary/maps/indication"
 import { sideEffect } from "../data/formulary/maps/side-effect"
 import { cblCase } from "../data/formulary/maps/cbl-case"
-
-const thisStyle = DEFAULT_STYLE
 
 export default function FormularyScreen() {
 
@@ -166,11 +163,11 @@ export default function FormularyScreen() {
                         title={label}
                         left={props => <List.Icon {...props}/>}
                         style={{backgroundColor: colors.background}}
-                        titleStyle = {{color:colors.text, fontFamily: font.style, fontSize: 15* font.scale}}
+                        titleStyle = {{color:colors.text, fontFamily: font.style, fontSize: 17 * font.scale}}
                         theme={{colors: {text: colors.text}}}>
                         {
                             sortLabel[label.replace(" ", "_")].filter(drug => filteredDrugs.includes(drug)).map((drug, key) => (
-                                <List.Item key={key} title={drug} titleStyle = {{color:colors.text, fontSize: 14* font.scale, fontFamily:font.style}} style={{backgroundColor: colors.button}} button onPress={() => {handleDrugPress(drug)}}/>
+                                <List.Item key={key} title={drug} titleStyle = {{color:colors.text, fontSize: 15 * font.scale, fontFamily:font.style}} style={{backgroundColor: colors.button}} button onPress={() => {handleDrugPress(drug)}}/>
                             ))
                         }
                     </List.Accordion>

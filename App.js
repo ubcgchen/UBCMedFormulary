@@ -1,275 +1,254 @@
-{/* Imports */}
+/**
+ * App entry point and home screen
+ * @author George Chen, UBC VFMP 2025
+ */
+
+// Imports
 import React, { useState } from "react";
-import { NavigationContainer, useTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native';
-import NavButton from './app/components/NavButton';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useFonts } from 'expo-font';
+import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  // Modal,
+} from "react-native";
+import Modal from "react-native-modal";
+import NavButton from "./app/components/NavButton";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useFonts } from "expo-font";
+import { themeMap, themeMapKeys } from "./app/constants/Styles";
+import { WINDOW } from "./app/constants/Dimensions";
+import { lowerCase } from "./app/utils/LowerCase";
+import { Settings } from "./app/Settings";
 
-{/* Screens */}
-import LearnPharmacologyScreen from './app/screens/LearnPharmacology';
-import QuizSelectionScreen from './app/screens/QuizSelection';
-import QuizQuestionScreen from './app/screens/QuizQuestion';
-import ResultsScreen from './app/screens/Results';
-import FormularyScreen from './app/screens/Formulary';
-import DrugInfoScreen from './app/screens/DrugInfo';
-import { STRINGS } from './app/constants/Strings';
+// Screens
+import LearnPharmacologyScreen from "./app/screens/LearnPharmacology";
+import QuizSelectionScreen from "./app/screens/QuizSelection";
+import QuizQuestionScreen from "./app/screens/QuizQuestion";
+import FormularyScreen from "./app/screens/Formulary";
+import DrugInfoScreen from "./app/screens/DrugInfo";
 
-const Stack = createNativeStackNavigator();
+const ThemeContext = React.createContext();
+const Stack = createNativeStackNavigator(); // For navigation between screens
 
-  const Light = {
-    dark: false,
-    colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: 'rgb(242, 242, 242)',
-      card: 'rgb(255, 255, 255)',
+const iconSize = 50 * WINDOW.scale;
 
-      text: 'rgb(28, 28, 30)',
-      text_disabled: '#777',
+// Global variables
+global.theme;
 
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
-
-      button: '#ebebeb',
-      button_disabled: '#fafafa',
-      button_outline: "#000",
-      button_text: '#986c55',
-
-      correct_outline: "#5fb25f",
-      incorrect_outline: "#b24141",
-      selected_outline: "#5bbce4",
-      correct: "#88FF88",
-      incorrect: "#d79191",
-      selected: "#87CEEB",
-      text_submitted: "#000",
-      shadow: "#a9a9a9",
-      
-      //Formulary
-      formulary_header: "#FFF"
-    },
-    font: {
-      style: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
-      scale: 1,
-    },
-    logo: require('./app/assets/logos/ubc-logo.png')
-  };
-
-  const Dark = {
-    dark: false,
-    colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: '#393939',
-      card: 'rgb(255, 255, 255)',
-
-      text: '#FFF',
-      text_disabled: 'rgb(100, 100, 100)',
-
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
-
-      button: '#3d4a52',
-      button_disabled: '#636e74',
-      button_outline: "#000",
-      button_text: '#986c55',
-
-      correct_outline: "#5fb25f",
-      incorrect_outline: "#b24141",
-      selected_outline: "#5bbce4",
-      correct: "#88FF88",
-      incorrect: "#d79191",
-      selected: "#87CEEB",
-      text_submitted: "#000",
-      shadow: "#2d2d2d",
-
-      //Formulary
-      formulary_header: "#2d2d2d"
-    },
-    font: {
-      style: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
-      scale: 1,
-    },
-    logo: require('./app/assets/logos/ubc-logo_darkmode.png')
-  };
-
-  const Cute = {
-    dark: false,
-    colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: '#fdf7e8',
-      card: 'rgb(255, 255, 255)',
-
-      text: '#716e6e',
-      text_disabled: 'rgb(100, 100, 100)',
-
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
-
-      button: '#ffedef',
-      button_disabled: '#636e74',
-      button_outline: "#000",
-      button_text: '#986c55',
-
-      correct_outline: "#5fb25f",
-      incorrect_outline: "#b24141",
-      selected_outline: "#5bbce4",
-      correct: "#88FF88",
-      incorrect: "#d79191",
-      selected: "#87CEEB",
-      text_submitted: "#000",
-      shadow: "#2d2d2d",
-
-      //Formulary
-      formulary_header: "#daeaf6"
-    },
-    font: {
-      style: 'Hynings',
-      scale: 1.3,
-    },
-    logo: require('./app/assets/logos/ubc-logo.png')
-  };
-
-  const Pending = {
-    dark: false,
-    colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: '#f5ede5',
-      card: 'rgb(255, 255, 255)',
-
-      text: '#986c55',
-      text_disabled: 'rgb(100, 100, 100)',
-
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
-
-      button: '#eedfd9',
-      button_disabled: '#636e74',
-      button_text: '#000',
-
-      correct_outline: "#5fb25f",
-      incorrect_outline: "#b24141",
-      selected_outline: "#5bbce4",
-      correct: "#88FF88",
-      incorrect: "#d79191",
-      selected: "#87CEEB",
-      text_submitted: "#000",
-      shadow: "#2d2d2d",
-
-      //Formulary
-      formulary_header: "#acb4af"
-    },
-    font: {
-      style: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light", // Determine font based on platform
-      scale: 1,
-    },
-    logo: require('./app/assets/logos/ubc-logo.png')
-  };
-
-  const theme_map = {
-    "Light" : Light,
-    "Dark" : Dark,
-    "Cute" : Cute,
-    "Pending" : Pending
-  }
-
-export const ThemeContext = React.createContext();
-
+/**
+ * Home screen
+ * @returns JSX expression for the home screen
+ */
 function HomeScreen() {
   const { setTheme, theme } = React.useContext(ThemeContext);
   const { colors, font, logo } = useTheme();
+  const [themeIndex, setThemeIndex] = useState(themeMapKeys.indexOf(theme));
+
+  global.theme = theme;
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  /**
+   * "Advance" the theme every time the icon is pressed
+   */
+  const handleSetThemeIndex = () => {
+    let temp_themeIndex = (themeIndex + 1) % themeMapKeys.length;
+    setThemeIndex(temp_themeIndex);
+    setTheme(themeMapKeys[temp_themeIndex]);
+    Settings[theme] = themeMapKeys[temp_themeIndex];
+  };
+
+  const handleAbout = () => {
+    setModalVisible(true);
+  };
+
+  function handleBackdropPress() {
+    setModalVisible(false);
+  }
 
   return (
     <View style={styles(colors, font).container}>
-      <View style={{flex: 0.2}}>
-        {
-          theme == 'Light' ? <MaterialCommunityIcons name='emoticon-happy' style={{ color: "rgb(200, 200, 200)", marginTop: 25, marginLeft: "90%"}} size={50} onPress={() => setTheme(theme === 'Light' ? 'Cute' : 'Light')}/> :
-                            <MaterialCommunityIcons name='emoticon-cool' style={{ color: "#acb4af", marginTop: 25, marginLeft: "90%"}} size={50} onPress={() => setTheme(theme === 'Light' ? 'Cute' : 'Light')}/>
-        }
+      <Modal
+        animationType="fade"
+        isVisible={modalVisible}
+        transparent={true}
+        onBackdropPress={handleBackdropPress}
+      >
+        <View style={styles(colors, font).modal}>
+          <MaterialCommunityIcons
+            name="close"
+            size={25}
+            onPress={() => {
+              setModalVisible(false);
+            }}
+            style={{
+              padding: 30,
+              color: colors.text,
+            }}
+          />
+          <View
+            style={{ flex: 1, justifyContent: "center", flexDirection: "row" }}
+          >
+            <Text style={styles(colors, font).text_aboutTitle}>
+              {lowerCase("About this App", theme)}
+            </Text>
+          </View>
+
+          <View style={{ flex: 3, marginLeft: "5%", marginRight: "5%" }}>
+            <Text style={styles(colors, font).text_about}>
+              Project Supervisor: Dr. Jennifer Shabbits {"\n"}
+            </Text>
+            <Text style={styles(colors, font).text_about}>
+              Software Developer: George Chen, VFMP 2025 {"\n"}
+            </Text>
+            <Text style={styles(colors, font).text_about}>
+              Content Developer: Michael Gong, VFMP 2025 {"\n"}
+            </Text>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Theme icon */}
+      <View style={styles(colors, font).icon_view}>
+        <MaterialCommunityIcons
+          name={themeMap[themeMapKeys[themeIndex]]["icon"]}
+          style={[
+            styles(colors, font).icon_position,
+            { color: themeMap[themeMapKeys[themeIndex]]["color"] },
+          ]}
+          size={iconSize}
+          onPress={() => handleSetThemeIndex()}
+        />
       </View>
 
-      <View style={{alignItems: "center", justifyContent: "center", flex: 1, marginBottom: "15%"}}>
+      <View style={styles(colors, font).content_view}>
         {/* Title */}
-        <View style={styles(colors, font).horizontalview}>
-        <Image style={styles(colors, font).logo} source={logo} />
-          <Text style={styles(colors, font).text_title}>UBC Med Formulary</Text>
-          {/* <Text style={styles(colors, font).text_title}>ubc med formulary</Text> */}
+        <View style={styles(colors, font).horizontal_view}>
+          <Image style={styles(colors, font).logo} source={logo} />
+          <Text style={styles(colors, font).text_title}>
+            {lowerCase("UBC Med Formulary", theme)}
+          </Text>
         </View>
-        
+
         {/* Nav Buttons */}
-        <NavButton label="Learn Pharmacology" page="Learn"/>
-        <NavButton label="Formulary" page={STRINGS.formulary_page}/>
-        {/* <NavButton label="learn pharmacology" page="Learn"/>
-        <NavButton label="formulary" page={STRINGS.formulary_page}/> */}
+        <View>
+          <NavButton
+            label={lowerCase("Learn Pharmacology", theme)}
+            page="Learn"
+          />
+          <NavButton label={lowerCase("Formulary", theme)} page="Formulary" />
+        </View>
       </View>
-      
+
       {/* About Button */}
-      <TouchableOpacity style={styles(colors, font).button_about}>
-          <Text style={styles(colors, font).text_buttons}>About</Text>
+      <TouchableOpacity
+        style={styles(colors, font).button_about}
+        onPress={() => handleAbout()}
+      >
+        <Text style={styles(colors, font).text_about}>
+          {lowerCase("About", theme)}
+        </Text>
       </TouchableOpacity>
-      <StatusBar style="auto" />
     </View>
   );
 }
 
+/**
+ * Entry point for the formulary
+ * @returns
+ */
 export default function App() {
   const [loaded] = useFonts({
-    Grimnotes: require('./assets/fonts/Grimnotes.ttf'),
-    Hynings: require('./assets/fonts/HyningsHandwritingV2-Regular.ttf')
-  })
-  const [theme, setTheme] = useState('Light');
+    Grimnotes: require("./assets/fonts/Grimnotes.ttf"),
+    Hynings: require("./assets/fonts/HyningsHandwritingV2-Regular.ttf"),
+  });
+  const [theme, setTheme] = useState("Light");
   const themeData = { theme, setTheme };
 
   return (
     <ThemeContext.Provider value={themeData}>
-      <NavigationContainer theme={theme_map[theme]}>
-
-        <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          <Stack.Screen name="Learn" component={LearnPharmacologyScreen}/>
-          <Stack.Screen name={STRINGS.formulary_page} component={FormularyScreen} />
+      <NavigationContainer theme={themeMap[theme].theme}>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Learn" component={LearnPharmacologyScreen} />
+          <Stack.Screen name="Formulary" component={FormularyScreen} />
           <Stack.Screen name="QuizSelect" component={QuizSelectionScreen} />
           <Stack.Screen name="QuizQuestion" component={QuizQuestionScreen} />
-          <Stack.Screen name="Results" component={ResultsScreen} />
           <Stack.Screen name="DrugInfo" component={DrugInfoScreen} />
         </Stack.Navigator>
-        
       </NavigationContainer>
     </ThemeContext.Provider>
   );
 }
 
-const styles = (colors, font) => StyleSheet.create({
-  button_about: {
-    position: 'absolute',
-    right: 20,
-    bottom: 20,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,   
-    alignItems: 'center',      
-    justifyContent: 'center',
-  },
-  horizontalview: {
-    flexDirection: "row",
-    alignItems:'center',
-    padding: "2%"
-  },
-  logo: {
-    width: 70,
-    height: 97,
-  },
-  text_buttons: {
-    fontSize: 18 * font.scale,
-    color: colors.button_text,
-    fontFamily: font.style
-  },
-  text_title: {
-    marginLeft: 50,
-    marginRight: 15,
-    fontSize: 40 * font.scale,
-    color: colors.text,
-    fontFamily: font.style
-  },
-});
+const styles = (colors, font) =>
+  StyleSheet.create({
+    button_about: {
+      bottom: "3%",
+      position: "absolute",
+      right: 30,
+    },
+    container: {
+      alignItems: "center",
+      backgroundColor: colors.background,
+      flex: 1,
+      justifyContent: "center",
+    },
+    content_view: {
+      alignItems: "center",
+      flex: 1,
+      justifyContent: "center",
+      marginBottom: "15%",
+    },
+    horizontal_view: {
+      alignItems: "center",
+      flexDirection: "row",
+      padding: "2%",
+    },
+    icon_position: {
+      marginLeft: "87%",
+      marginTop: 40,
+    },
+    icon_view: {
+      flex: 0.2,
+    },
+    logo: {
+      height: 116 * WINDOW.scale,
+      width: 84 * WINDOW.scale,
+    },
+    modal: {
+      backgroundColor: "#fff",
+      width:
+        WINDOW.width * 0.5 > WINDOW.height * 0.5
+          ? WINDOW.width * 0.5
+          : WINDOW.width * 0.8,
+      height: WINDOW.height * 0.5,
+      alignSelf: "center",
+      borderRadius: 25,
+      backgroundColor: colors.background,
+    },
+    text_about: {
+      color: colors.button_text,
+      fontFamily: font.style,
+      fontSize: 27 * font.scale * WINDOW.scale,
+    },
+    text_aboutTitle: {
+      color: colors.button_text,
+      fontFamily: font.style,
+      fontSize: 35 * font.scale * WINDOW.scale,
+      textDecorationLine: "underline",
+    },
+    text_title: {
+      color: colors.text,
+      fontFamily: font.style,
+      fontSize: 50 * font.scale * WINDOW.scale,
+      marginLeft: "5%",
+    },
+  });

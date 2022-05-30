@@ -4,4 +4,4 @@
 "Breast Mass"
 "Immunology & Allergy"
 "Pneumonia and Cough"
-"Pregnancy"
+"Chronic Obstructive Pulmonary Disease (COPD)"

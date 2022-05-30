@@ -5,5 +5,5 @@
 "Nutrient Malabsorption"
 "Diabetes Mellitus"
 "Lower Gastrointestinal Tract"
+"Pregnancy"
 "Infertility"
-"Chronic Obstructive Pulmonary Disease (COPD)"

@@ -8,5 +8,4 @@ export const STRINGS = {
     contraindications: "contraindications",
     brandNames: "brand-names",
     PK: "pharmacokinetics",
-    formulary_page: "Formulary"
 }

@@ -5,10 +5,8 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import * as DRUGS from '../data/formulary/drugs'
 import { STRINGS } from '../constants/Strings';
 import { WINDOW } from '../constants/Dimensions';
-import { DEFAULT_STYLE } from '../constants/Styles';
 import DottedLine from '../components/DottedLine';
 
-const thisStyle = DEFAULT_STYLE
 
 export default function DrugInfoScreen({route}) {
   const { drug } = route.params;
