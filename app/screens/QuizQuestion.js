@@ -12,41 +12,26 @@ import {
   ScrollView,
   Modal,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { WINDOW } from "../constants/Dimensions";
 import Dialog from "react-native-dialog";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import ConfettiCannon from "react-native-confetti-cannon";
 
 import { shuffle } from "../utils/Shuffle";
-
-import * as quizzes from "../data/quiz";
+import { week_mappings } from "../data/quiz/mappings";
 
 export default function QuizQuestionScreen({ route }) {
-  const { selectedWeeks, randomize, numQuestions } = route.params;
+  /**
+   * exam: one of "MEDD 411 Midterm", "MEDD 411 Final", "MEDD 412 Midterm", "MEDD 412 Final".
+   * randomize: {bool} should the quiz questions be randomized?
+   * numQuestions: {int} max number of questions given to the user
+   * selectedWeeks: [String] list of weeks to be included in the quiz
+   */
+  const { selectedWeeks, randomize, numQuestions, exam } = route.params;
   const { colors, font } = useTheme();
 
-  let week_mappings = {
-    "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
-    "Intro to Pharmacokinetics": quizzes.pharmacokinetics,
-    "Fetal Development": quizzes.fetalDevelopment,
-    "Breast Mass": quizzes.breastMass,
-    "Immunology & Allergy": quizzes.immunologyAndAllergy,
-    "Pneumonia and Cough": quizzes.pneumoniaAndCough,
-    "Chronic Obstructive Pulmonary Disease (COPD)": quizzes.COPD,
-    "Electrolyte Disturbance": quizzes.electrolyteDisturbance,
-    Hypertension: quizzes.hypertension,
-    "Heart Murmurs": quizzes.heartMurmur,
-    "Upper Gastrointestinal Tract": quizzes.upperGI,
-    "Nutrient Malabsorption": quizzes.nutrientMalabsorption,
-    "Diabetes Mellitus": quizzes.diabetesMellitus,
-    "Lower Gastrointestinal Tract": quizzes.lowerGI,
-    Infertility: quizzes.infertility,
-    Pregnancy: quizzes.pregnancy,
-  };
-
+  // Build array of questions based on which weeks are selected by the user
   const questions = [];
-
   for (const key in selectedWeeks) {
     if (selectedWeeks[key]) {
       questions.push.apply(questions, week_mappings[key]);
@@ -56,36 +41,36 @@ export default function QuizQuestionScreen({ route }) {
   const questionsLength = questions.length;
   let numQuestions_filtered = numQuestions;
   if (numQuestions == 0 || numQuestions > questionsLength)
+    // Control for crazy user inputs
     numQuestions_filtered = questionsLength;
-  const defaultOrder = [...Array(questionsLength).keys()];
+  const defaultOrder = [...Array(questionsLength).keys()]; // Question order. Shuffle if randomize is set to true.
   const [questionOrder, setQuestionOrder] = randomize
     ? useState(shuffle(defaultOrder))
     : useState(defaultOrder);
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
-  const [correctOption, setCorrectOption] = useState(null);
-  const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
-  const [score, setScore] = useState(0);
-  const [visible, setVisible] = useState(false);
-  const [showNextButton, setShowNextButton] = useState(false);
-  const [answerSubmitted, setAnswerSubmitted] = useState(false);
-  const [showSubmitButton, setShowSubmitButton] = useState(false);
-  const [isSubmitDisabled, setSubmitDisabled] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // keeps track of user's current question
+  const [currentOptionSelected, setCurrentOptionSelected] = useState(null); // keeps track of user's current selected choice
+  const [correctOption, setCorrectOption] = useState(null); // keeps track of current correct choice
+  const [isOptionsDisabled, setIsOptionsDisabled] = useState(false); // choices should be disabled after user submits
+  const [score, setScore] = useState(0); // keeps track of user's current score
+  const [showNextButton, setShowNextButton] = useState(false); // next button should be shown after user submits
+  const [answerSubmitted, setAnswerSubmitted] = useState(false); // keeps track of if user submitted
+  const [showSubmitButton, setShowSubmitButton] = useState(false); // submit button should be shown once a choice is clicked
+  const [isSubmitDisabled, setSubmitDisabled] = useState(false); // submit button should be disabled after user submits
   const navigation = useNavigation();
 
-  const [userAnswers, setUserAnswers] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [userAnswers, setUserAnswers] = useState([]); // keeps track of all the user's answers for review
+  const [modalVisible, setModalVisible] = useState(false); // results modal should be visible if user clicks next on the last question
 
-  const [incorrect, setIncorrect] = useState(0);
-  const [percent, setPercent] = useState(0);
-  const [confettiCount, setConfettiCount] = useState(0);
+  const [incorrect, setIncorrect] = useState(0); // keeps track of number of incorrect questions
+  const [percent, setPercent] = useState(0); // keeps track of user's percent score
+  const [confettiCount, setConfettiCount] = useState(0); // confetti should be displayed if user gets perfect
 
-  const [quizOver, setQuizOver] = useState(false);
-  const [backButtonDisabled, setBackButtonDisabled] = useState(false);
+  const [quizOver, setQuizOver] = useState(false); // quiz review mode once quiz is over
+  const [backButtonDisabled, setBackButtonDisabled] = useState(false); // back button should be disabled
 
   const renderHeader = () => {
-    const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = useState(false); // keeps track of visibility of exit quiz dialog
 
     return (
       <View>
@@ -136,20 +121,14 @@ export default function QuizQuestionScreen({ route }) {
             {currentQuestionIndex + 1} / {numQuestions_filtered}
           </Text>
         </View>
-
-        {/* Question Prompt */}
       </View>
     );
-  };
-
-  const handleExitQuiz = () => {
-    navigation.navigate("Learn");
-    setQuizOver(false);
   };
 
   const renderQuestion = () => {
     return (
       <View>
+        {/* Question Prompt */}
         <Text
           style={styles(colors, font, null, null, null, null, null).text_prompt}
         >
@@ -157,22 +136,6 @@ export default function QuizQuestionScreen({ route }) {
         </Text>
       </View>
     );
-  };
-
-  const highlightChoice = (selectedOption) => {
-    let correct_option =
-      questions[questionOrder[currentQuestionIndex]]["correct"];
-    setCurrentOptionSelected(selectedOption);
-    setCorrectOption(correct_option);
-    setShowSubmitButton(true);
-  };
-
-  const validateAnswer = () => {
-    setIsOptionsDisabled(true);
-    if (currentOptionSelected == correctOption) {
-      setScore(score + 1);
-    }
-    setShowNextButton(true);
   };
 
   const renderChoices = () => {
@@ -204,93 +167,11 @@ export default function QuizQuestionScreen({ route }) {
               >
                 {choice}
               </Text>
-              {choice == correctOption && answerSubmitted ? (
-                <View
-                  style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 30 / 2,
-                    backgroundColor: colors.correct_outline,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="check"
-                    style={{ color: "#000", fontSize: 20 }}
-                  />
-                </View>
-              ) : choice == currentOptionSelected && answerSubmitted ? (
-                <View
-                  style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 30 / 2,
-                    backgroundColor: colors.incorrect_outline,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="close"
-                    style={{ color: "#FFF", fontSize: 20 }}
-                  />
-                </View>
-              ) : null}
             </TouchableOpacity>
           )
         )}
       </ScrollView>
     );
-  };
-
-  const handleSubmit = () => {
-    setAnswerSubmitted(true);
-    validateAnswer();
-    setSubmitDisabled(true);
-    let temp_userAnswers = userAnswers;
-    temp_userAnswers.push(currentOptionSelected);
-
-    setUserAnswers(temp_userAnswers);
-    console.log(temp_userAnswers);
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex + 1 == numQuestions_filtered) {
-      setModalVisible(true);
-      let temp_incorrect = numQuestions_filtered - score;
-      setIncorrect(temp_incorrect);
-      setPercent((score / numQuestions_filtered) * 100);
-      if (temp_incorrect == 0) setConfettiCount(200);
-      setQuizOver(true);
-      setShowSubmitButton(false);
-    } else if (!quizOver) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setCurrentOptionSelected(null);
-      setIsOptionsDisabled(false);
-      setShowNextButton(false);
-      setShowSubmitButton(false);
-      setAnswerSubmitted(false);
-      setSubmitDisabled(false);
-    } else {
-      // Quiz is over
-      setBackButtonDisabled(false);
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setCurrentOptionSelected(userAnswers[currentQuestionIndex + 1]);
-      setAnswerSubmitted(true);
-      setCorrectOption(questions[currentQuestionIndex + 1]["correct"]);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentQuestionIndex == 0) {
-      setBackButtonDisabled(true);
-    } else {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setCurrentOptionSelected(userAnswers[currentQuestionIndex - 1]);
-      setCorrectOption(questions[currentQuestionIndex - 1]["correct"]);
-      setAnswerSubmitted(true);
-    }
   };
 
   const renderFooter = () => {
@@ -433,7 +314,7 @@ export default function QuizQuestionScreen({ route }) {
                   styles(colors, font, null, null, null, null, null).text_result
                 }
               >
-                {percent}%{"\n"}Score
+                {parseInt(percent)}%{"\n"}Score
               </Text>
             </View>
           </View>
@@ -461,6 +342,82 @@ export default function QuizQuestionScreen({ route }) {
         </View>
       </Modal>
     );
+  };
+
+  const handleExitQuiz = () => {
+    navigation.navigate("QuizSelect", {
+      exam: exam,
+      randomize: randomize,
+      numQuestions: numQuestions,
+    });
+    setQuizOver(false);
+  };
+
+  const highlightChoice = (selectedOption) => {
+    let correct_option =
+      questions[questionOrder[currentQuestionIndex]]["correct"];
+    setCurrentOptionSelected(selectedOption);
+    setCorrectOption(correct_option);
+    setShowSubmitButton(true);
+  };
+
+  const validateAnswer = () => {
+    setIsOptionsDisabled(true);
+    if (currentOptionSelected == correctOption) {
+      setScore(score + 1);
+    }
+    setShowNextButton(true);
+  };
+
+  const handleSubmit = () => {
+    setAnswerSubmitted(true);
+    validateAnswer();
+    setSubmitDisabled(true);
+    let temp_userAnswers = userAnswers;
+    temp_userAnswers.push(currentOptionSelected);
+
+    setUserAnswers(temp_userAnswers);
+    console.log(temp_userAnswers);
+  };
+
+  const handleNext = () => {
+    if (currentQuestionIndex + 1 == numQuestions_filtered) {
+      // User reaches end of quiz
+      setModalVisible(true);
+      let temp_incorrect = numQuestions_filtered - score;
+      setIncorrect(temp_incorrect);
+      setPercent((score / numQuestions_filtered) * 100);
+      if (temp_incorrect == 0) setConfettiCount(200);
+      setQuizOver(true);
+      setShowSubmitButton(false);
+    } else if (!quizOver) {
+      // Quiz is not over, advance question
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentOptionSelected(null);
+      setIsOptionsDisabled(false);
+      setShowNextButton(false);
+      setShowSubmitButton(false);
+      setAnswerSubmitted(false);
+      setSubmitDisabled(false);
+    } else {
+      // Quiz is over, advance question (during question review)
+      setBackButtonDisabled(false);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentOptionSelected(userAnswers[currentQuestionIndex + 1]);
+      setAnswerSubmitted(true);
+      setCorrectOption(questions[currentQuestionIndex + 1]["correct"]);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentQuestionIndex == 0) {
+      setBackButtonDisabled(true);
+    } else {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setCurrentOptionSelected(userAnswers[currentQuestionIndex - 1]);
+      setCorrectOption(questions[currentQuestionIndex - 1]["correct"]);
+      setAnswerSubmitted(true);
+    }
   };
 
   return (

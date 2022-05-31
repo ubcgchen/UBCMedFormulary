@@ -184,12 +184,11 @@ export default function LearnPharmacologyScreen() {
           }}
         />
 
-        {/*NOT IMPLEMENTED*/}
         <NavButton
           label={lowerCase("MEDD 412 Midterm", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 411 Midterm",
+            exam: "MEDD 412 Midterm",
             randomize: isRandomOn,
             numQuestions: text,
           }}
@@ -198,7 +197,7 @@ export default function LearnPharmacologyScreen() {
           label={lowerCase("MEDD 412 Final", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 411 Final",
+            exam: "MEDD 412 Final",
             randomize: isRandomOn,
             numQuestions: text,
           }}

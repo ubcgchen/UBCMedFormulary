@@ -13,7 +13,7 @@ import {
   View,
   TouchableOpacity,
   Image,
-  // Modal,
+  Linking,
 } from "react-native";
 import Modal from "react-native-modal";
 import NavButton from "./app/components/NavButton";
@@ -30,6 +30,7 @@ import QuizSelectionScreen from "./app/screens/QuizSelection";
 import QuizQuestionScreen from "./app/screens/QuizQuestion";
 import FormularyScreen from "./app/screens/Formulary";
 import DrugInfoScreen from "./app/screens/DrugInfo";
+import { TextInput } from "react-native-paper";
 
 const ThemeContext = React.createContext();
 const Stack = createNativeStackNavigator(); // For navigation between screens
@@ -47,10 +48,12 @@ function HomeScreen() {
   const { setTheme, theme } = React.useContext(ThemeContext);
   const { colors, font, logo } = useTheme();
   const [themeIndex, setThemeIndex] = useState(themeMapKeys.indexOf(theme));
+  const [text, setText] = useState("");
 
   global.theme = theme;
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // About modal
+  const [reportModalVisible, setReportModalVisible] = useState(false); // Report modal
 
   /**
    * "Advance" the theme every time the icon is pressed
@@ -66,8 +69,13 @@ function HomeScreen() {
     setModalVisible(true);
   };
 
+  const handleReport = () => {
+    setReportModalVisible(true);
+  };
+
   function handleBackdropPress() {
     setModalVisible(false);
+    setReportModalVisible(false);
   }
 
   return (
@@ -112,6 +120,59 @@ function HomeScreen() {
         </View>
       </Modal>
 
+      <Modal
+        animationType="fade"
+        isVisible={reportModalVisible}
+        transparent={true}
+        onBackdropPress={handleBackdropPress}
+        avoidKeyboard={true}
+      >
+        <View style={styles(colors, font).modal_report}>
+          <MaterialCommunityIcons
+            name="close"
+            size={25}
+            onPress={() => {
+              setReportModalVisible(false);
+            }}
+            style={{
+              padding: 30,
+              color: colors.text,
+            }}
+          />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <View>
+              <Text style={styles(colors, font).text_report}>
+                {lowerCase("Bugs & Suggestions?", theme)}
+              </Text>
+            </View>
+            <View>
+              <Text style={styles(colors, font).text_report_subheader}>
+                {lowerCase(
+                  "Leave your suggestions here to make this app better! If you are reporting a bug, let us know the actions leading up to the bug as well :)",
+                  theme
+                )}
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={styles(colors, font).link}
+                onPress={() =>
+                  Linking.openURL("https://forms.gle/h7ErJSQ82x2nJBsR8")
+                }
+              >
+                {lowerCase("https://forms.gle/h7ErJSQ82x2nJBsR8", theme)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       {/* Theme icon */}
       <View style={styles(colors, font).icon_view}>
         <MaterialCommunityIcons
@@ -143,6 +204,16 @@ function HomeScreen() {
           <NavButton label={lowerCase("Formulary", theme)} page="Formulary" />
         </View>
       </View>
+
+      {/* Report Button*/}
+      <TouchableOpacity
+        style={styles(colors, font).button_report}
+        onPress={() => handleReport()}
+      >
+        <Text style={styles(colors, font).text_about}>
+          {lowerCase("Report a Problem", theme)}
+        </Text>
+      </TouchableOpacity>
 
       {/* About Button */}
       <TouchableOpacity
@@ -195,6 +266,11 @@ const styles = (colors, font) =>
       position: "absolute",
       right: 30,
     },
+    button_report: {
+      bottom: "3%",
+      position: "absolute",
+      left: 30,
+    },
     container: {
       alignItems: "center",
       backgroundColor: colors.background,
@@ -219,6 +295,15 @@ const styles = (colors, font) =>
     icon_view: {
       flex: 0.2,
     },
+    link: {
+      color: "#89cff0",
+      fontFamily: font.style,
+      fontSize: 20 * font.scale * WINDOW.scale,
+      alignSelf: "center",
+      marginLeft: "5%",
+      marginRight: "5%",
+      marginTop: "5%",
+    },
     logo: {
       height: 116 * WINDOW.scale,
       width: 84 * WINDOW.scale,
@@ -226,9 +311,18 @@ const styles = (colors, font) =>
     modal: {
       backgroundColor: "#fff",
       width:
+        WINDOW.width > WINDOW.height ? WINDOW.width * 0.5 : WINDOW.width * 0.8,
+      height: WINDOW.height * 0.5,
+      alignSelf: "center",
+      borderRadius: 25,
+      backgroundColor: colors.background,
+    },
+    modal_report: {
+      backgroundColor: "#fff",
+      width:
         WINDOW.width * 0.5 > WINDOW.height * 0.5
           ? WINDOW.width * 0.5
-          : WINDOW.width * 0.8,
+          : WINDOW.width * 0.9,
       height: WINDOW.height * 0.5,
       alignSelf: "center",
       borderRadius: 25,
@@ -244,6 +338,20 @@ const styles = (colors, font) =>
       fontFamily: font.style,
       fontSize: 35 * font.scale * WINDOW.scale,
       textDecorationLine: "underline",
+    },
+    text_report: {
+      color: colors.button_text,
+      fontFamily: font.style,
+      fontSize: 35 * font.scale * WINDOW.scale,
+    },
+    text_report_subheader: {
+      color: colors.button_text,
+      fontFamily: font.style,
+      fontSize: 20 * font.scale * WINDOW.scale,
+      alignSelf: "center",
+      marginLeft: "5%",
+      marginRight: "5%",
+      marginTop: "2%",
     },
     text_title: {
       color: colors.text,

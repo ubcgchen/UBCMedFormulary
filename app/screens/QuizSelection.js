@@ -16,12 +16,14 @@ import BackButton from "../components/BackButton";
 import { Checkbox } from "react-native-paper";
 
 import { WINDOW } from "../constants/Dimensions";
-import { m411Midterm, m411Final } from "../data/weeks";
+import { m411Midterm, m411Final, m412Midterm, m412Final } from "../data/weeks";
 import { lowerCase } from "../utils/LowerCase";
 
 const file_mappings = {
   "MEDD 411 Midterm": m411Midterm,
   "MEDD 411 Final": m411Final,
+  "MEDD 412 Midterm": m412Midterm,
+  "MEDD 412 Final": m412Final,
 };
 
 export default function QuizSelectionScreen({ route }) {
