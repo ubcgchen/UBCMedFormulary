@@ -98,7 +98,7 @@ export default function QuizSelectionScreen({ route }) {
           {lowerCase(exam + " Quizzes", global.theme)}
         </Text>
         <Text style={styles(null, colors, font).text_blurb}>
-          Improve your pharmacology knowledge! Select the CBL cases you want to
+          Improve your pharmacology knowledge! Select the week topic you want to
           be quizzed on
         </Text>
       </View>

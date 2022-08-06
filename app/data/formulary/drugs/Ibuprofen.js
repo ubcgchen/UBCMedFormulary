@@ -1,19 +1,40 @@
-export const ibuprofen = 
-
-{
-    "drug-classes": ["NSAID"],
-    "CBL-cases": ["idk"],
-    "side-effects": [{
-        "GI": ["Nausea", "Dizziness", "Decreased renal function"],
-        "CV": ["Increased blood pressure"],
-    }],
-    "dosing": ["200-400 mg PO", "PRN (do not exceed amount on bottle)"],
-    "indications": ["headache", "menstrual pain", "toothache", "arthritis", "backache", "fever", "minor aches and pains", "pain due to cold or flu", ],
-    "contraindications": ["pregnancy", "hyperkalemia", "hepatic disease", "renal impairment", "gastrointestinal hemorrhage"],
-    "brand-names": ["Advil", "Motrin", "Brufen", "Nurofen"],
-    "pharmacokinetics": [{
-        "ROA": ["oral"],
-        "elimination": ["renal"],
-        "half-life": ["2 hours"]
-    }]
-}
+export const ibuprofen = {
+  "drug-classes": ["Non-steroidal anti-inflammatory drugs (NSAID)"],
+  "CBL-cases": [
+    "Upper Gastrointestinal",
+    "Electrolyte Disturbance",
+    "Pregnancy",
+  ],
+  mechanism: [
+    "Inhibits COX enzymes that produce prostaglandins that mediate pain/inflammation",
+  ],
+  indications: ["Analgesia", "Inflammation", "Fever"],
+  "side-effects": [
+    "Nausea",
+    "Dizziness",
+    "Decreased renal function (AKI)",
+    "Increased blood pressure",
+    "edema",
+    "gastric/duodenal ulcer",
+  ],
+  contraindications: [
+    "Pregnancy",
+    "Hyperkalemia",
+    "Active peptic ulcer",
+    "GI bleed",
+    "Active inflammatory disease of GI tract",
+    "SLE",
+    "Renal impairment",
+    "Hepatic severe dysfunction",
+    "Hx of recurrent ulceration",
+    "Hypersensitivity",
+  ],
+  "brand-names": ["Advil", "Motrin"],
+  pharmacokinetics: [
+    {
+      ROA: ["oral"],
+      elimination: ["Renal"],
+      "half-life": ["2 hrs"],
+    },
+  ],
+};

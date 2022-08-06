@@ -16,14 +16,22 @@ import {
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import * as DRUGS from "../data/formulary/drugs";
-import { STRINGS } from "../constants/Strings";
 import { WINDOW } from "../constants/Dimensions";
 import DottedLine from "../components/DottedLine";
 
 export default function DrugInfoScreen({ route }) {
-  const { drug } = route.params;
-  console.log(drug.toLowerCase().replace(/\s/g, ""));
-  const drug_info = DRUGS[drug.toLowerCase().replace(/\s/g, "")];
+  const { drug_info, drug } = route.params;
+  // let temp = drug;
+
+  // if (!isNaN(drug.charAt(0))) temp = "_" + temp;
+  // const drug_info =
+  //   DRUGS[temp.toLowerCase().replace(/\s/g, "_").replace("-", "_")];
+
+  // if (drug_info === undefined) {
+  //   navigation.navigate("Formulary");
+  //   return;
+  // }
+
   const navigation = useNavigation();
   const fields = Object.keys(drug_info);
   const { colors, font } = useTheme();
@@ -35,7 +43,7 @@ export default function DrugInfoScreen({ route }) {
           <TouchableOpacity
             style={styles(colors, font).button_quizexit}
             onPress={() => {
-              navigation.navigate(STRINGS.formulary_page);
+              navigation.navigate("Formulary");
             }}
           >
             <Text style={styles(colors, font).text_exitquiz}>{"<"}</Text>
