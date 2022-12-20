@@ -1,4 +1,10 @@
+import { fracture } from "./Fracture";
+import { osteoporosis } from "./Osteoporosis";
+import { acuteKidneyInjury } from "./Acute Kidney Injury";
 import * as quizzes from "./";
+import { chronicKidneyDisease } from "./Chronic Kidney Disease";
+import { deepVeinThrombosis_pulmonaryEmbolism } from "./Deep Vein Thrombosis _ Pulmonary Embolism";
+import { ataxia_movementDisorder_tremor } from "./Ataxia _ Movement Disorder _ Tremor";
 
 export const week_mappings = {
   "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
@@ -34,4 +40,12 @@ export const week_mappings = {
   "Spinal Cord Injury": quizzes.sci,
   Stroke: quizzes.stroke,
   "Thyroid and Parathyroid": quizzes.thyroidParathyroid,
+
+  Fracture: fracture,
+  Osteoporosis: osteoporosis,
+  "Deep Vein Thrombosis : Pulmonary Embolism":
+    deepVeinThrombosis_pulmonaryEmbolism,
+  "Acute Kidney Injury": acuteKidneyInjury,
+  "Chronic Kidney Disease": chronicKidneyDisease,
+  "Ataxia : Movement Disorder : Tremor": ataxia_movementDisorder_tremor,
 };

@@ -10,12 +10,12 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Modal,
 } from "react-native";
 import { WINDOW } from "../constants/Dimensions";
 import Dialog from "react-native-dialog";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import ConfettiCannon from "react-native-confetti-cannon";
+import Modal from "react-native-modal";
 
 import { shuffle } from "../utils/Shuffle";
 import { week_mappings } from "../data/quiz/mappings";
@@ -68,6 +68,8 @@ export default function QuizQuestionScreen({ route }) {
 
   const [quizOver, setQuizOver] = useState(false); // quiz review mode once quiz is over
   const [backButtonDisabled, setBackButtonDisabled] = useState(false); // back button should be disabled
+
+  const [explainModalVisible, setExplainModalVisible] = useState(false); // explainModal should be visible if the "Explanation" button is clicked
 
   const renderHeader = () => {
     const [visible, setVisible] = useState(false); // keeps track of visibility of exit quiz dialog
@@ -196,7 +198,28 @@ export default function QuizQuestionScreen({ route }) {
             </Text>
           </TouchableOpacity>
         )}
-        <View style={{ flex: 5 }}></View>
+        <View style={{ flex: 2.5 }}></View>
+        {showNextButton &&
+          questions[currentQuestionIndex].hasOwnProperty("explain") && (
+            <TouchableOpacity
+              style={
+                styles(colors, font, null, null, null, null, null)
+                  .button_explain
+              }
+              onPress={() => {
+                handleExplain();
+              }}
+            >
+              <Text
+                style={
+                  styles(colors, font, null, null, null, null, null).text_next
+                }
+              >
+                Explanation
+              </Text>
+            </TouchableOpacity>
+          )}
+        <View style={{ flex: 2.5 }}></View>
         {showNextButton && (
           <TouchableOpacity
             style={
@@ -250,7 +273,12 @@ export default function QuizQuestionScreen({ route }) {
 
   const renderResults = () => {
     return (
-      <Modal animationType="slide" visible={modalVisible}>
+      <Modal
+        animationType="slide"
+        isVisible={modalVisible}
+        backdropColor={colors.background}
+        backdropOpacity={1}
+      >
         <View style={styles(colors, font).modal}>
           <ConfettiCannon
             count={confettiCount}
@@ -344,6 +372,38 @@ export default function QuizQuestionScreen({ route }) {
     );
   };
 
+  function handleBackdropPress() {
+    setExplainModalVisible(false);
+  }
+
+  const renderExplanation = () => {
+    return (
+      <Modal
+        animationType="fade"
+        isVisible={explainModalVisible}
+        transparent={true}
+        onBackdropPress={handleBackdropPress}
+        avoidKeyboard={true}
+      >
+        <ScrollView
+          style={
+            styles(colors, font, null, null, null, null, null).explain_modal
+          }
+        >
+          <View style={{ padding: 20 }}>
+            <Text
+              style={
+                styles(colors, font, null, null, null, null, null).text_choice
+              }
+            >
+              {questions[currentQuestionIndex]["explain"]}
+            </Text>
+          </View>
+        </ScrollView>
+      </Modal>
+    );
+  };
+
   const handleExitQuiz = () => {
     navigation.navigate("QuizSelect", {
       exam: exam,
@@ -372,12 +432,16 @@ export default function QuizQuestionScreen({ route }) {
   const handleSubmit = () => {
     setAnswerSubmitted(true);
     validateAnswer();
-    setSubmitDisabled(true);
+    // setSubmitDisabled(true);
+    setShowSubmitButton(false);
     let temp_userAnswers = userAnswers;
     temp_userAnswers.push(currentOptionSelected);
 
     setUserAnswers(temp_userAnswers);
-    console.log(temp_userAnswers);
+  };
+
+  const handleExplain = () => {
+    setExplainModalVisible(true);
   };
 
   const handleNext = () => {
@@ -431,6 +495,7 @@ export default function QuizQuestionScreen({ route }) {
         {renderSubmitButton()}
         {renderFooter()}
         {renderResults()}
+        {renderExplanation()}
       </View>
     </View>
   );
@@ -464,6 +529,13 @@ const styles = (
       height: 50,
       alignSelf: "flex-start",
       marginLeft: 30,
+    },
+    button_explain: {
+      flex: 2.5,
+      alignSelf: "center",
+      backgroundColor: colors.button,
+      borderRadius: 10,
+      padding: 10,
     },
     button_next: {
       flex: 1,
@@ -561,7 +633,7 @@ const styles = (
       fontFamily: font.style,
     },
     text_title: {
-      marginTop: "10%",
+      marginTop: "15%",
       fontSize: WINDOW.scale * 40 * font.scale,
       color: colors.text,
       fontFamily: font.style,
@@ -582,6 +654,15 @@ const styles = (
       marginTop: 20,
       width: 275,
       height: 50,
+    },
+    explain_modal: {
+      flexDirection: "column",
+      width:
+        WINDOW.width > WINDOW.height ? WINDOW.width * 0.5 : WINDOW.width * 0.8,
+      alignSelf: "center",
+      borderRadius: 25,
+      backgroundColor: colors.background,
+      maxHeight: "30%",
     },
     text_buttons: {
       fontSize: 18 * font.scale,

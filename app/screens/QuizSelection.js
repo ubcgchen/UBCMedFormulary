@@ -13,10 +13,19 @@ import {
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import BackButton from "../components/BackButton";
-import { Checkbox } from "react-native-paper";
+import { Checkbox, Modal } from "react-native-paper";
 
 import { WINDOW } from "../constants/Dimensions";
-import { m411Midterm, m411Final, m412Midterm, m412Final } from "../data/weeks";
+import {
+  m411Midterm,
+  m411Final,
+  m412Midterm,
+  m412Final,
+  m421Midterm,
+  m421Final,
+  m422Midterm,
+  m422Final,
+} from "../data/weeks";
 import { lowerCase } from "../utils/LowerCase";
 
 const file_mappings = {
@@ -24,6 +33,10 @@ const file_mappings = {
   "MEDD 411 Final": m411Final,
   "MEDD 412 Midterm": m412Midterm,
   "MEDD 412 Final": m412Final,
+  "MEDD 421 Midterm": m421Midterm,
+  "MEDD 421 Final": m421Final,
+  "MEDD 422 Midterm": m422Midterm,
+  "MEDD 422 Final": m422Final,
 };
 
 export default function QuizSelectionScreen({ route }) {
@@ -90,104 +103,132 @@ export default function QuizSelectionScreen({ route }) {
     setDisableStart(!isSelectAllPressed);
   };
 
-  return (
-    <View style={styles(null, colors, font).container}>
-      {/* Title */}
-      <View>
-        <Text style={styles(null, colors, font).text_header}>
-          {lowerCase(exam + " Quizzes", global.theme)}
-        </Text>
-        <Text style={styles(null, colors, font).text_blurb}>
-          Improve your pharmacology knowledge! Select the week topic you want to
-          be quizzed on
-        </Text>
-      </View>
-
-      {/* Select All and De-select All buttons */}
-      <View style={{ flexDirection: "row" }}>
-        {/* Select All */}
-        <TouchableOpacity
-          onPress={() => {
-            handleBlanketButton(true);
-          }}
-          style={styles(null, colors, font).button}
-        >
-          <Text
-            style={{
-              color: colors.text,
-              fontFamily: font.style,
-              fontSize: 15 * font.scale,
-            }}
-          >
-            {lowerCase("Select All", global.theme)}
+  if (weeks.length != 0) {
+    return (
+      <View style={styles(null, colors, font).container}>
+        {/* Title */}
+        <View>
+          <Text style={styles(null, colors, font).text_header}>
+            {lowerCase(exam + " Quizzes", global.theme)}
           </Text>
-        </TouchableOpacity>
-
-        {/* De-select All */}
-        <TouchableOpacity
-          onPress={() => {
-            handleBlanketButton(false);
-          }}
-          style={styles(null, colors, font).button}
-        >
-          <Text
-            style={{
-              color: colors.text,
-              fontFamily: font.style,
-              fontSize: 15 * font.scale,
-            }}
-          >
-            {lowerCase("De-select All", global.theme)}
+          <Text style={styles(null, colors, font).text_blurb}>
+            Improve your pharmacology knowledge! Select the week topic you want
+            to be quizzed on
           </Text>
-        </TouchableOpacity>
-      </View>
+        </View>
 
-      {/* Quiz Selection */}
-      <ScrollView style={{ flex: 1 }}>
-        {weeks.map((week, key) => (
-          <Checkbox.Item
-            key={key}
-            label={lowerCase(week, global.theme)}
-            status={selectedWeeks[week] ? "checked" : "unchecked"}
+        {/* Select All and De-select All buttons */}
+        <View style={{ flexDirection: "row" }}>
+          {/* Select All */}
+          <TouchableOpacity
             onPress={() => {
-              handleSelection(week);
+              handleBlanketButton(true);
             }}
-            labelStyle={{
-              color: colors.text,
-              fontFamily: font.style,
-              fontSize: 15 * font.scale,
-            }}
-            style={{
-              backgroundColor: selectedWeeks[week]
-                ? colors.button
-                : colors.background,
-            }}
-          />
-        ))}
-      </ScrollView>
+            style={styles(null, colors, font).button}
+          >
+            <Text
+              style={{
+                color: colors.text,
+                fontFamily: font.style,
+                fontSize: 15 * font.scale,
+              }}
+            >
+              {lowerCase("Select All", global.theme)}
+            </Text>
+          </TouchableOpacity>
 
-      {/* Bottom Buttons */}
-      <View style={{ flex: 0.11 }}>
-        <BackButton page="Learn" />
-        <TouchableOpacity
-          style={styles(null, colors, font).button_start}
-          onPress={() =>
-            navigation.navigate("QuizQuestion", {
-              selectedWeeks: selectedWeeks,
-              exam: exam,
-              randomize: randomize,
-              numQuestions: numQuestions,
-            })
-          }
-          disabled={disableStart}
-        >
-          <Text style={styles(disableStart, colors, font).text_buttons}>
-            {lowerCase("Start Quiz", global.theme)}
-          </Text>
-        </TouchableOpacity>
+          {/* De-select All */}
+          <TouchableOpacity
+            onPress={() => {
+              handleBlanketButton(false);
+            }}
+            style={styles(null, colors, font).button}
+          >
+            <Text
+              style={{
+                color: colors.text,
+                fontFamily: font.style,
+                fontSize: 15 * font.scale,
+              }}
+            >
+              {lowerCase("De-select All", global.theme)}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Quiz Selection */}
+        <ScrollView style={{ flex: 1 }}>
+          {weeks.map((week, key) => (
+            <Checkbox.Item
+              key={key}
+              label={lowerCase(week, global.theme)}
+              status={selectedWeeks[week] ? "checked" : "unchecked"}
+              onPress={() => {
+                handleSelection(week);
+              }}
+              labelStyle={{
+                color: colors.text,
+                fontFamily: font.style,
+                fontSize: 15 * font.scale,
+              }}
+              style={{
+                backgroundColor: selectedWeeks[week]
+                  ? colors.button
+                  : colors.background,
+              }}
+            />
+          ))}
+        </ScrollView>
+
+        {/* Bottom Buttons */}
+        <View style={{ flex: 0.11 }}>
+          <BackButton page="Year" />
+          <TouchableOpacity
+            style={styles(null, colors, font).button_start}
+            onPress={() =>
+              navigation.navigate("QuizQuestion", {
+                selectedWeeks: selectedWeeks,
+                exam: exam,
+                randomize: randomize,
+                numQuestions: numQuestions,
+              })
+            }
+            disabled={disableStart}
+          >
+            <Text style={styles(disableStart, colors, font).text_buttons}>
+              {lowerCase("Start Quiz", global.theme)}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        <View>
+          <Text style={styles(null, colors, font).text_header}>
+            {lowerCase(exam + " Quizzes", global.theme)}
+          </Text>
+          <Text style={styles(null, colors, font).text_blurb}>
+            Improve your pharmacology knowledge! Select the week topic you want
+            to be quizzed on
+          </Text>
+        </View>
+        <Text
+          style={{
+            alignSelf: "center",
+            paddingTop: "75%",
+            fontSize: 15 * font.scale,
+            color: colors.text,
+            fontFamily: font.style,
+          }}
+        >
+          Content Coming Soon!
+        </Text>
+        <BackButton page="Year" />
+      </View>
+    );
+  }
 }
 
 const styles = (disableStart, colors, font) =>

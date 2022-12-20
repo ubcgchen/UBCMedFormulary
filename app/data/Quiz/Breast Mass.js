@@ -18,6 +18,7 @@ export const breastMass = [
     correct:
       "Tamoxifen is safer because it has tissue specific properties, where it acts as an estrogen antagonist in breast tissue, but an estrogen agonist in bone tissue for bone density maintenance",
     tags: ["PD", "medium", "Oncology", "side-effects", "MoA"],
+    explain: "This question requires understanding the difference in mechanisms of letrozole and tamoxifen and inferring its effect on bone density. Here we need to understand the pathology of decreased bone density and the mechanisms. In general terms, bone density decreases with lower levels of estrogen due to decreased osteoblast activity. THis is why post-menopausal women are at risk of fractures and osteoporosis. Therefore, the safer drug would be one that doesn’t decrease estrogen levels as much or inhibit the activity of estrogen. Letrozole is an aromatase inhibitor, thus it will decrease estrogen levels. Tamoxifen is a selective estrogen receptor modulator, which means it has tissue specific activity. In breast tissue, tamoxifen will act as an estrogen antagonist, while in bone tissue it will act as a partial agonist. This will allow tamoxifen to preserve osteoblast function, while inhibiting ER+ breast tissue growth. Hence, (E) is the correct answer."
   },
   {
     id: 2,
@@ -32,6 +33,7 @@ export const breastMass = [
     correct:
       "Aromatase inhibitor. Inhibits the conversion of androgens to estradiol/estrone",
     tags: ["PD", "easy", "Oncology", "Ob/Gyn", "MoA"],
+    explain: "B is the correct answer. Letrozole is an aromatase inhibitor, which inhibits the conversion of androgens (e.g. testosterone) to estrogens. Option E describes the mechanism of tamoxifen."
   },
   {
     id: 3,
@@ -46,6 +48,7 @@ export const breastMass = [
     correct:
       "Letrozole inhibits the production of estrogen, thus leading to decreased osteoblast activity and a loss in bone density, which resulted in the fracture",
     tags: ["Oncology", "easy", "side-effects"],
+    explain: "This question requires understanding an important adverse effect of letrozole in post-menopausal women. In this vignette, we are presented with a patient with breast cancer treated medically with letrozole and now has a lumbar compression fracture. Letrozole is an aromatase inhibitor and inhibits the production of estrogen. An important adverse effect of estrogen inhibition is osteoporosis. This is why post-menopausal women are at a higher risk of osteoporosis and fractures due to decreased estrogen levels. Hence (C) is the correct answer."
   },
   {
     id: 4,
@@ -60,5 +63,21 @@ export const breastMass = [
     correct:
       "Cyclophosphamide (alkylating agents that prevents unwinding of DNA)",
     tags: ["Oncology", "medium", "Chemo", "PD"],
+    explain: "This question tests for understanding of pharmacodynamics in drug therapy choice. In this case, the tumor does not express HER2 on the surface, hence (D) is not a viable therapy choice since Tmab targets the HER2 protein. Likewise, (B) and (C) are not viable since the tumor does not express hormone receptors (ER and PR). Both letrozole and tamoxifen mechanism targets reducing the effects of estrogen on tumor growth, which in this case is not the driving force of the tumor. Hence (A) is the best option since it is not dependent on the expression of a specific protein and has a “general” mechanism of action, where it targets the unwinding of DNA during DNA replication and protein synthesis, which all cells have."
+  },
+  {
+    id: 5,
+    prompt:
+      "A 65 y/o patient with metastatic colon cancer is undergoing chemotherapy. The cancer is found to be EGFR (epidermal growth factor receptor) positive and he is prescribed an anti-EGFR biologic, cetuximab. The treatment is found to be ineffective and it is later discovered that he has a gain of function mutation in a protein called KRAS. Given this case, what is the best possible explanation for the treatment failure with cetuximab?",
+    choices: [
+      "EGFR is a cytosolic protein, hence the mAb could not reach its target to exert its therapeutic effect",
+      "EGFR is a surface receptor, however, the gain of function KRAS caused EGFR to misfold, thus was not recognized by cetuximab",
+      "KRAS is an upstream protein of EGFR, hence blocking EGFR does not prevent Ras from activating another pathway that leads to cell proliferation",
+      "KRAS is a downstream protein of EGFR, hence blocking EGFR does little in preventing cell proliferation if Ras is always “on”",
+    ],
+    correct:
+      "KRAS is a downstream protein of EGFR, hence blocking EGFR does little in preventing cell proliferation if Ras is always “on”",
+    tags: ["Oncology", "medium", "Chemo", "PD"],
+    explain: "This question requires understanding cell signal transduction pathways and how that affects efficacy of treatments. In this vignette, we are presented with a patient with EGFR positive metastatic colon cancer that fails to respond to cetuximab (anti-EGFR). On the surface, treating an EGFR positive cancer with an mAb that blocks it is a great way to stop the transduction pathway for cell proliferation. This works IF that is the driving force behind cell proliferation, however we are told he has a gain of function KRAS mutation as well. KRAS is a downstream protein in the signal transduction pathway, and if constitutively active (gain of function) it will continue to activate the rest of the pathway without requiring upstream EGFR activation. Hence, his cancer growth is driven by KRAS, not EGFR, so targeted EGFR therapy is not effective. You don’t need to memorize the different signal transduction pathways, but (D) is the most plausible explanation with the provided information. We can infer that EGFr is a surface receptor protein since it is treated with a mAb, hence (A) and (C) are most likely false. (B) outlines a complex process, that isn’t as plausible as (D)."
   },
 ];

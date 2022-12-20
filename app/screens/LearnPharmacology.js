@@ -21,8 +21,9 @@ import { lowerCase } from "../utils/LowerCase";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function LearnPharmacologyScreen() {
+export default function LearnPharmacologyScreen({ route }) {
   const { colors, font } = useTheme();
+  const { year } = route.params;
 
   // Hooks and handlers for Quiz Settings modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -74,7 +75,10 @@ export default function LearnPharmacologyScreen() {
             }}
             style={{
               padding: 20 * WINDOW.scale,
-              marginTop: 20 * WINDOW.scale,
+              marginTop:
+                Platform.OS === "android"
+                  ? 20 * WINDOW.scale
+                  : 60 * WINDOW.scale,
               marginLeft: 20 * WINDOW.scale,
               color: colors.text,
             }}
@@ -166,38 +170,38 @@ export default function LearnPharmacologyScreen() {
       {/* Nav Buttons to various quizzes */}
       <View>
         <NavButton
-          label={lowerCase("MEDD 411 Midterm", global.theme)}
+          label={lowerCase("MEDD 4" + year + "1 Midterm", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 411 Midterm",
+            exam: "MEDD 4" + year + "1 Midterm",
             randomize: isRandomOn,
             numQuestions: text,
           }}
         />
         <NavButton
-          label={lowerCase("MEDD 411 Final", global.theme)}
+          label={lowerCase("MEDD 4" + year + "1 Final", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 411 Final",
+            exam: "MEDD 4" + year + "1 Final",
             randomize: isRandomOn,
             numQuestions: text,
           }}
         />
 
         <NavButton
-          label={lowerCase("MEDD 412 Midterm", global.theme)}
+          label={lowerCase("MEDD 4" + year + "2 Midterm", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 412 Midterm",
+            exam: "MEDD 4" + year + "2 Midterm",
             randomize: isRandomOn,
             numQuestions: text,
           }}
         />
         <NavButton
-          label={lowerCase("MEDD 412 Final", global.theme)}
+          label={lowerCase("MEDD 4" + year + "2 Final", global.theme)}
           page="QuizSelect"
           param={{
-            exam: "MEDD 412 Final",
+            exam: "MEDD 4" + year + "2 Final",
             randomize: isRandomOn,
             numQuestions: text,
           }}
@@ -205,7 +209,7 @@ export default function LearnPharmacologyScreen() {
       </View>
 
       {/* Back Button */}
-      <BackButton page="Home" />
+      <BackButton page="Year" />
 
       {/* Quiz Settings Button */}
       <TouchableOpacity

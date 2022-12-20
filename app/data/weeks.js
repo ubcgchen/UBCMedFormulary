@@ -40,3 +40,18 @@ export const m412Final = [
   "Central Nervous System Infections",
   "Headache and Pain",
 ];
+
+export const m421Midterm = [];
+
+export const m421Final = [
+  "Fracture",
+  "Osteoporosis",
+  "Deep Vein Thrombosis : Pulmonary Embolism",
+  "Acute Kidney Injury",
+  "Chronic Kidney Disease",
+  "Ataxia : Movement Disorder : Tremor",
+];
+
+export const m422Midterm = [];
+
+export const m422Final = [];

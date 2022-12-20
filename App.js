@@ -5,8 +5,13 @@
 
 // Imports
 import React, { useState } from "react";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import {
+  useNavigation,
+  NavigationContainer,
+  useTheme,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import {
   StyleSheet,
   Text,
@@ -30,7 +35,8 @@ import QuizSelectionScreen from "./app/screens/QuizSelection";
 import QuizQuestionScreen from "./app/screens/QuizQuestion";
 import FormularyScreen from "./app/screens/Formulary";
 import DrugInfoScreen from "./app/screens/DrugInfo";
-import { TextInput } from "react-native-paper";
+import AboutScreen from "./app/screens/About";
+import YearSelectionScreen from "./app/screens/YearSelection";
 
 const ThemeContext = React.createContext();
 const Stack = createNativeStackNavigator(); // For navigation between screens
@@ -38,7 +44,7 @@ const Stack = createNativeStackNavigator(); // For navigation between screens
 const iconSize = 50 * WINDOW.scale;
 
 // Global variables
-global.theme;
+global.theme; // makes sure theme is "seen" throughout the app
 
 /**
  * Home screen
@@ -48,11 +54,10 @@ function HomeScreen() {
   const { setTheme, theme } = React.useContext(ThemeContext);
   const { colors, font, logo } = useTheme();
   const [themeIndex, setThemeIndex] = useState(themeMapKeys.indexOf(theme));
-  const [text, setText] = useState("");
+  const navigation = useNavigation();
 
   global.theme = theme;
 
-  const [modalVisible, setModalVisible] = useState(false); // About modal
   const [reportModalVisible, setReportModalVisible] = useState(false); // Report modal
 
   /**
@@ -66,7 +71,7 @@ function HomeScreen() {
   };
 
   const handleAbout = () => {
-    setModalVisible(true);
+    navigation.navigate("About", { colors, font });
   };
 
   const handleReport = () => {
@@ -74,53 +79,12 @@ function HomeScreen() {
   };
 
   function handleBackdropPress() {
-    setModalVisible(false);
     setReportModalVisible(false);
   }
 
   return (
     <View style={styles(colors, font).container}>
-      <Modal
-        animationType="fade"
-        isVisible={modalVisible}
-        transparent={true}
-        onBackdropPress={handleBackdropPress}
-      >
-        <View style={styles(colors, font).modal}>
-          <MaterialCommunityIcons
-            name="close"
-            size={25}
-            onPress={() => {
-              setModalVisible(false);
-            }}
-            style={{
-              padding: 30,
-              color: colors.text,
-            }}
-          />
-          <View
-            style={{ flex: 1, justifyContent: "center", flexDirection: "row" }}
-          >
-            <Text style={styles(colors, font).text_aboutTitle}>
-              {lowerCase("About this App", theme)}
-            </Text>
-          </View>
-
-          <View style={{ flex: 3, marginLeft: "5%", marginRight: "5%" }}>
-            <Text style={styles(colors, font).text_about}>
-              Project Supervisor: Dr. Jennifer Shabbits {"\n"}
-            </Text>
-            <Text style={styles(colors, font).text_about}>
-              Software Developer: George Chen, VFMP 2025 {"\n"}
-            </Text>
-            <Text style={styles(colors, font).text_about}>
-              Content Developer: Michael Gong, VFMP 2025 {"\n"}
-            </Text>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
+      <Modal // Suggestions modal
         animationType="fade"
         isVisible={reportModalVisible}
         transparent={true}
@@ -128,7 +92,7 @@ function HomeScreen() {
         avoidKeyboard={true}
       >
         <View style={styles(colors, font).modal_report}>
-          <MaterialCommunityIcons
+          <MaterialCommunityIcons // Close button
             name="close"
             size={25}
             onPress={() => {
@@ -146,7 +110,8 @@ function HomeScreen() {
               alignItems: "center",
             }}
           >
-            <View>
+            <View // Text + link to form
+            >
               <Text style={styles(colors, font).text_report}>
                 {lowerCase("Bugs & Suggestions?", theme)}
               </Text>
@@ -199,7 +164,7 @@ function HomeScreen() {
         <View>
           <NavButton
             label={lowerCase("Learn Pharmacology", theme)}
-            page="Learn"
+            page="Year"
           />
           <NavButton label={lowerCase("Formulary", theme)} page="Formulary" />
         </View>
@@ -209,6 +174,7 @@ function HomeScreen() {
       <TouchableOpacity
         style={styles(colors, font).button_report}
         onPress={() => handleReport()}
+        hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }}
       >
         <Text style={styles(colors, font).text_about}>
           {lowerCase("Report a Problem", theme)}
@@ -219,6 +185,7 @@ function HomeScreen() {
       <TouchableOpacity
         style={styles(colors, font).button_about}
         onPress={() => handleAbout()}
+        hitSlop={{ top: 25, bottom: 25, left: 25, right: 25 }}
       >
         <Text style={styles(colors, font).text_about}>
           {lowerCase("About", theme)}
@@ -248,11 +215,13 @@ export default function App() {
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Year" component={YearSelectionScreen} />
           <Stack.Screen name="Learn" component={LearnPharmacologyScreen} />
           <Stack.Screen name="Formulary" component={FormularyScreen} />
           <Stack.Screen name="QuizSelect" component={QuizSelectionScreen} />
           <Stack.Screen name="QuizQuestion" component={QuizQuestionScreen} />
           <Stack.Screen name="DrugInfo" component={DrugInfoScreen} />
+          <Stack.Screen name="About" component={AboutScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

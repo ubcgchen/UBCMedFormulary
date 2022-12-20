@@ -8,6 +8,7 @@ export const nutrientMalabsorption = [
             "No change", 
             "Unpredictable, depends on the drug"],
         "correct": "Unpredictable, depends on the drug",
-        "tags":["PK","hard","GI"]
+        "tags":["PK","hard","GI"],
+        explain: "This question requires understanding the complexity of Celiac disease. In this vignette, we have a patient diagnosed with Celiac disease given her serology, endoscopy, and pathology report. We know that with Celiac, the absorption of nutrients is impaired, but it is more complicated with drugs. Some drugs do show decreased absorption, which could be due to the decreased surface area for absorption (villous atrophy). One example is levothyroxine for hypothyroidism which has decreased serum levels in patients with Celiac. However, some antihypertensives like propranolol have shown increased serum levels, and it is hypothesized that changes in the gut like increased pH could decrease ionization of some drugs, which leads to increased absorption of some drugs.  Hence, (D) is the correct answer. It is important to be more prudent with dosing in patients with Celiac by monitoring adverse effects and therapeutic effects and being prepared to make necessary dosing adjustments."
     },
 ]

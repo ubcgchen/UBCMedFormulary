@@ -2,9 +2,7 @@ import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
-import { DEFAULT_STYLE } from "../constants/Styles";
-
-function BackButton({ page }) {
+function BackButton({ page, param }) {
   const navigation = useNavigation();
   const { colors, font } = useTheme();
 
@@ -12,9 +10,9 @@ function BackButton({ page }) {
     <TouchableOpacity
       style={styles(colors, font).button_back}
       onPress={() => {
-        navigation.navigate(page);
+        navigation.navigate(page, param);
       }}
-      hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
+      hitSlop={{ top: 15, bottom: 50, left: 50, right: 50 }}
     >
       <Text style={styles(colors, font).text_buttons}>Back</Text>
     </TouchableOpacity>

@@ -15,7 +15,6 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import * as DRUGS from "../data/formulary/drugs";
 import { WINDOW } from "../constants/Dimensions";
 import DottedLine from "../components/DottedLine";
 
@@ -66,7 +65,7 @@ export default function DrugInfoScreen({ route }) {
                 style={{
                   color: colors.text,
                   fontWeight: "bold",
-                  flex: 0.9 / Math.pow(WINDOW.scale, 2),
+                  flex: 1.1 / Math.pow(WINDOW.scale, 2),
                   marginLeft: "7%",
                   fontFamily: font.style,
                   fontSize: 15 * font.scale,
@@ -79,27 +78,17 @@ export default function DrugInfoScreen({ route }) {
               {/* conditional formatting: is the child an object or an array? */}
               {typeof drug_info[field][0] == "object" ? (
                 <View style={{ flex: 4.5, marginRight: "7%" }}>
-                  {Object.keys(drug_info[field][0]).map((system) => (
-                    <View style={{ flexDirection: "row" }}>
+                  {Object.keys(drug_info[field][0]).map((system, key) => (
+                    <View style={{ flexDirection: "row" }} key={key}>
                       <Text
                         style={{
                           color: colors.text,
-                          fontWeight: "bold",
                           fontFamily: font.style,
                           fontSize: 15 * font.scale,
                         }}
                       >
-                        {system}:{" "}
-                      </Text>
-                      <Text
-                        style={{
-                          color: colors.text,
-                          marginRight: "7%",
-                          fontFamily: font.style,
-                          fontSize: 15 * font.scale,
-                        }}
-                      >
-                        {drug_info[field][0][system].join(", ")}
+                        {system}: {drug_info[field][0][system].join(", ")}
+                        {"\n"}{" "}
                       </Text>
                     </View>
                   ))}
