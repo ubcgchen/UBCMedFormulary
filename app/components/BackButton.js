@@ -1,28 +1,39 @@
-import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import * as React from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
-function BackButton({ page }) {
+function BackButton({ page, param }) {
+  const navigation = useNavigation();
+  const { colors, font } = useTheme();
 
-    const navigation = useNavigation();
-
-    return(
-        <TouchableOpacity style={styles.button_back} onPress={() => {navigation.navigate(page)}}>
-          <Text style={styles.text_buttons}>Back</Text>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      style={styles(colors, font).button_back}
+      onPress={() => {
+        navigation.navigate(page, param);
+      }}
+      hitSlop={{ top: 15, bottom: 50, left: 50, right: 50 }}
+    >
+      <Text style={styles(colors, font).text_buttons}>Back</Text>
+    </TouchableOpacity>
+  );
 }
 
-const styles = StyleSheet.create({
+const styles = (colors, font) =>
+  StyleSheet.create({
     button_back: {
-        position: 'absolute',
-        left: 20,
-        bottom: 20,
+      position: "absolute",
+      left: 10,
+      bottom: 10,
+      padding: 20,
+      backgroundColor: colors.background,
+      borderRadius: 15,
     },
     text_buttons: {
-        fontSize: 18,
-        fontFamily: Platform.OS === 'ios' ? "DamascusLight" : "sans-serif-light" // Determine font based on platform
+      color: colors.button_text,
+      fontSize: 18 * font.scale,
+      fontFamily: font.style,
     },
-});
+  });
 
 export default BackButton;

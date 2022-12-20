@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "UBCMedFormulary",
-    "slug": "UBCMedFormulary",
-    "version": "1.0.0",
+    "name": "UBC MDUP Formulary",
+    "slug": "UBCMDUPFormulary",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,9 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.UBC.MDUPFormulary",
+      "buildNumber": "2"
     },
     "android": {
+      "package": "com.UBC.MDUPFormulary",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -27,6 +31,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "14ed5a09-3527-4803-b359-089b6e6ffb90"
+      }
     }
   }
 }

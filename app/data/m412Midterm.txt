@@ -1,0 +1,6 @@
+  "Peripheral Neuropathy"
+  "Spinal Cord Injury"
+  "Stroke"
+  "Brain Stem"
+  "Anemia"
+  "Bleeding disorders and Hematologic Malignancy"
