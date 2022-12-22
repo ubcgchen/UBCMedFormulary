@@ -3,6 +3,7 @@ export const Light = {
   colors: {
     primary: "rgb(255, 45, 85)",
     background: "#FFF",
+    text_input_background: "#f5f5f5",
     card: "rgb(255, 255, 255)",
 
     text: "rgb(28, 28, 30)",
@@ -40,6 +41,7 @@ export const Dark = {
   colors: {
     primary: "rgb(255, 45, 85)",
     background: "#393939",
+    text_input_background: "#535353",
     card: "rgb(255, 255, 255)",
 
     text: "#FFF",
@@ -76,6 +78,7 @@ export const Cute = {
   colors: {
     primary: "rgb(255, 45, 85)",
     background: "#fdf7e8",
+    text_input_background: "#fbf1d6",
     card: "rgb(255, 255, 255)",
 
     text: "#939393",
@@ -112,6 +115,7 @@ export const Coffee = {
   colors: {
     primary: "rgb(255, 45, 85)",
     background: "#f5ede5",
+    text_input_background: "#f0e3d7",
     card: "rgb(255, 255, 255)",
 
     text: "#986c55",

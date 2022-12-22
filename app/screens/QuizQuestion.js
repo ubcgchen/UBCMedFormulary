@@ -178,7 +178,7 @@ export default function QuizQuestionScreen({ route }) {
 
   const renderFooter = () => {
     return (
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", paddingTop: "3%" }}>
         {quizOver && (
           <TouchableOpacity
             style={
@@ -591,7 +591,7 @@ const styles = (
         ? colors.selected
         : colors.button,
       borderRadius: 50,
-      height: WINDOW.height * 0.08,
+      height: WINDOW.height * 0.075,
 
       flexDirection: "row",
       alignItems: "center",
@@ -599,7 +599,7 @@ const styles = (
 
       paddingHorizontal: 20,
 
-      marginVertical: WINDOW.height * 0.015,
+      marginVertical: WINDOW.height * 0.01,
       marginLeft: WINDOW.width * 0.02,
       marginRight: WINDOW.width * 0.02,
     },
@@ -609,7 +609,7 @@ const styles = (
     },
     text_choice: {
       color: answerSubmitted ? colors.text_submitted : colors.text,
-      fontSize: WINDOW.scale * 21 * font.scale,
+      fontSize: WINDOW.scale * 20 * font.scale,
       fontFamily: font.style, // Determine font based on platform
     },
     text_numbering: {
@@ -621,7 +621,7 @@ const styles = (
     },
     text_prompt: {
       color: colors.text,
-      fontSize: WINDOW.scale * 28 * font.scale,
+      fontSize: WINDOW.scale * 26 * font.scale,
       marginLeft: WINDOW.width * 0.056,
       marginRight: WINDOW.width * 0.05,
       marginBottom: WINDOW.height * 0.03,
