@@ -30,3 +30,15 @@ export { pharmacologyBasics } from "./Pharmacology Basics";
 export { sci } from "./Spinal Cord Injury";
 export { stroke } from "./Stroke";
 export { thyroidParathyroid } from "./Thyroid and Parathyroid";
+
+export { chestPain_angina_myocardialInfarction } from "./Chest Pain _ Angina _ Myocardial Infarction";
+export { Nausea_Vomiting_Diarrhea } from "./Nausea _ Vomiting _ Diarrhea";
+export { Osteoarthritis } from "./Osteoarthritis";
+export { HeartFailure } from "./Heart Failure";
+export { Jaundice } from "./Jaundice";
+
+export { Inflammatory_Joint_Disease } from "./Inflammatory Joint Disease";
+export { Abnormal_Vaginal_Bleeding } from "./Abnormal Vaginal Bleeding";
+export { Prostate_Cancer_and_Benign_Prostatic_Hyperplasia } from "./Prostate Cancer and Benign Prostatic Hyperplasia";
+export { Shock } from "./Shock";
+export { Sepsis } from "./Sepsis";

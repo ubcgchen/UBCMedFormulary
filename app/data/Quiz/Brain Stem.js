@@ -20,7 +20,7 @@ export const brainStem = [
   {
     id: 3,
     prompt:
-      "A 63 y/o male presents to the neurologist office after experiencing bouts of double vision and ataxia. These attacks have never happened before till recently. After a thorough diagnostic workup, he is diagnosed with primary progressive MS. Which of the following is the ONLY approved medication for primary progressive MS as of 2022?",
+      "Which of the following medications for MS is not taken orally and can impede lymphocyte migration into the CNS by preventing penetration of the blood brain barrier or egress from lymph nodes?",
     choices: ["Alemtuzumab", "Fingolimod", "Interferons", "Natalizumab"],
     correct: "Natalizumab",
     tags: ["PD", "medium", "MoA", "MS", "Neurology"],
@@ -29,7 +29,7 @@ export const brainStem = [
   {
     id: 4,
     prompt:
-      "A 64 y/o woman was recently diagnosed with Stage II ductal carcinoma in situ (DCIS). She undergoes a lumpectomy and further investigation reveals the tumor to be ER-, PR-, and HER2- (triple-negative). You need to pick a chemotherapeutic agent to be included in her adjuvant therapy. With your knowledge on the mechanisms of actions, which of the following drugs would be the most appropriate?",
+      "A 63 y/o male presents to the neurologist office after experiencing bouts of double vision and ataxia. These attacks have never happened before till recently. After a thorough diagnostic workup, he is diagnosed with primary progressive MS. Which of the following is the ONLY approved medication for primary progressive MS as of 2022?",
     choices: [
       "Alemtuzumab",
       "Dimethyl fumarate",

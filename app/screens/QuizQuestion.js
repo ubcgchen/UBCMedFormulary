@@ -396,7 +396,7 @@ export default function QuizQuestionScreen({ route }) {
                 styles(colors, font, null, null, null, null, null).text_choice
               }
             >
-              {questions[currentQuestionIndex]["explain"]}
+              {questions[questionOrder[currentQuestionIndex]]["explain"]}
             </Text>
           </View>
         </ScrollView>

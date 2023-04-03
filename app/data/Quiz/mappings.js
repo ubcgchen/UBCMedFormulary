@@ -48,4 +48,18 @@ export const week_mappings = {
   "Acute Kidney Injury": acuteKidneyInjury,
   "Chronic Kidney Disease": chronicKidneyDisease,
   "Ataxia : Movement Disorder : Tremor": ataxia_movementDisorder_tremor,
+
+  "Chest Pain, Angina, Myocardial Infarction":
+    quizzes.chestPain_angina_myocardialInfarction,
+  "Nausea, Vomiting, Diarrhea": quizzes.Nausea_Vomiting_Diarrhea,
+  Osteoarthritis: quizzes.Osteoarthritis,
+  "Heart Failure": quizzes.HeartFailure,
+  Jaundice: quizzes.Jaundice,
+
+  "Inflammatory Joint Disease": quizzes.Inflammatory_Joint_Disease,
+  "Abnormal Vaginal Bleeding": quizzes.Abnormal_Vaginal_Bleeding,
+  "Prostate Cancer and Benign Prostatic Hypertrophy":
+    quizzes.Prostate_Cancer_and_Benign_Prostatic_Hyperplasia,
+  Sepsis: quizzes.Sepsis,
+  Shock: quizzes.Shock,
 };
