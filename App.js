@@ -19,6 +19,7 @@ import {
   TouchableOpacity,
   Image,
   Linking,
+  TextInput,
 } from "react-native";
 import Modal from "react-native-modal";
 import NavButton from "./app/components/NavButton";
@@ -38,6 +39,11 @@ import DrugInfoScreen from "./app/screens/DrugInfo";
 import AboutScreen from "./app/screens/About";
 import YearSelectionScreen from "./app/screens/YearSelection";
 
+// Firestore + feedback
+import { collection, addDoc } from "firebase/firestore";
+import * as firebase from "./firebaseConfig";
+import { Slider } from "@miblanchard/react-native-slider";
+
 const ThemeContext = React.createContext();
 const Stack = createNativeStackNavigator(); // For navigation between screens
 
@@ -55,6 +61,8 @@ function HomeScreen() {
   const { colors, font, logo } = useTheme();
   const [themeIndex, setThemeIndex] = useState(themeMapKeys.indexOf(theme));
   const navigation = useNavigation();
+  const [feedback, onChangeFeedback] = useState(""); // feedback hooks
+  const [feedbackSent, setFeedbackSent] = useState(false); // has the feedback been sent?
 
   global.theme = theme;
 
@@ -78,28 +86,48 @@ function HomeScreen() {
     setReportModalVisible(true);
   };
 
-  function handleBackdropPress() {
+  function handleCloseModal() {
     setReportModalVisible(false);
+    setFeedbackSent(false);
+    onChangeFeedback("");
+  }
+
+  async function submitReport() {
+    if (feedback.match(/^ *$/) !== null) {
+      // do nothing if feedback field is empty
+    } else {
+      setFeedbackSent(true);
+      try {
+        const docRef = await addDoc(collection(firebase.db, "feedback"), {
+          feedback: feedback,
+          rating: 5,
+          user_friendliness: 5,
+          developer_cuteness: 10,
+          developer_girlfriend_cuteness: 11,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
   }
 
   return (
     <View style={styles(colors, font).container}>
-      <Modal // Suggestions modal
+      <Modal // Report modal
         animationType="fade"
         isVisible={reportModalVisible}
         transparent={true}
-        onBackdropPress={handleBackdropPress}
+        onBackdropPress={handleCloseModal}
         avoidKeyboard={true}
       >
         <View style={styles(colors, font).modal_report}>
           <MaterialCommunityIcons // Close button
             name="close"
             size={25}
-            onPress={() => {
-              setReportModalVisible(false);
-            }}
+            onPress={() => handleCloseModal()}
             style={{
-              padding: 30,
+              padding: 20,
               color: colors.text,
             }}
           />
@@ -119,12 +147,69 @@ function HomeScreen() {
             <View>
               <Text style={styles(colors, font).text_report_subheader}>
                 {lowerCase(
-                  "Leave your suggestions here to make this app better! If you are reporting a bug, let us know the actions leading up to the bug as well :)",
+                  "If you are reporting a bug, let us know the actions leading up to the bug :)",
                   theme
                 )}
               </Text>
             </View>
+            <TextInput
+              style={styles(colors, font).input}
+              onChangeText={onChangeFeedback}
+              value={feedback}
+              multiline={true}
+              placeholder="Type here"
+              placeholderTextColor={colors.text}
+              selectionColor={colors.text}
+              editable={!feedbackSent}
+              selectTextOnFocus={!feedbackSent}
+            />
+            {/* <Slider
+              value={0}
+              minimumValue={0}
+              maximumValue={5}
+              step={1}
+              onValueChange={() => {
+                console.log("hi");
+              }}
+            /> */}
+            <TouchableOpacity
+              style={{
+                marginTop: "1%",
+                marginBottom: "10%",
+                padding: 5,
+                borderRadius: 5,
+                borderColor: feedbackSent
+                  ? colors.text_disabled
+                  : colors.border,
+                backgroundColor: feedbackSent
+                  ? colors.button_disabled
+                  : colors.button,
+                borderWidth: 1.5,
+              }}
+              onPress={() => submitReport()}
+              disabled={feedbackSent}
+            >
+              <Text
+                style={{
+                  color: feedbackSent
+                    ? colors.text_disabled
+                    : colors.button_text,
+                  fontFamily: font.style,
+                }}
+              >
+                {feedbackSent
+                  ? lowerCase("Thank you!", theme)
+                  : lowerCase("Send Feedback", theme)}
+              </Text>
+            </TouchableOpacity>
             <View>
+              <Text style={styles(colors, font).text_report_subheader}>
+                {lowerCase(
+                  "We'd really appreciate it if you provided a few more thoughts about our app (~3 mins)",
+                  theme
+                )}
+                :
+              </Text>
               <Text
                 style={styles(colors, font).link}
                 onPress={() =>
@@ -235,6 +320,15 @@ const styles = (colors, font) =>
       position: "absolute",
       right: 30,
     },
+    button_feedback_submit: {
+      marginTop: "1%",
+      marginBottom: "10%",
+      padding: 5,
+      borderRadius: 5,
+      borderColor: colors.border,
+      backgroundColor: colors.button,
+      borderWidth: 1.5,
+    },
     button_report: {
       bottom: "3%",
       position: "absolute",
@@ -264,6 +358,17 @@ const styles = (colors, font) =>
     icon_view: {
       flex: 0.2,
     },
+    input: {
+      height: WINDOW.height * 0.1,
+      width: WINDOW.width * 0.8,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      borderColor: colors.text,
+      color: colors.text,
+      textAlignVertical: "top",
+      backgroundColor: colors.text_input_background,
+    },
     link: {
       color: "#89cff0",
       fontFamily: font.style,
@@ -281,7 +386,7 @@ const styles = (colors, font) =>
       backgroundColor: "#fff",
       width:
         WINDOW.width > WINDOW.height ? WINDOW.width * 0.5 : WINDOW.width * 0.8,
-      height: WINDOW.height * 0.5,
+      height: WINDOW.height * 0.6,
       alignSelf: "center",
       borderRadius: 25,
       backgroundColor: colors.background,
@@ -307,6 +412,10 @@ const styles = (colors, font) =>
       fontFamily: font.style,
       fontSize: 35 * font.scale * WINDOW.scale,
       textDecorationLine: "underline",
+    },
+    text_feedback_submit: {
+      color: colors.button_text,
+      fontFamily: font.style,
     },
     text_report: {
       color: colors.button_text,

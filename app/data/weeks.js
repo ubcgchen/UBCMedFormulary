@@ -52,6 +52,18 @@ export const m421Final = [
   "Ataxia : Movement Disorder : Tremor",
 ];
 
-export const m422Midterm = [];
+export const m422Midterm = [
+  "Chest Pain, Angina, Myocardial Infarction",
+  "Nausea, Vomiting, Diarrhea",
+  "Osteoarthritis",
+  "Heart Failure",
+  "Jaundice",
+];
 
-export const m422Final = [];
+export const m422Final = [
+  "Inflammatory Joint Disease",
+  "Abnormal Vaginal Bleeding",
+  "Prostate Cancer and Benign Prostatic Hypertrophy",
+  "Sepsis",
+  "Shock",
+];
