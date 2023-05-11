@@ -1,10 +1,5 @@
-import { fracture } from "./Fracture";
-import { osteoporosis } from "./Osteoporosis";
-import { acuteKidneyInjury } from "./Acute Kidney Injury";
+
 import * as quizzes from "./";
-import { chronicKidneyDisease } from "./Chronic Kidney Disease";
-import { deepVeinThrombosis_pulmonaryEmbolism } from "./Deep Vein Thrombosis _ Pulmonary Embolism";
-import { ataxia_movementDisorder_tremor } from "./Ataxia _ Movement Disorder _ Tremor";
 
 export const week_mappings = {
   "Intro to Pharmacodynamics": quizzes.pharmacodynamics,
@@ -41,13 +36,20 @@ export const week_mappings = {
   Stroke: quizzes.stroke,
   "Thyroid and Parathyroid": quizzes.thyroidParathyroid,
 
-  Fracture: fracture,
-  Osteoporosis: osteoporosis,
+  "Neonatal Transition": quizzes.Neonatal_Transition,
+  "Chromosomal Abnormalities": quizzes.Chromosomal_Abnormalities,
+  "Normal and Abnormal Growth and Development": quizzes.Normal_and_Abnormal_Growth_and_Development,
+  "Arrhythmia": quizzes.Arrhythmia,
+  "Joint Injury": quizzes.Joint_Injury,
+
+  Fracture: quizzes.fracture,
+  Osteoporosis: quizzes.osteoporosis,
   "Deep Vein Thrombosis : Pulmonary Embolism":
-    deepVeinThrombosis_pulmonaryEmbolism,
-  "Acute Kidney Injury": acuteKidneyInjury,
-  "Chronic Kidney Disease": chronicKidneyDisease,
-  "Ataxia : Movement Disorder : Tremor": ataxia_movementDisorder_tremor,
+  quizzes.deepVeinThrombosis_pulmonaryEmbolism,
+  "Acute Kidney Injury": quizzes.acuteKidneyInjury,
+  "Chronic Kidney Disease": quizzes.chronicKidneyDisease,
+  "Ataxia : Movement Disorder : Tremor": quizzes.ataxia_movementDisorder_tremor,
+  "Psychosis": quizzes.Psychosis,
 
   "Chest Pain, Angina, Myocardial Infarction":
     quizzes.chestPain_angina_myocardialInfarction,
@@ -55,6 +57,7 @@ export const week_mappings = {
   Osteoarthritis: quizzes.Osteoarthritis,
   "Heart Failure": quizzes.HeartFailure,
   Jaundice: quizzes.Jaundice,
+  "Pregnancy, Birth and Newborn": quizzes.Pregnancy_Birth_and_Newborn,
 
   "Inflammatory Joint Disease": quizzes.Inflammatory_Joint_Disease,
   "Abnormal Vaginal Bleeding": quizzes.Abnormal_Vaginal_Bleeding,
@@ -62,4 +65,5 @@ export const week_mappings = {
     quizzes.Prostate_Cancer_and_Benign_Prostatic_Hyperplasia,
   Sepsis: quizzes.Sepsis,
   Shock: quizzes.Shock,
+  Dementia: quizzes.Dementia,
 };

@@ -9,7 +9,8 @@ export const immunologyAndAllergy = [
             "Norepinephrine has affinity for β2 adrenergic receptors, therefore causing vasodilation and a drop in blood pressure.",
             "Norepinephrine has decreased tissue absorption due to the lack of a methyl group (lipophilic), therefore the onset of action is slower than epinephrine."],
         "correct": "Norepinephrine has minimal affinity for β2 adrenergic receptors, therefore does not allow for bronchodilation",
-        "tags":["MoA","easy","ANS","ER","Immunology"]
+        "tags":["MoA","easy","ANS","ER","Immunology"],
+        explain: "This question requires understanding the effects of catecholamines. Here we need to understand the different receptor affinities of norepinephrine (NE) and epinephrine (E). Both of these drugs are released by the SNS in our “flight and fight” response. E has affinity for both α (1, 2) and β (1, 2, 3) adrenoceptors (more affinity for β), while NE has affinity for α (1, 2) and β (1) adrenoceptors (more affinity for α). In anaphylactic shock, we want to both increase blood pressure via vasoconstriction (α1) and increasing cardiac output via increased contractility (β1), decrease mucus secretions and edema via vasoconstriction (α1), decrease bronchospasm via bronchodilation (β2), and decrease mediator release from mast cells and basophils (β2). E is able to exert all of these effects. Hence, (A) is the correct answer. Side note: NE is a valid adjuvant option if the patient needs extra help in maintaining cardiac output. The addition of an extra methyl group on E increases its affinity for the β adrenoceptors."
     },
     {
         "id" : 2,
@@ -21,7 +22,8 @@ export const immunologyAndAllergy = [
             "IM thigh because it’s large and less vascularized than the deltoid",
             "SC deltoid because there’s better absorption through adipose tissue than muscle"],
         "correct": "IM thigh because it’s large and more vascularized than the deltoid",
-        "tags":["PK","medium","RoA","ER","Immunology"]
+        "tags":["PK","medium","RoA","ER","Immunology"],
+        explain: "This question requires the understanding of different routes of administration and their role in treatment. Anaphylactic shock is a medical emergency, so we want the drug to reach therapeutic concentrations as quickly as possible. IV would allow us to achieve that instantly, however, that requires training. The next best option here is IM (A-D). Muscles are highly vascularized tissues, which allows for faster absorption of drugs. (E) SC is into adipose tissue, which is not as vascularized, thus slower absorption. Another reason why SC is not recommended is that E is a potent vasoconstrictor, and this will v/c the vessels in the SC tissue, further impairing absorption. Now we are left with a thigh or deltoid. Using the same concept of vascularization, larger muscle groups tend to be more vascularized, and thus will have faster absorption. The thigh is a larger muscle group than the deltoid, hence is more vascularized and will have faster absorption, thus (A) is the correct answer. Side note: you might wonder if the v/c effects of E are a problem in IM. A potential reason why it isn’t a big deal is because vessels to skeletal muscles have β2 adrenoceptors (E has β2 affinity), which leads to vasodilation. This is important because in a “fight or flight” response, you want to increase blood flow to skeletal muscles fight or flight."
     },
    {
         "id" : 3,
@@ -32,7 +34,8 @@ export const immunologyAndAllergy = [
             "Loratadine", 
             "Ranitidine"],
         "correct": "Loratadine",
-        "tags":["PD","easy","Immunology","Side effects"]
+        "tags":["PD","easy","Immunology","Side effects"],
+        explain: "This question requires understanding that there are two different histamine receptor antagonists and side effects of different generations of H1 receptor antagonists. All four options here are antihistamines. However, only H1 receptor antagonists actually target the pathological process of allergies. (D) Ranitidine is a H2 receptor antagonist and is used to reduce gastric acid secretion, hence is not an option. (A) and (B) are both first generation H1 receptor antagonists, which all have an important side effect of causing drowsiness (sedation) due to their ability to cross the blood brain barrier and block histamine receptors in the CNS. In this case, an antihistamine that causes drowsiness is not ideal for this patient’s occupation of truck driving. Hence (C) is the best option. Loratadine is a 2nd generation H1 receptor antagonist, which has minimal CNS penetration. Therefore loratadine will not cause drowsiness, and thus is the best option for this patient."
     },  
     {
         "id" : 4,
@@ -44,7 +47,8 @@ export const immunologyAndAllergy = [
             "All of the above",
             "All except for C"],
         "correct": "All of the above",
-        "tags":["PD","medium","ER","ANS","Immunology","MoA"]
+        "tags":["PD","medium","ER","ANS","Immunology","MoA"],
+        explain: "This question requires understanding the effects of epinephrine and the SNS. In this case, all of the above are valid effects of E on the cardiovascular system. The drop in blood pressure via β2 adrenergic receptors is not as important as α1 and β1 adrenergic receptor stimulation, hence a rise in blood pressure is the end result with E administration. But it is important to remember that β2 adrenergic receptors are found in vessels to skeletal muscles, to allow for increased blood flow to skeletal muscle to facilitate the fight or flight response."
     },
   {
         "id" : 5,
@@ -56,7 +60,8 @@ export const immunologyAndAllergy = [
             "Cetrizine blocks both H1 and H2 receptors, which resolves the urticaria and vomiting",
             "Cetrizine blocks H1 receptors causing the relaxation of bronchial smooth muscle"],
         "correct": "Cetirizine blocks H1 receptors causing decreased vascular permeability",
-        "tags":["PD","medium","MoA","Immunology","Autacoids"]
+        "tags":["PD","medium","MoA","Immunology","Autacoids"],
+        explain: "This question requires understanding the effects of histamine. In this vignette, we are presented with a patient in anaphylactic shock. Epi has been administered, and the ER team decides to adjuvantly administer cetirizine IV. Cetrizine is a 2nd generation antihistamine for H1 receptors, so the expected pharmacological action is correctly outlined in (B). This will combat the edema, and histamine release from mast cells. Since cetrizine is 2nd generation, we would not expect CNS penetration to cause drowsiness. Cetrizine does not block H2 receptors, so it will have minimal effect on acid production."
     },
 {
         "id" : 6,
@@ -67,6 +72,7 @@ export const immunologyAndAllergy = [
             "Yes because activation of α1 adrenergic receptors will decrease inflammatory mediator release from mast cells", 
             "No because it doesn’t act on β2 adrenergic receptors to decrease inflammatory mediator release from mast cells"],
         "correct": "Yes because activation of α1 adrenergic receptors will vasoconstrict her upper airway mucosal vessels leading to decreased edema",
-        "tags":["PD","medium","ANS","MoA"]
+        "tags":["PD","medium","ANS","MoA"],
+        explain: "This question requires understanding the therapeutic role of adrenergic receptors (SNS). We have not been directly taught what phenylephrine is, but this question should have enough information (α1 adrenergic receptor agonist) and the symptom (nasal congestion) she is trying to treat to infer a pharmacological explanation. Nasal congestion is usually due to increased mucus secretions and edema of the mucous membrane. (B) is the correct answer because it correctly uses the effects of  α1 adrenergic receptor stimulation to describe a therapeutic process, which is the v/c of mucosal vessels leading to less edema in the nasal cavity. (A) Bronchodilation will not play a role since bronchioles are not in the upper airways. (C) is not true, α1 does not mediate the decrease in inflammatory cytokines from mast cells, that is an effect of β2 (D)."
     }, 
 ]

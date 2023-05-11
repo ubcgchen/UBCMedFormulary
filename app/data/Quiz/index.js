@@ -31,14 +31,31 @@ export { sci } from "./Spinal Cord Injury";
 export { stroke } from "./Stroke";
 export { thyroidParathyroid } from "./Thyroid and Parathyroid";
 
+export { Neonatal_Transition} from "./Neonatal Transition";
+export { Chromosomal_Abnormalities} from "./Chromosomal Abnormalities";
+export {Normal_and_Abnormal_Growth_and_Development} from "./Normal and Abnormal Growth and Development";
+export {Arrhythmia} from "./Arrhythmia"
+export { Joint_Injury} from "./Joint Injury"
+
+export { fracture } from "./Fracture";
+export { osteoporosis } from "./Osteoporosis";
+export { acuteKidneyInjury } from "./Acute Kidney Injury";
+export { chronicKidneyDisease } from "./Chronic Kidney Disease";
+export { deepVeinThrombosis_pulmonaryEmbolism } from "./Deep Vein Thrombosis _ Pulmonary Embolism";
+export { ataxia_movementDisorder_tremor } from "./Ataxia _ Movement Disorder _ Tremor";
+export { Psychosis } from "./Psychosis"
+
 export { chestPain_angina_myocardialInfarction } from "./Chest Pain _ Angina _ Myocardial Infarction";
 export { Nausea_Vomiting_Diarrhea } from "./Nausea _ Vomiting _ Diarrhea";
 export { Osteoarthritis } from "./Osteoarthritis";
 export { HeartFailure } from "./Heart Failure";
 export { Jaundice } from "./Jaundice";
+export { Pregnancy_Birth_and_Newborn } from "./Pregnancy, Birth and Newborn"
 
 export { Inflammatory_Joint_Disease } from "./Inflammatory Joint Disease";
 export { Abnormal_Vaginal_Bleeding } from "./Abnormal Vaginal Bleeding";
 export { Prostate_Cancer_and_Benign_Prostatic_Hyperplasia } from "./Prostate Cancer and Benign Prostatic Hyperplasia";
 export { Shock } from "./Shock";
 export { Sepsis } from "./Sepsis";
+export {Dementia} from "./Dementia";
+

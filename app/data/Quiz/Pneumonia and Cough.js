@@ -116,7 +116,7 @@ export const pneumoniaAndCough = [
     },
 {
         "id" : 10,
-        "prompt" : "A 57 y/o patient with a history of COPD is diagnosed with community acquired pneumonia with left lower lobe consolidation seen on chest x-ray. During the history taking, the patient remembers having had strep throat when he was a child and having a rash to the drug. He doesn’t remember the drug name, but being the astute medical student you are able to infer the identity of the drug and prescribe him:",
+        "prompt" : "A 57 y/o patient with a history of COPD is diagnosed with community acquired pneumonia with left lower lobe consolidation seen on chest x-ray. During the history taking, the patient remembers having had strep throat when he was a child and having a rash to the drug. He doesn’t remember the drug name, but being the astute medical student you are able to infer the identity of the drug and prescribe him (pick the SAFEST option):",
         "choices": [
             "Amoxicillin-clavulanate + azithromycin",
             "Ceftriaxone + azithromycin",
@@ -125,7 +125,7 @@ export const pneumoniaAndCough = [
             "Piperacillin-tazobactam + azithromycin"],
         "correct": "Levofloxacin",
         "tags":["hard","MoA","Side effects","Infectious"],
-        explain: "This question requires understanding the treatment of strep throat and an associated side effect with β-lactam antibiotics. In this vignette, we are presented with a patient that previously had a rash following a course of ABX for his strep throat when he was a child. Strep throat is commonly treated with penicillin. β-lactams like penicillin are associated with hypersensitivity reactions that usually present as a diffuse maculopapular rash. Hence, we infer he probably had a hypersensitivity reaction towards penicillin.  β-lactam ABXs are the most allergenic ABXs because of β-lactam “ring strain”, which causes it to be unstable and open up. This will lead to covalent attachment to proteins (via Cys residues), causing the protein to be recognized as foreign by the host immune system. Since the β-lactam structure is found in β-lactams, cephalosporins, and  carbapenems, there is potential for cross-reactivity. Hence the safest option is to prescribe a non-β-lactam ABX, which in this case is (C) levofloxacin, a fluoroquinolone."
+        explain: "This question requires understanding the treatment of strep throat and an associated side effect with β-lactam antibiotics. In this vignette, we are presented with a patient that previously had a rash following a course of ABX for his strep throat when he was a child. Strep throat is commonly treated with penicillin. β-lactams like penicillin are associated with hypersensitivity reactions that usually present as a diffuse maculopapular rash. Hence, we infer he probably had a hypersensitivity reaction towards penicillin.  β-lactam ABXs are the most allergenic ABXs because of β-lactam “ring strain”, which causes it to be unstable and open up. This will lead to covalent attachment to proteins (via Cys residues), causing the protein to be recognized as foreign by the host immune system. Since the β-lactam structure is found in β-lactams, cephalosporins, and  carbapenems, there is potential for cross-reactivity. Hence the safest option is to prescribe a non-β-lactam ABX, which in this case is (C) levofloxacin, a fluoroquinolone. However, it should be noted that the prevalence of cross-reactivity between penicillins and cephalosporins is extremely low (~2%), and would not be an absolute contraindication, which means we would still prescribe him a cephalosporin if we really needed to"
     },
 {
         "id" : 11,
@@ -220,7 +220,7 @@ export const pneumoniaAndCough = [
     },
 {
         "id" : 18,
-        "prompt" : "A 28 y/o male who uses IV heroin presents to the ER with a cough and vitals: T 40 \u00b0C, RR 26, HR 125, BP 92/68, O2 98% RA. Chest X-ray showed consolidation in multiple lobes of the lung bilaterally. The patient is admitted and blood cultures are drawn and are positive 24 hrs later show gram positive cocci in clusters, later confirmed as MRSA. Which of the following antibiotics would be the least effective?",
+        "prompt" : "A 28 y/o male who uses IV heroin presents to the ER with a cough and vitals: T 40C, RR 26, HR 125, BP 92/68, O2 98% RA. Chest X-ray shows multiple consolidations in both lungs. The patient is admitted and blood cultures are drawn and are positive 24 hrs later show gram positive cocci in clusters. Which of the following antibiotics would be the least effective?",
         "choices": [
             "Vancomycin IV",
             "Daptomycin IV",

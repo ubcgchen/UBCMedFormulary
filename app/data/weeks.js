@@ -41,7 +41,13 @@ export const m412Final = [
   "Headache and Pain",
 ];
 
-export const m421Midterm = [];
+export const m421Midterm = [
+  "Neonatal Transition",
+  "Chromosomal Abnormalities",
+  "Normal and Abnormal Growth and Development",
+  "Arrhythmia",
+  "Joint Injury"
+];
 
 export const m421Final = [
   "Fracture",
@@ -50,6 +56,7 @@ export const m421Final = [
   "Acute Kidney Injury",
   "Chronic Kidney Disease",
   "Ataxia : Movement Disorder : Tremor",
+  "Psychosis"
 ];
 
 export const m422Midterm = [
@@ -58,6 +65,7 @@ export const m422Midterm = [
   "Osteoarthritis",
   "Heart Failure",
   "Jaundice",
+  "Pregnancy, Birth and Newborn"
 ];
 
 export const m422Final = [
@@ -66,4 +74,5 @@ export const m422Final = [
   "Prostate Cancer and Benign Prostatic Hypertrophy",
   "Sepsis",
   "Shock",
+  "Dementia"
 ];
