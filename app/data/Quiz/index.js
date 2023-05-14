@@ -34,6 +34,7 @@ export { thyroidParathyroid } from "./Thyroid and Parathyroid";
 export { Neonatal_Transition} from "./Neonatal Transition";
 export { Chromosomal_Abnormalities} from "./Chromosomal Abnormalities";
 export {Normal_and_Abnormal_Growth_and_Development} from "./Normal and Abnormal Growth and Development";
+export {Adolescent_Health_and_Development} from "./Adolescent Health and Development"
 export {Arrhythmia} from "./Arrhythmia"
 export { Joint_Injury} from "./Joint Injury"
 

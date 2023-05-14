@@ -39,6 +39,7 @@ export const week_mappings = {
   "Neonatal Transition": quizzes.Neonatal_Transition,
   "Chromosomal Abnormalities": quizzes.Chromosomal_Abnormalities,
   "Normal and Abnormal Growth and Development": quizzes.Normal_and_Abnormal_Growth_and_Development,
+  "Adolescent Health and Development": quizzes.Adolescent_Health_and_Development,
   "Arrhythmia": quizzes.Arrhythmia,
   "Joint Injury": quizzes.Joint_Injury,
 

@@ -13,26 +13,30 @@ export default function AboutScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 0.4 }}>
+      <View style={{ flex: 0.2 }}>
         <Text style={styles(colors, font).text_header}>
           {lowerCase("About", global.theme)}
         </Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
+      <Text style={styles(colors, font).subheader}>Credits</Text>
         {credits.map((credit, key) => (
           <Text style={styles(colors, font).text} key={key}>
             {lowerCase(credit, global.theme)}
           </Text>
         ))}
         <Text>{"\n"}</Text>
-        <Text style={styles(colors, font).subheader}>{"Sources:\n"}</Text>
+        <Text style={styles(colors, font).subheader}>Disclaimer</Text>
+        <Text style={styles(colors, font).text}>The purpose of this app is to help you gain a deeper understanding of the material covered in the UBC MDUP.</Text>
+        <Text>{"\n"}</Text>
+        <Text style={styles(colors, font).subheader}>{"Sources\n"}</Text>
         {citations.map((citation, key) => (
           <Text style={styles(colors, font).text} key={key}>
             {lowerCase(citation, global.theme)}
           </Text>
         ))}
       </ScrollView>
-      <View style={{ flex: 0.5 }}>
+      <View style={{ flex: 0.2 }}>
         <BackButton page="Home" />
       </View>
     </View>

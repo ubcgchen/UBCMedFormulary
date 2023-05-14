@@ -45,6 +45,7 @@ export const m421Midterm = [
   "Neonatal Transition",
   "Chromosomal Abnormalities",
   "Normal and Abnormal Growth and Development",
+  "Adolescent Health and Development",
   "Arrhythmia",
   "Joint Injury"
 ];
