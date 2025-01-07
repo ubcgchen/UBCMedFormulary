@@ -9,7 +9,6 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   Modal,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";

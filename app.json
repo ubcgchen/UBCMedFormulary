@@ -2,7 +2,7 @@
   "expo": {
     "name": "UBC MDUP Formulary",
     "slug": "UBCMDUPFormulary",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,11 +19,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.UBC.MDUPFormulary",
-      "buildNumber": "10"
+      "buildNumber": "11"
     },
     "android": {
       "package": "com.UBC.MDUPFormulary",
-      "versionCode": 7,
+      "versionCode": 8,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

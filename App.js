@@ -38,11 +38,12 @@ import FormularyScreen from "./app/screens/Formulary";
 import DrugInfoScreen from "./app/screens/DrugInfo";
 import AboutScreen from "./app/screens/About";
 import YearSelectionScreen from "./app/screens/YearSelection";
+import ModuleScreen from "./app/screens/Modules";
+import ModuleDetails from "./app/screens/ModuleContent";
 
 // Firestore + feedback
 import { collection, addDoc } from "firebase/firestore";
 import * as firebase from "./firebaseConfig";
-import { Slider } from "@miblanchard/react-native-slider";
 
 const ThemeContext = React.createContext();
 const Stack = createNativeStackNavigator(); // For navigation between screens
@@ -252,6 +253,7 @@ function HomeScreen() {
             page="Year"
           />
           <NavButton label={lowerCase("Formulary", theme)} page="Formulary" />
+          <NavButton label={lowerCase("Modules", theme)} page="Modules" />
         </View>
       </View>
 
@@ -303,10 +305,12 @@ export default function App() {
           <Stack.Screen name="Year" component={YearSelectionScreen} />
           <Stack.Screen name="Learn" component={LearnPharmacologyScreen} />
           <Stack.Screen name="Formulary" component={FormularyScreen} />
+          <Stack.Screen name="Modules" component={ModuleScreen} />
           <Stack.Screen name="QuizSelect" component={QuizSelectionScreen} />
           <Stack.Screen name="QuizQuestion" component={QuizQuestionScreen} />
           <Stack.Screen name="DrugInfo" component={DrugInfoScreen} />
           <Stack.Screen name="About" component={AboutScreen} />
+          <Stack.Screen name="ModuleDetails" component={ModuleDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

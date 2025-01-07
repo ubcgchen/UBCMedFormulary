@@ -158,15 +158,15 @@ export const themeMap = {
     icon: "weather-night",
     color: "rgb(255, 255, 255)",
   },
-  Coffee: {
-    theme: Coffee,
-    icon: "coffee",
-    color: "#acb4af",
-  },
-  Cute: {
-    theme: Cute,
-    icon: "candycane",
-    color: "#daeaf6",
-  },
+  // Coffee: {
+  //   theme: Coffee,
+  //   icon: "coffee",
+  //   color: "#acb4af",
+  // },
+  // Cute: {
+  //   theme: Cute,
+  //   icon: "candycane",
+  //   color: "#daeaf6",
+  // },
 };
 export const themeMapKeys = Object.keys(themeMap);
