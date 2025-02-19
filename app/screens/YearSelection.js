@@ -10,6 +10,7 @@ import {
   View,
   Image,
   Modal,
+  Platform,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import NavButton from "../components/NavButton";

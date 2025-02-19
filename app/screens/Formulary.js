@@ -10,6 +10,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { List, Searchbar } from "react-native-paper";

@@ -139,7 +139,7 @@ function HomeScreen() {
               alignItems: "center",
             }}
           >
-            <View // Text + link to form
+            {/* <View // Text + link to form
             >
               <Text style={styles(colors, font).text_report}>
                 {lowerCase("Bugs & Suggestions?", theme)}
@@ -173,7 +173,7 @@ function HomeScreen() {
                 console.log("hi");
               }}
             /> */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 marginTop: "1%",
                 marginBottom: "10%",
@@ -202,7 +202,7 @@ function HomeScreen() {
                   ? lowerCase("Thank you!", theme)
                   : lowerCase("Send Feedback", theme)}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View>
               <Text style={styles(colors, font).text_report_subheader}>
                 {lowerCase(
