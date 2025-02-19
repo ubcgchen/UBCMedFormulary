@@ -1,10 +1,12 @@
-import { ABXPages, ANSPages } from "../data/Modules";
+import { ABXPages, ANSPages, SNSPages } from "../data/Modules";
 
 export const MODULES = [
-    "Autonomic Nervous System", 
+    "ANS Introduction and PSNS", 
+    "SNS", 
     "Antibiotics"];
 
 export const MODULES_MAP = {
-    "Autonomic Nervous System": ANSPages,
+    "ANS Introduction and PSNS": ANSPages,
+    "SNS": SNSPages,
     "Antibiotics": ABXPages
 }

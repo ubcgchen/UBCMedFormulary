@@ -14,12 +14,11 @@ import { ANSPages, ABXPages } from "../data/Modules";
 import { MODULES_MAP } from "../constants/ModuleList";
 
 export default function ModuleDetails({ route }) {
+    const [textLength, setTextLength] = useState(0);
     const { colors, font } = useTheme();
     const { module_name } = route.params;
     const [currentPageID, setCurrentPageID] = useState(1); // Start at pageID: 1
 
-    console.log(module_name)
-    console.log("hello")
     const module = MODULES_MAP[module_name]
 
     const currentPage = module.find((page) => page.pageID === currentPageID);
@@ -67,7 +66,14 @@ export default function ModuleDetails({ route }) {
 
     return (
         <View style={styles(colors, font).container}>
-            <Text style={styles(colors, font).text_header}>{module_name} {currentPage.pageTitle}</Text>
+            <Text style={styles(colors, font).sub_header}>{module_name}</Text>
+            <View
+                style={[styles(colors, font).horizontalLine, { width: textLength }]} // Dynamic line width
+            />
+            <Text style={styles(colors, font).text_header} 
+                  onLayout={(event) => setTextLength(event.nativeEvent.layout.width)}>
+                    {currentPage.pageTitle}
+            </Text>
 
             <ScrollView style={styles(colors, font).scroll}>
                 {currentPage && renderContent(currentPage.text, currentPage.images)}
@@ -155,5 +161,15 @@ const styles = (colors, font) =>
         scroll: {
             maxHeight: WINDOW.height * 0.65, // Limit the height to 60% of the screen
             width: "100%", // Ensure it spans the width of the screen
-        }
+        },
+        sub_header: {
+            fontSize: 30 * WINDOW.scale * font.scale,
+            fontFamily: font.style,
+        },
+        horizontalLine: {
+            height: 1,
+            backgroundColor: 'black',
+            marginBottom: 5, // Spacing between line and text
+            marginTop: 7,
+        },
     });
