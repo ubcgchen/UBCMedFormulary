@@ -11,6 +11,12 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import BackButton from "../components/BackButton";
 import { MODULES } from "../constants/ModuleList";
 
+
+// TODO:
+// 1. Add progress bar
+// 2. Click picture -> expand
+// 3. Bullet points
+
 export default function ModuleScreen({ route }) {
     const { colors, font } = useTheme();
     const navigation = useNavigation();

@@ -134,7 +134,7 @@ const styles = (colors, font) =>
         },
         image: {
             width: "100%",
-            height: 300 * WINDOW.scale,
+            height: 400 * WINDOW.scale,
             marginVertical: 20,
         },
         buttonContainer: {

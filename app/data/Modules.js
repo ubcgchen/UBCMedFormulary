@@ -1,4 +1,3 @@
-
 export const ANSPages = [
     {
         pageID: 1,
@@ -83,7 +82,7 @@ export const ANSPages = [
     {
         pageID: 9,
         pageTitle: "PSNS Pharmacology: mAChR Agonists",
-        text: "One way to modulate the PSNS is through muscarinic agonists, which directly activate mAChRs. Some of these drugs are used therapeutically, such as pilocarpine. Pilocarpine is a lipophilic muscarinic agonist that effective penetrates glandular tissue, and is used to increase salivary secretion in patients with Sjögren’s syndrome to treat dry mouth.[IMAGE_1]Others have diagnostic applications; for instance, methacholine is used in the methacholine challenge to diagnose asthma, as patients with asthma exhibit heightened sensitivity to muscarinic agonists.",
+        text: "One way to modulate the PSNS is through muscarinic agonists, which directly activate mAChRs. Some of these drugs are used therapeutically, such as pilocarpine. Pilocarpine is a lipophilic muscarinic agonist that effective penetrates glandular tissue, and is used to increase salivary secretion in patients with Sjögren’s syndrome to treat dry mouth.[IMAGE_1]Others have diagnostic applications; for instance, methacholine is used in the methacholine challenge as patients with asthma exhibit heightened sensitivity to muscarinic agonists. If methacholine causes a ≥20% reduction in FEV1 compared to baseline, a diagnosis of asthma should be considered.",
         images: [
             require("../assets/Anatomy.png"),
             require("../assets/Anatomy.png"),
@@ -157,35 +156,126 @@ export const SNSPages = [
     {
         pageID: 1,
         pageTitle: "Introduction",
-        text: "The goal of this module is to help you gain an appreciation of how deeply tied the autonomic nervous system is to all areas of medicine.",
+        text: "The goal of this module is to explore the sympathetic division of the autonomic nervous system. It assumes you understand the previous module.",
         images: null
     },
+    {
+        pageID: 2,
+        pageTitle: "SNS Physiology",
+        text: "Some of the important effects of the sympathetic nervous system (SNS) include:[IMAGE_1]Given its extensive role in homeostasis, modulation of the SNS also has significant clinical applications.",
+        images: [
+            require("../assets/SNS_Physiology.png"),
+        ]
+    },
+    {
+        pageID: 3,
+        pageTitle: "SNS Physiology: Transmitters and Receptors",
+        text: "The SNS primarily relies on norepinephrine (NEpi), epinephrine (Epi), and dopamine (DA) as neurotransmitters. One notable exception is sweat glands, use acetylcholine (ACh) acting on muscarinic receptors. As a generalization, the effects of these receptors being activated are:[IMAGE_1]There are other specific effects that will be explored in a case-by-case basis. The receptor selectivity for these transmitters:[IMAGE_2]NEpi is the primary neurotransmitter released from postsynaptic sympathetic neurons. The adrenal medulla releases both Epi and NEpi into the bloodstream, producing a systemic response. Unlike NEpi, Epi activates β2 receptors leading to skeletal muscle vasodilation (v/d), crucial for the fight-or-flight response. The adrenal medulla releases about 85% epinephrine and 15% NEpi.",
+        images: [
+            require("../assets/SNS_Receptors.png"),
+            require("../assets/SNS_Transmitter.png"),
+        ]
+    },
+    {
+        pageID: 4,
+        pageTitle: "SNS Physiology: A Toxicology Aside",
+        text: "Cocaine blocks NET, which prevents reuptake of NEpi and results in prolonged sympathetic activation. This manifests as hypertension through α1 activation, tachycardia through β1 activation, and dilated pupils via α1 activation. The hypertension and tachycardia also increase risk of arrhythmias and myocardial ischemia.[IMAGE_1]MAO inhibitors (MAOis) like phenelzine block the breakdown of NEpi, dopamine, and serotonin and are used to treat depression. Tyramine, found in aged cheeses, fermented foods, and wine, is normally degraded by MAO in the gut. However, when tyramine-high foods are consumed while taking a MAOi, tyramine is absorbed and enters sympathetic neurons, displacing stored NEpi and causing a massive release. This results in excessive adrenergic stimulation, which can result in a hypertensive crisis. This should be treated with an α1 receptor blocker. Note that β2 receptor blockers are contraindicated as this would lead to unopposed α1 activity and worsening hypertension.[IMAGE_2]",
+        images: [
+            require("../assets/Anatomy.png"),
+            require("../assets/Anatomy.png"),
+        ]
+
+    },
+    {
+        pageID: 5,
+        pageTitle: "SNS Physiology: An Anatomical Aside",
+        text: "Horner syndrome is characterized by the triad of ptosis, miosis, and facial anhidrosis. It can be a manifestation of lung cancer, particularly Pancoast tumors, which arise at the lung apex. These tumors invade or compress the sympathetic pathway as it exits the sympathetic chain toward the head, disrupting sympathetic innervation to the face and eyes and resulting in the characteristic findings.[IMAGE_1]",
+        images: [
+            require("../assets/Anatomy.png"),
+        ]
+    },
+    {
+        pageID: 6,
+        pageTitle: "Agonists: α1 agonists",
+        text: "α1 selective adrenergic agonists are primarily used in clinical settings where vasoconstriction (v/c) is beneficial. Some of the α1 selective sympathomimetics commonly seen in clinical practice are:[IMAGE_1]Phenylephrine is often included in over the counter cold/flu medications as a decongestant, though studies have not shown it to be more effective than placebo.",
+        images: [
+            require("../assets/alpha_agonists.png"),
+        ]
+    },
+    {
+        pageID: 7,
+        pageTitle: "Agonists: A Pharmacology Aside",
+        text: "Oral phenylephrine is not effective as a decongestant as it undergoes extensive first pass metabolism in the gut and liver by MAO. Oxymetazoline works as a nasal decongestant as it is applied topically, thereby bypassing this process.",
+        images: null
+    },
+    {
+        pageID: 8,
+        pageTitle: "Agonists: α2 agonists",
+        text: "α2 adrenergic agonists decrease sympathetic outflow by stimulating presynaptic α2 receptors, leading to reduced norepinephrine release. Some of the α1 selective sympathomimetics commonly seen in clinical practice are:[IMAGE_1]",
+        images: [
+            require("../assets/alpha_2_agonists.png"),
+        ]
+    },
+    {
+        pageID: 9,
+        pageTitle: "Agonists: β agonists",
+        text: "Some of the β sympathomimetics commonly seen in clinical practice are:[IMAGE_1]Isoproterenol has more of a pronounced chronotropic effect than dobutamine due to its β2 activity. This leads to v/d, decreased blood pressure, and reflex tachycardia.",
+        images: [
+            require("../assets/beta_agonists.png"),
+        ]
+    },
+    {
+        pageID: 10,
+        pageTitle: "Agonists: A Physiology Aside",
+        text: "Historically, β2 agonists such as ritodrine were used as tocolytics due to their ability to relax uterine smooth muscle. However, their use declined due to severe maternal side effects, including chest pain and arrhythmias, as well as neonatal complications such as hypoglycemia. These effects occur due to off target β1 activation in the maternal heart, leading to cardiovascular symptoms, and β2 activation in the fetal pancreas, stimulating insulin release and causing postnatal hypoglycemia.",
+        images: null
+    },
+    {
+        pageID: 11,
+        pageTitle: "Antagonists: α blockers",
+        text: "α-adrenoceptor antagonists such as prazosin and terazosin are useful in many situations that require smooth muscle relaxation:[IMAGE_1]Common adverse effects include:[IMAGE_2]",
+        images: [
+            require("../assets/alpha_blocker_indications.png"),
+            require("../assets/alpha_blocker_adverse_effects.png"),
+        ]
+    },
+    {
+        pageID: 12,
+        pageTitle: "Antagonists: β blockers",
+        text: "Some of the common uses of beta blockers are:[IMAGE_1]Other indications include hyperthyroidism, hypertension, and migraine prophylaxis. β-blockers should be used with caution in these cases:[IMAGE_2]",
+        images: [
+            require("../assets/beta_blockers.png"),
+            require("../assets/beta_blocker_caution.png"),
+        ]
+    },
+    {
+        pageID: 13,
+        pageTitle: "Antagonists: Labetalol",
+        text: "Labetalol is a non-selective β-blocker with additional α1-blocking properties (β1 = β2 > α1). It is used for severe hypertension and hypertensive crisis, including hypertension in pregnancy. By blocking α1 receptors, it causes vasodilation, reducing systemic vascular resistance, while β1 blockade prevents reflex tachycardia, making it effective for rapid blood pressure reduction without a significant increase in heart rate.",
+        images: null
+    },
+    {
+        pageID: 14,
+        pageTitle: "Antagonists: Physiology Aside",
+        text: "The renin-angiotensin-aldosterone system (RAAS), important in regulating blood pressure, fluid balance, and electrolytes, is under sympathetic control. When blood pressure drops, the SNS is activated and sympathetic nerve fibers activate β1 receptors on juxtaglomerular cells in the kidney leads to renin release.[IMAGE_1]In heart failure, sympathetic overactivity stimulates the RAAS, leading to vasoconstriction via angiotensin II and fluid retention via aldosterone. Metoprolol can be used blocks this process, reducing blood pressure, fluid retention, and cardiac afterload.",
+        images: [
+            require("../assets/Anatomy.png"),
+        ]
+    },
+    {
+        pageID: 15,
+        pageTitle: "Autonomic Nervous System Conclusion",
+        text: "With this overview of the autonomic nervous system, you now have an understanding its function and regulation. More importantly, we hope you can appreciate how its clinical relevance spans nearly every organ system, influencing everything from cardiovascular and respiratory function to gastrointestinal and endocrine regulation. Recognizing these connections will help you apply this knowledge to real-world clinical scenarios.",
+        images: null,
+    }
 ]
 
 export const ABXPages = [
     {
         pageID: 1,
-        pageTitle: "Beta Lactams",
-        text: `Beta-lactam antibiotics, including penicillins, cephalosporins, carbapenems, and monobactams, inhibit bacterial cell wall synthesis by targeting penicillin-binding proteins. Widely used for infections, they are effective, versatile, but can cause resistance and allergies. [IMAGE_1]`,
-        images: [
-            require("../assets/betalactam.png"),
-        ],
-    },
-    {
-        pageID: 2,
-        pageTitle: "Macrolides",
-        text: `[IMAGE_1] abc.`,
-        images: [
-            require("../assets/betalactam.png"),
-        ],
-    },
-    {
-        pageID: 3,
-        pageTitle: "Fluoroquinolones",
-        text: `Fluoroquinolones are great:D [IMAGE_1]`,
-        images: [
-            require("../assets/pill.png"),
-        ],
+        pageTitle: "Penicillin",
+        text: `Coming soon!`,
+        images: null
     },
 ]
 
