@@ -71,12 +71,9 @@ export const ANSPages = [
     {
         pageID: 8,
         pageTitle: "Signal Transduction: A Physiology Aside",
-        text: "As an example of signal transduction, we will explore how increased vagal tone can cause sinus bradycardia. ACh released from the postganglionic parasympathetic fibers of the vagus nerve bind to M2 muscarinic receptors on the sinoatrial (SA) node. This leads to a decrease in cyclic AMP (cAMP) levels, which increases potassium conductance while decreasing inward calcium current.[IMAGE_1]The overall effect is slowing impulse formation in the SA node, which reduces heart rate.[IMAGE_2]",
+        text: "As an example of signal transduction, we will explore how increased vagal tone can cause sinus bradycardia. ACh released from the postganglionic parasympathetic fibers of the vagus nerve bind to M2 muscarinic receptors on the sinoatrial (SA) node. This leads to a decrease in cyclic AMP (cAMP) levels, which increases potassium conductance while decreasing inward calcium current. The overall effect is slowing impulse formation in the SA node, which reduces heart rate.[IMAGE_1]",
         images: [
             require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
         ]
     },
     {

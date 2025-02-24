@@ -125,11 +125,11 @@ const styles = (colors, font) =>
             paddingBottom: 20,
             textAlign: "center",
         },
-        text_content: {
-            fontSize: 20 * WINDOW.scale * font.scale,
+        text: {
+            fontSize: 25 * WINDOW.scale * font.scale,
             fontFamily: font.style,
             color: colors.text,
-            textAlign: "center",
+            // textAlign: "center",
             marginBottom: 20,
         },
         image: {
@@ -165,10 +165,11 @@ const styles = (colors, font) =>
         sub_header: {
             fontSize: 30 * WINDOW.scale * font.scale,
             fontFamily: font.style,
+            color: colors.text,
         },
         horizontalLine: {
             height: 1,
-            backgroundColor: 'black',
+            backgroundColor: colors.text,
             marginBottom: 5, // Spacing between line and text
             marginTop: 7,
         },
