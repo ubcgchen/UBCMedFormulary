@@ -10,7 +10,6 @@ import {
 import { WINDOW } from "../constants/Dimensions";
 import { useTheme } from "@react-navigation/native";
 import BackButton from "../components/BackButton";
-import { ANSPages, ABXPages } from "../data/Modules";
 import { MODULES_MAP } from "../constants/ModuleList";
 
 export default function ModuleDetails({ route }) {

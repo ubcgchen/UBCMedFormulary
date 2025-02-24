@@ -19,9 +19,6 @@ export const ANSPages = [
         text: "Autonomic dysreflexia occurs when there is a spinal cord injury (SCI) at T6 or higher. Recall that the SNS originates in the thoracic and lumbar spine (T1-L2). Importantly, the splanchnic nerves, which regulate vascular tone, arise from T5 and below. Noxious stimuli below the lesion, such as fecal impaction and bladder distention, trigger sympathetic activity, causing vasoconstriction and high blood pressure. Normally, the vagus nerve would counteract this through inhibitory signals. However, these are blocked by the SCI. As a result, there is PSNS dominance above the lesion causing vasodilation, relative bradycardia, flushing, and sweating. There is unregulated SNS activity below the lesion causing by high blood pressure, pallor, and cool skin.[IMAGE_1]",
         images: [
             require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
         ]
     },
     {
@@ -29,20 +26,18 @@ export const ANSPages = [
         pageTitle: "ANS Physiology: Signals to Responses",
         text: "Neurotransmission follows a two-neuron pathway: presynaptic neuron to postsynaptic neuron to target organ. For both the PSNS and SNS, acetylcholine (ACh) released from the presynaptic neuron binds nicotinic ACh receptors (nAChRs) on the postsynaptic neuron.[IMAGE_1]Parasympathetic postganglionic neurons then release ACh, which acts on muscarinic ACh receptors (mAChRs) on the target organ. There are 5 subtypes: M1, M2, M3, M4, M5.[IMAGE_2]Sympathetic postganglionic neurons primarily release norepinephrine (NEpi), which acts on adrenergic receptors. There are 4 subtypes: α1, α2, β1, β2. An exception is the sweat glands, which are innervated by the SNS but also use ACh at mAChRs.",
         images: [
-            require("../assets/Presynaptic_Neurotransmission.jpeg"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
+            require("../assets/Pre-synaptic.png"),
+            require("../assets/Post-synaptic.png"),
         ]
     },
     {
         pageID: 5,
         pageTitle: "ANS Physiology: Synaptic transmission",
-        text: "The nAChRs on the postsynaptic neuron are ligand-gated ion channels. When activated by ACh released from the presynaptic neuron, they open and allow for influx of sodium ions, leading to depolarization and propagation of the signal.[IMAGE_1]The action potential reaching the postsynaptic nerve terminal opens voltage-gated calcium channels, which triggers release of the neurotransmitters (NTs), which are stored in synaptic vesicles.[IMAGE_2]mAChRs and adrenergic receptors on the target organ are G-protein-coupled receptors (GPCRs). When activated, they trigger intracellular processes that ultimately bring about the physiologic change.[IMAGE_2]Signalling is terminated through a combination of NT reuptake, metabolism in the synaptic cleft, and diffusion away from the synapse.",
+        text: "The nAChRs on the postsynaptic neuron are ligand-gated ion channels. When activated by ACh released from the presynaptic neuron, they open and allow for influx of sodium ions, leading to depolarization and propagation of the signal.[IMAGE_1]The action potential reaching the postsynaptic nerve terminal opens voltage-gated calcium channels, which triggers release of the neurotransmitters (NTs), which are stored in synaptic vesicles.[IMAGE_2]mAChRs and adrenergic receptors on the target organ are G-protein-coupled receptors (GPCRs). When activated, they trigger intracellular processes that ultimately bring about the physiologic change.[IMAGE_3]Signalling is terminated through a combination of NT reuptake, metabolism in the synaptic cleft, and diffusion away from the synapse.",
         images: [
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
+            require("../assets/nAChR.png"),
+            require("../assets/Calcium_Induced_Release.png"),
+            require("../assets/GPCR.png"),
 
         ]
     },
@@ -52,9 +47,6 @@ export const ANSPages = [
         text: "Some of the important effects of the PSNS include:[IMAGE_1]Given its extensive role in homeostasis, modulation of the PSNS has significant clinical applications(Note: the PSNS has little direct effect on the vasculature as blood vessels are not directly innervated by the PSNS).",
         images: [
             require("../assets/PSNS_Effects.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
         ]
     },
     {
@@ -65,7 +57,6 @@ export const ANSPages = [
             require("../assets/Anatomy.png"),
             require("../assets/Anatomy.png"),
             require("../assets/Anatomy.png"),
-
         ]
     },
     {
@@ -95,7 +86,6 @@ export const ANSPages = [
             require("../assets/AChEIs.png"),
             require("../assets/Anatomy.png"),
             require("../assets/Anatomy.png"),
-
         ]
     },
     {
@@ -103,10 +93,7 @@ export const ANSPages = [
         pageTitle: "Alzheimer’s Dementia: A Pharmacology Aside",
         text: "The cholinergic hypothesis of dementia suggests that cholinergic deficiency in the brain contributes to cognitive decline. Despite this, AChEIs and not muscarinic agonists are used in Alzheimer’s management for several reasons.[IMAGE_1]Firstly, the predominant muscarinic receptor subtype in the brain is M1, but there are no selective M1 agonists available. Non-selective muscarinic agonists would cause systemic cholinergic adverse effects. Secondly, prolonged stimulation by full agonists may lead to receptor downregulation, reducing long-term efficacy. In contrast, AChEIs enhance cholinergic signalling in a physiologic manner by increasing endogenous ACh levels, minimizing receptor desensitization and adverse effects.",
         images: [
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
+            require("../assets/dementia.png"),
         ]
     },
     {
