@@ -18,7 +18,7 @@ export const ANSPages = [
         pageTitle: "ANS Anatomy: Clinical Correlate",
         text: "Autonomic dysreflexia occurs when there is a spinal cord injury (SCI) at T6 or higher. Recall that the SNS originates in the thoracic and lumbar spine (T1-L2). Importantly, the splanchnic nerves, which regulate vascular tone, arise from T5 and below. Noxious stimuli below the lesion, such as fecal impaction and bladder distention, trigger sympathetic activity, causing vasoconstriction and high blood pressure. Normally, the vagus nerve would counteract this through inhibitory signals. However, these are blocked by the SCI. As a result, there is PSNS dominance above the lesion causing vasodilation, relative bradycardia, flushing, and sweating. There is unregulated SNS activity below the lesion causing by high blood pressure, pallor, and cool skin.[IMAGE_1]",
         images: [
-            require("../assets/Anatomy.png"),
+            require("../assets/Autonomic_Dysreflexia.png"),
         ]
     },
     {
@@ -52,11 +52,10 @@ export const ANSPages = [
     {
         pageID: 7,
         pageTitle: "PSNS Physiology: Clinical Correlate",
-        text: "ACh is synthesized in the nerve terminal, stored in vesicles, and released into the synaptic cleft, where it binds to post-synaptic receptors. ACh signalling is terminated either by reuptake into the nerve terminal, enzymatic breakdown by acetylcholinesterase (AChE), or diffusion away from the synapse.[IMAGE_1]The release of ACh depends on SNARE proteins, which facilitate vesicle fusion with the neuron membrane.[IMAGE_2]Botulinum toxin cleaves SNARE proteins, preventing ACh release. Clinically, this can be used in conditions like overactive bladder, where it reduces detrusor muscle contractions by blocking parasympathetic input.",
+        text: "ACh is synthesized in the nerve terminal, stored in vesicles, and released into the synaptic cleft, where it binds to post-synaptic receptors. ACh signalling is terminated either by enzymatic breakdown by acetylcholinesterase (AChE), or diffusion away from the synapse.[IMAGE_1]The release of ACh depends on SNARE proteins, which facilitate vesicle fusion with the neuron membrane.[IMAGE_2]Botulinum toxin cleaves SNARE proteins, preventing ACh release. Clinically, this can be used in conditions like overactive bladder, where it reduces detrusor muscle contractions by blocking parasympathetic input.",
         images: [
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
+            require("../assets/PSNS_Metabolism.jpeg"),
+            require("../assets/SNAP_SNARE.jpeg"),
         ]
     },
     {
@@ -64,7 +63,7 @@ export const ANSPages = [
         pageTitle: "Signal Transduction: A Physiology Aside",
         text: "As an example of signal transduction, we will explore how increased vagal tone can cause sinus bradycardia. ACh released from the postganglionic parasympathetic fibers of the vagus nerve bind to M2 muscarinic receptors on the sinoatrial (SA) node. This leads to a decrease in cyclic AMP (cAMP) levels, which increases potassium conductance while decreasing inward calcium current. The overall effect is slowing impulse formation in the SA node, which reduces heart rate.[IMAGE_1]",
         images: [
-            require("../assets/Anatomy.png"),
+            require("../assets/PSNS_Cardiac.jpeg"),
         ]
     },
     {
@@ -72,10 +71,7 @@ export const ANSPages = [
         pageTitle: "PSNS Pharmacology: mAChR Agonists",
         text: "One way to modulate the PSNS is through muscarinic agonists, which directly activate mAChRs. Some of these drugs are used therapeutically, such as pilocarpine. Pilocarpine is a lipophilic muscarinic agonist that effective penetrates glandular tissue, and is used to increase salivary secretion in patients with Sjögren’s syndrome to treat dry mouth.[IMAGE_1]Others have diagnostic applications; for instance, methacholine is used in the methacholine challenge as patients with asthma exhibit heightened sensitivity to muscarinic agonists. If methacholine causes a ≥20% reduction in FEV1 compared to baseline, a diagnosis of asthma should be considered.",
         images: [
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
+            require("../assets/Sjogren_Dry_Mouth.jpeg"),
         ]
     },
     {
@@ -84,8 +80,6 @@ export const ANSPages = [
         text: "Another approach to increasing cholinergic neurotransmission is to inactivate AChE, the enzyme responsible for ACh breakdown in the synaptic cleft. AChE inhibitors (AChEIs) are classified into quaternary alcohols, carbamates, and organophosphates, in order of increasing duration of action.[IMAGE_1]Organophosphates, such as malathion (an insecticide) and sarin (a nerve agent), form irreversible covalent bonds with AChE, making them highly toxic. They have very limited use in a clinical setting. Therapeutically, carbamates like donepezil are used in Alzheimer’s disease management due to their ability to enhance central nervous system cholinergic signaling.",
         images: [
             require("../assets/AChEIs.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
         ]
     },
     {
@@ -102,9 +96,6 @@ export const ANSPages = [
         text: "Excessive cholinergic activity, often due to AChEI inhibitor toxicity, results in toxicity described by the mnemonic “SLUDGE” – salivation, lacrimation, urination, defecation, GI distress, and emesis. This condition is treated with supportive care and atropine, a muscarinic antagonist we will talk about next.[IMAGE_1]If administered early, pralidoxime can reverse the effects of organophosphates by reactivating AChE.",
         images: [
             require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
-
         ]
     },
     {
@@ -114,8 +105,8 @@ export const ANSPages = [
         images: [
             require("../assets/Anticholinergics.png"),
             require("../assets/Anticholinergic_Effects.png"),
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
+            require("../assets/Benztropine.png"),
+            require("../assets/Ipratropium.png"),
         ]
     },
     {
@@ -165,8 +156,8 @@ export const SNSPages = [
         pageTitle: "SNS Physiology: A Toxicology Aside",
         text: "Cocaine blocks NET, which prevents reuptake of NEpi and results in prolonged sympathetic activation. This manifests as hypertension through α1 activation, tachycardia through β1 activation, and dilated pupils via α1 activation. The hypertension and tachycardia also increase risk of arrhythmias and myocardial ischemia.[IMAGE_1]MAO inhibitors (MAOis) like phenelzine block the breakdown of NEpi, dopamine, and serotonin and are used to treat depression. Tyramine, found in aged cheeses, fermented foods, and wine, is normally degraded by MAO in the gut. However, when tyramine-high foods are consumed while taking a MAOi, tyramine is absorbed and enters sympathetic neurons, displacing stored NEpi and causing a massive release. This results in excessive adrenergic stimulation, which can result in a hypertensive crisis. This should be treated with an α1 receptor blocker. Note that β2 receptor blockers are contraindicated as this would lead to unopposed α1 activity and worsening hypertension.[IMAGE_2]",
         images: [
-            require("../assets/Anatomy.png"),
-            require("../assets/Anatomy.png"),
+            require("../assets/Cocaine.jpeg"),
+            require("../assets/Phenelzine.jpeg"),
         ]
 
     },
