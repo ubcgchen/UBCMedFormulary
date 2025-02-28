@@ -26,8 +26,8 @@ export const ANSPages = [
         pageTitle: "ANS Physiology: Signals to Responses",
         text: "Neurotransmission follows a two-neuron pathway: presynaptic neuron to postsynaptic neuron to target organ. For both the PSNS and SNS, acetylcholine (ACh) released from the presynaptic neuron binds nicotinic ACh receptors (nAChRs) on the postsynaptic neuron.[IMAGE_1]Parasympathetic postganglionic neurons then release ACh, which acts on muscarinic ACh receptors (mAChRs) on the target organ. There are 5 subtypes: M1, M2, M3, M4, M5.[IMAGE_2]Sympathetic postganglionic neurons primarily release norepinephrine (NEpi), which acts on adrenergic receptors. There are 4 subtypes: α1, α2, β1, β2. An exception is the sweat glands, which are innervated by the SNS but also use ACh at mAChRs.",
         images: [
-            require("../assets/Pre-synaptic.png"),
-            require("../assets/Post-synaptic.png"),
+            require("../assets/pre_synaptic.png"),
+            require("../assets/post_synaptic.png"),
         ]
     },
     {
@@ -37,7 +37,7 @@ export const ANSPages = [
         images: [
             require("../assets/nAChR.png"),
             require("../assets/Calcium_Induced_Release.png"),
-            require("../assets/GPCR.png"),
+            require("../assets/gpcr.png"),
 
         ]
     },
