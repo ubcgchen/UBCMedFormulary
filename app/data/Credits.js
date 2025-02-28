@@ -1,6 +1,7 @@
 export const credits = [
-  "Supervisor: Jennifer Shabbits",
-  "Software Developer: George Chen, VFMP 2025",
-  "Lead Content Developer: Michael Gong, VFMP 2025",
-  "Content Developers: Will Wei, VFMP 2025",
+  "Supervisor: Dr. Jennifer Shabbits",
+  "Software Developer: George Chen",
+  "Lead Content Developer: Michael Gong",
+  "Content Developers: Will Wei",
+  "Module Developers: George Chen, Elizabeth Chan"
 ];

@@ -93,10 +93,8 @@ export const ANSPages = [
     {
         pageID: 12,
         pageTitle: "Cholinergic Crisis: A Toxicology Aside",
-        text: "Excessive cholinergic activity, often due to AChEI inhibitor toxicity, results in toxicity described by the mnemonic “SLUDGE” – salivation, lacrimation, urination, defecation, GI distress, and emesis. This condition is treated with supportive care and atropine, a muscarinic antagonist we will talk about next.[IMAGE_1]If administered early, pralidoxime can reverse the effects of organophosphates by reactivating AChE.",
-        images: [
-            require("../assets/Anatomy.png"),
-        ]
+        text: "Excessive cholinergic activity, often due to AChEI inhibitor toxicity, results in toxicity described by the mnemonic “SLUDGE” – salivation, lacrimation, urination, defecation, GI distress, and emesis. This condition is treated with supportive care and atropine, a muscarinic antagonist we will talk about next. If administered early, pralidoxime can reverse the effects of organophosphates by reactivating AChE.",
+        images: null
     },
     {
         pageID: 13,
@@ -164,9 +162,9 @@ export const SNSPages = [
     {
         pageID: 5,
         pageTitle: "SNS Physiology: An Anatomical Aside",
-        text: "Horner syndrome is characterized by the triad of ptosis, miosis, and facial anhidrosis. It can be a manifestation of lung cancer, particularly Pancoast tumors, which arise at the lung apex. These tumors invade or compress the sympathetic pathway as it exits the sympathetic chain toward the head, disrupting sympathetic innervation to the face and eyes and resulting in the characteristic findings.[IMAGE_1]",
+        text: "Horner's syndrome is characterized by the triad of ptosis, miosis, and facial anhidrosis. It can be a manifestation of lung cancer, particularly Pancoast tumors, which arise at the lung apex. These tumors invade or compress the sympathetic pathway as it exits the sympathetic chain toward the head, disrupting sympathetic innervation to the face and eyes and resulting in the characteristic findings.[IMAGE_1]",
         images: [
-            require("../assets/Anatomy.png"),
+            require("../assets/Horners.jpeg"),
         ]
     },
     {
@@ -234,7 +232,7 @@ export const SNSPages = [
         pageTitle: "Antagonists: Physiology Aside",
         text: "The renin-angiotensin-aldosterone system (RAAS), important in regulating blood pressure, fluid balance, and electrolytes, is under sympathetic control. When blood pressure drops, the SNS is activated and sympathetic nerve fibers activate β1 receptors on juxtaglomerular cells in the kidney leads to renin release.[IMAGE_1]In heart failure, sympathetic overactivity stimulates the RAAS, leading to vasoconstriction via angiotensin II and fluid retention via aldosterone. Metoprolol can be used blocks this process, reducing blood pressure, fluid retention, and cardiac afterload.",
         images: [
-            require("../assets/Anatomy.png"),
+            require("../assets/RAAS.png"),
         ]
     },
     {
@@ -253,4 +251,3 @@ export const ABXPages = [
         images: null
     },
 ]
-
